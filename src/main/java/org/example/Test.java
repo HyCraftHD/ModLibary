@@ -1,14 +1,17 @@
 package org.example;
 
+import net.hycrafthd.core.ClientRegistry;
 import net.hycrafthd.core.CommonRegistry;
-import net.hycrafthd.core.exeption.UnsupportedVersionExeption;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+/**
+ * Only for testings, will be removed further
+ */
 
 @Mod(modid = "test")
 public class Test {
@@ -20,6 +23,8 @@ public class Test {
 	public void f(FMLInitializationEvent event) {
 		CommonRegistry.registerItem(testitem, "testitem");
 		CommonRegistry.registerBlock(testblock, "testblock");
+		ClientRegistry.registerModel(testitem);
+		ClientRegistry.registerModel(testblock);
 	}
 
 	// for (Method methodes : gameregistryclass.getMethods()) {
