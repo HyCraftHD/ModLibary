@@ -2,48 +2,56 @@ package net.hycrafthd.core;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
+import net.hycrafthd.core.tileentity.ICustomTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 public class CommonRegistry {
 
 	/**
-	 * Register a new item
+	 * Add a new shaped crafting recipe
 	 * 
-	 * @param item Item instance
-	 * @param itemname Item name
+	 * @param output Itemstack instance
+	 * @param obj Craftingfield object
 	 */
-	public static void registerItem(Item item, String itemname) {
+	public static void addShapedRecipe(ItemStack output, Object... obj) {
+		CoreUtil.gameregistry.addShapedRecipe(output, obj);
+	}
 
-		if (!CoreUtil.isUnsupportedVersion()) {
-			try {
-				if (CoreUtil.contains1_8()) {
+	/**
+	 * Add new shapeless crafting recipe
+	 * 
+	 * @param output Itemstack instance
+	 * @param obj Item / Block / ItemStack input instance
+	 */
+	public static void addShapelessRecipe(ItemStack output, Object... obj) {
+		CoreUtil.gameregistry.addShapelessRecipe(output, obj);
+	}
 
-					Method unlocalizedname = item.getClass().getMethod("setUnlocalizedName", String.class);
-					Method register = CoreUtil.gameregistryclass.getMethod("registerItem", Item.class, String.class);
-
-					unlocalizedname.invoke(item, itemname);
-					register.invoke(null, item, itemname);
-
-				} else if (CoreUtil.contains1_9()) {
-
-					Class iforgeregistry = Class.forName("net.minecraftforge.fml.common.registry.IForgeRegistryEntry");
-
-					Method unlocalizedname = item.getClass().getMethod("setUnlocalizedName", String.class);
-					Method registryname = item.getClass().getMethod("setRegistryName", String.class);
-					Method register = CoreUtil.gameregistryclass.getMethod("register", iforgeregistry);
-
-					unlocalizedname.invoke(item, itemname);
-					registryname.invoke(item, itemname);
-					register.invoke(iforgeregistry, item);
-
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+	/**
+	 * Add new smelting recipe
+	 * 
+	 * @param input Item / Block / ItemStack instance
+	 * @param output ItemStack instance
+	 * @param xp XP per item
+	 */
+	public static void addSmelting(Object input, ItemStack output, float xp) {
+		ItemStack stack;
+		if (input instanceof Item) {
+			stack = new ItemStack((Item) input);
+		} else if (input instanceof Block) {
+			stack = new ItemStack((Block) input);
+		} else if (input instanceof ItemStack) {
+			stack = (ItemStack) input;
+		} else {
+			throw new IllegalArgumentException("Only items, blocks, itemstacks...");
 		}
+		CoreUtil.gameregistry.addSmelting(stack, output, xp);
 	}
 
 	/**
@@ -101,4 +109,73 @@ public class CommonRegistry {
 			}
 		}
 	}
+
+	/**
+	 * Register a new item
+	 * 
+	 * @param item Item instance
+	 * @param itemname Item name
+	 */
+	public static void registerItem(Item item, String itemname) {
+
+		if (!CoreUtil.isUnsupportedVersion()) {
+			try {
+				if (CoreUtil.contains1_8()) {
+
+					Method unlocalizedname = item.getClass().getMethod("setUnlocalizedName", String.class);
+					Method register = CoreUtil.gameregistryclass.getMethod("registerItem", Item.class, String.class);
+
+					unlocalizedname.invoke(item, itemname);
+					register.invoke(null, item, itemname);
+
+				} else if (CoreUtil.contains1_9()) {
+
+					Class iforgeregistry = Class.forName("net.minecraftforge.fml.common.registry.IForgeRegistryEntry");
+
+					Method unlocalizedname = item.getClass().getMethod("setUnlocalizedName", String.class);
+					Method registryname = item.getClass().getMethod("setRegistryName", String.class);
+					Method register = CoreUtil.gameregistryclass.getMethod("register", iforgeregistry);
+
+					unlocalizedname.invoke(item, itemname);
+					registryname.invoke(item, itemname);
+					register.invoke(iforgeregistry, item);
+
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Register a new tile entity. Usefull to implement #ICustomTileEntity
+	 * 
+	 * @param tileEntityClass Tile entity class
+	 */
+	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass) {
+
+		try {
+			if (Arrays.asList(tileEntityClass.getInterfaces()).contains(ICustomTileEntity.class)) {
+				Method registryname = tileEntityClass.getMethod("getRegisterName");
+				String id = (String) registryname.invoke(tileEntityClass.newInstance());
+				registerTileEntity(tileEntityClass, id);
+			} else {
+				registerTileEntity(tileEntityClass, tileEntityClass.getName());
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Register a new tile entity
+	 * 
+	 * @param tileEntityClass Tile entity class
+	 * @param id Tile entity id
+	 */
+	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id) {
+		CoreUtil.gameregistry.registerTileEntity(tileEntityClass, id);
+	}
+
 }

@@ -2,11 +2,13 @@ package net.hycrafthd.core;
 
 import net.hycrafthd.core.exeption.UnsupportedVersionExeption;
 import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CoreUtil {
 
 	public static String version;
+	public static GameRegistry gameregistry;
+
 	public static Class gameregistryclass;
 
 	public static boolean is1_8() {
@@ -47,12 +49,8 @@ public class CoreUtil {
 
 	static {
 		version = ForgeVersion.mcVersion;
-		try {
-			gameregistryclass = Class.forName("net.minecraftforge.fml.common.registry.GameRegistry");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			FMLCommonHandler.instance().exitJava(0, true);
-		}
+		gameregistry = new GameRegistry();
+		gameregistryclass = gameregistry.getClass();
 	}
 
 }
