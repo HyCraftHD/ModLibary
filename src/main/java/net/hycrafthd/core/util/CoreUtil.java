@@ -1,15 +1,10 @@
-package net.hycrafthd.core;
+package net.hycrafthd.core.util;
 
-import net.hycrafthd.core.exeption.UnsupportedVersionExeption;
 import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CoreUtil {
 
 	public static String version;
-	public static GameRegistry gameregistry;
-
-	public static Class gameregistryclass;
 
 	public static boolean is1_8() {
 		return version == "1.8";
@@ -39,18 +34,18 @@ public class CoreUtil {
 		return contains1_8() || contains1_9();
 	}
 
-	public static boolean isUnsupportedVersion() {
-		boolean supportedversion = isSupportedVersion();
-		if (!supportedversion) {
-			throw new UnsupportedVersionExeption();
-		}
-		return false;
+	public static void invokeMethod(String classname, String method, ClassObject classobject) {
+		Class clazz = ReflectionUtil.getClass(classname);
+		ReflectionUtil.invokeMethod(clazz, ReflectionUtil.getInstance(clazz), method, classobject);
+		logger(clazz, method, classobject);
+	}
+
+	private static void logger(Class clazz, String method, ClassObject classobject) {
+		System.out.println(clazz.getName() + " -> " + method + "\n------------------------------------\nClassobject\n------------------------------------\n" + classobject.toString());
 	}
 
 	static {
 		version = ForgeVersion.mcVersion;
-		gameregistry = new GameRegistry();
-		gameregistryclass = gameregistry.getClass();
 	}
 
 }

@@ -1,11 +1,8 @@
 package net.hycrafthd.core;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-
+import net.hycrafthd.core.util.ClassObject;
+import net.hycrafthd.core.util.CoreUtil;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,9 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientRegistry {
 
 	/**
-	 * Register a new model for rendering items and blocks. This method takes
-	 * the unlocalized name to register the model and only is for items that
-	 * have no meta
+	 * Register a new model for rendering items and blocks. This method takes the unlocalized name to register the model and only is for items that have no meta
 	 * 
 	 * @param object Item or Block instance
 	 */
@@ -26,8 +21,7 @@ public class ClientRegistry {
 	}
 
 	/**
-	 * Register a new model for rendering items and blocks. This method takes
-	 * the unlocalized name to register the model
+	 * Register a new model for rendering items and blocks. This method takes the unlocalized name to register the model
 	 * 
 	 * @param object Item or Block instance
 	 * @param meta Item meta
@@ -68,32 +62,6 @@ public class ClientRegistry {
 	 * @param variant Variant, normally inventory
 	 */
 	public static void registerModel(Item item, int meta, String location, String variant) {
-
-		if (!CoreUtil.isUnsupportedVersion()) {
-			try {
-
-				Class modelresourcelocation = null;
-
-				if (CoreUtil.contains1_8()) {
-					modelresourcelocation = Class.forName("net.minecraft.client.resources.model.ModelResourceLocation");
-				} else if (CoreUtil.contains1_9()) {
-					modelresourcelocation = Class.forName("net.minecraft.client.renderer.block.model.ModelResourceLocation");
-				}
-
-				if (modelresourcelocation != null) {
-
-					Constructor constructor = modelresourcelocation.getConstructor(String.class, String.class);
-					Method method = ItemModelMesher.class.getMethod("register", Item.class, int.class, modelresourcelocation);
-
-					method.invoke(Minecraft.getMinecraft().getRenderItem().getItemModelMesher(), item, meta, constructor.newInstance(location, variant));
-
-				} else {
-					throw new ClassNotFoundException();
-				}
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+		CoreUtil.invokeMethod("Client", "registerModel", ClassObject.forObj(item, meta, location, variant));
 	}
 }
