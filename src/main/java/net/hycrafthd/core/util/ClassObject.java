@@ -26,7 +26,7 @@ public class ClassObject {
 		return obj;
 	}
 
-	public static ClassObject forObj(Object... obj) { // Everyone knows how to make this methode better?
+	public static ClassObject forObj(Object... obj) {
 		Class[] classes = new Class[obj.length];
 		for (int i = 0; i < classes.length; i++) {
 			Class clazz = obj[i].getClass();

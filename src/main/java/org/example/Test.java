@@ -8,6 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -20,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class Test {
 
 	public static TestItem testitem = new TestItem();
-	public static Block testblock = new Block(Material.rock);
+	public static TestBlock testblock = new TestBlock();
 
 	@EventHandler
 	public void f(FMLInitializationEvent event) {
@@ -44,10 +46,12 @@ public class Test {
 		// }
 
 		CommonRegistry.registerEntity(TestEntity.class, "testentity", "test", 64, 1, true, 0xFF0000, 0x0000FF);
-		CommonRegistry.registerTileEntity(TestTileEntity.class);
 
 		CommonRegistry.registerBlock(testblock, "testblock");
 		CommonRegistry.registerItem(testitem, "testitem");
+		
+		CommonRegistry.registerTileEntity(TestTileEntity.class);
+		ClientRegistry.bindTileEntitySpecialRenderer(TestTileEntity.class, new TileEntitySpecialRendererTest());
 
 		ClientRegistry.registerModel(testitem);
 		ClientRegistry.registerModel(testblock);

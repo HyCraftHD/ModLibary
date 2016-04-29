@@ -3,13 +3,35 @@ package net.hycrafthd.core;
 import net.hycrafthd.core.util.ClassObject;
 import net.hycrafthd.core.util.CoreUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ClientRegistry {
+
+	/**
+	 * Bind special tileentity renderer
+	 * 
+	 * @param tileEntityClass TileEntity class
+	 * @param specialRenderer TileEntitySpecialRenderer class
+	 */
+	public static void bindTileEntitySpecialRenderer(Class<? extends TileEntity> tileEntityClass, TileEntitySpecialRenderer specialRenderer) {
+		CoreUtil.invokeMethod("Client", "bindTileEntitySpecialRenderer", ClassObject.forObj(tileEntityClass, specialRenderer));
+	}
+
+	/**
+	 * Register keybindings
+	 * 
+	 * @param key Keybinding
+	 */
+	public void registerKeyBinding(KeyBinding key) {
+		CoreUtil.invokeMethod("Client", "registerKeyBinding", ClassObject.forObj(key));
+	}
 
 	/**
 	 * Register a new model for rendering items and blocks. This method takes the unlocalized name to register the model and only is for items that have no meta
