@@ -1,10 +1,31 @@
 package net.hycrafthd.core.util;
 
+import java.io.File;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.common.ForgeVersion;
 
 public class CoreUtil {
 
-	public static String version;
+	private static String version;
+
+	private static Logger logger = LogManager.getLogger("CoreLibary");
+	
+	private static String downloadPath = "https://github.com/HyCraftHD/CoreLibary";
+
+	public static File getMinecraftDir() {
+		return new File(System.getProperty("user.dir"));
+	}
+
+	public static Logger getLogger() {
+		return logger;
+	}
+
+	public static String getVersion() {
+		return version;
+	}
 
 	public static boolean is1_8() {
 		return version == "1.8";

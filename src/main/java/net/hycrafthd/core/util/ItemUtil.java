@@ -3,8 +3,9 @@ package net.hycrafthd.core.util;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
-public class ItemstackUtil {
+public class ItemUtil {
 
 	public static ItemStack getItemStack(Object obj) {
 		ItemStack stack;
@@ -18,6 +19,20 @@ public class ItemstackUtil {
 			throw new IllegalArgumentException("Only items, blocks, itemstacks are allowed!");
 		}
 		return stack;
+	}
+
+	public static String getModid(Object obj) {
+		String modid = "minecraft";
+		Object name = Item.itemRegistry.getNameForObject(getItemStack(obj).getItem());
+
+		if (name instanceof String) {
+			String[] parts = ((String) name).split(":");
+			modid = parts[0];
+		}
+		if (name instanceof ResourceLocation) {
+			modid = ((ResourceLocation) name).getResourceDomain();
+		}
+		return modid;
 	}
 
 }

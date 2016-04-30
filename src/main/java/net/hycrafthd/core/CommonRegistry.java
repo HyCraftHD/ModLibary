@@ -4,15 +4,24 @@ import java.util.Map;
 
 import net.hycrafthd.core.util.ClassObject;
 import net.hycrafthd.core.util.CoreUtil;
-import net.hycrafthd.core.util.ItemstackUtil;
+import net.hycrafthd.core.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 
+/**
+ * CommonRegistry! For both sides
+ */
 public class CommonRegistry {
 
 	/**
@@ -22,7 +31,7 @@ public class CommonRegistry {
 	 * @param obj Craftingfield object
 	 */
 	public static void addShapedRecipe(ItemStack output, Object... obj) {
-		CoreUtil.invokeMethod("Common", "addShapedRecipe", ClassObject.forObj(output, obj));
+		GameRegistry.addShapedRecipe(output, obj);
 	}
 
 	/**
@@ -32,7 +41,7 @@ public class CommonRegistry {
 	 * @param obj Item / Block / ItemStack input instance
 	 */
 	public static void addShapelessRecipe(ItemStack output, Object... obj) {
-		CoreUtil.invokeMethod("Common", "addShapelessRecipe", ClassObject.forObj(output, obj));
+		GameRegistry.addShapelessRecipe(output, obj);
 	}
 
 	/**
@@ -43,7 +52,7 @@ public class CommonRegistry {
 	 * @param xp XP per item
 	 */
 	public static void addSmelting(Object input, Object output, float xp) {
-		CoreUtil.invokeMethod("Common", "addSmelting", ClassObject.forObj(ItemstackUtil.getItemStack(input), ItemstackUtil.getItemStack(output), xp));
+		GameRegistry.addSmelting(ItemUtil.getItemStack(input), ItemUtil.getItemStack(output), xp);
 	}
 
 	/**
@@ -130,6 +139,16 @@ public class CommonRegistry {
 	}
 
 	/**
+	 * Register a new guihandler
+	 * 
+	 * @param mod Modid
+	 * @param handler Guihandler instance
+	 */
+	public static void registerGuiHandler(Object mod, IGuiHandler handler) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(mod, handler);
+	}
+
+	/**
 	 * Register a new item.
 	 *
 	 * @param item Item instance
@@ -137,6 +156,16 @@ public class CommonRegistry {
 	 */
 	public static void registerItem(Item item, String itemname) {
 		CoreUtil.invokeMethod("Common", "registerItem", ClassObject.forObj(item, itemname));
+	}
+
+	/**
+	 * Register a new ore
+	 * 
+	 * @param obj Item / Block / ItemStack input instance
+	 */
+	public static void registerOre(Object obj) {
+		ItemStack stack = ItemUtil.getItemStack(obj);
+		OreDictionary.registerOre(stack.getItem().getUnlocalizedName().substring(5), stack);
 	}
 
 	/**
@@ -157,7 +186,16 @@ public class CommonRegistry {
 	 * @param id Tile entity id
 	 */
 	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id) {
-		CoreUtil.invokeMethod("Common", "registerTileEntity", ClassObject.forObj(tileEntityClass, id));
+		GameRegistry.registerTileEntity(tileEntityClass, id);
+	}
+
+	/**
+	 * Register a new worldgenerator
+	 * 
+	 * @param worldgen Worldgenerator instance
+	 */
+	public static void registerWorldGenerator(IWorldGenerator worldgen) {
+		GameRegistry.registerWorldGenerator(worldgen, 0);
 	}
 
 }

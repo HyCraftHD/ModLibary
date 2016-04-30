@@ -46,6 +46,7 @@ public class Test {
 		// }
 
 		CommonRegistry.registerEntity(TestEntity.class, "testentity", "test", 64, 1, true, 0xFF0000, 0x0000FF);
+		ClientRegistry.registerEntityRenderer(TestEntity.class, TestRender.class);
 
 		CommonRegistry.registerBlock(testblock, "testblock");
 		CommonRegistry.registerItem(testitem, "testitem");

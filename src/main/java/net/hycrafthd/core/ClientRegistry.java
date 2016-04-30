@@ -2,15 +2,20 @@ package net.hycrafthd.core;
 
 import net.hycrafthd.core.util.ClassObject;
 import net.hycrafthd.core.util.CoreUtil;
+import net.hycrafthd.core.util.ItemUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * ClientRegistry! Only on client side
+ */
 @SideOnly(Side.CLIENT)
 public class ClientRegistry {
 
@@ -21,7 +26,33 @@ public class ClientRegistry {
 	 * @param specialRenderer TileEntitySpecialRenderer class
 	 */
 	public static void bindTileEntitySpecialRenderer(Class<? extends TileEntity> tileEntityClass, TileEntitySpecialRenderer specialRenderer) {
-		CoreUtil.invokeMethod("Client", "bindTileEntitySpecialRenderer", ClassObject.forObj(tileEntityClass, specialRenderer));
+		net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
+	}
+
+	/**
+	 * Register an entity render <br>
+	 * <br>
+	 * Constructor: <br>
+	 * <br>
+	 * public classname(RenderManager) { <br>
+	 * <br>
+	 * } <br>
+	 * 
+	 * @param entityClass Entity class
+	 * @param renderClass Render class
+	 */
+	public static void registerEntityRenderer(Class<? extends Entity> entityClass, Class<? extends Render> renderClass) {
+		CoreUtil.invokeMethod("Client", "registerEntityRenderer", ClassObject.forObj(entityClass, renderClass));
+	}
+
+	/**
+	 * Register variants for a item
+	 * 
+	 * @param item Item instance
+	 * @param names Resource names
+	 */
+	public static void registerItemVariants(Item item, String... names) {
+		CoreUtil.invokeMethod("Client", "registerItemVariants", ClassObject.forObj(item, names));
 	}
 
 	/**
@@ -30,7 +61,7 @@ public class ClientRegistry {
 	 * @param key Keybinding
 	 */
 	public void registerKeyBinding(KeyBinding key) {
-		CoreUtil.invokeMethod("Client", "registerKeyBinding", ClassObject.forObj(key));
+		net.minecraftforge.fml.client.registry.ClientRegistry.registerKeyBinding(key);
 	}
 
 	/**
@@ -60,18 +91,7 @@ public class ClientRegistry {
 			throw new IllegalArgumentException("Only items and block objects are allowed");
 		}
 
-		String modid = "minecraft";
-		Object obj = item.itemRegistry.getNameForObject(item);
-
-		if (obj instanceof String) {
-			String[] parts = ((String) obj).split(":");
-			modid = parts[0];
-		}
-		if (obj instanceof ResourceLocation) {
-			modid = ((ResourceLocation) obj).getResourceDomain();
-		}
-
-		registerModel(item, meta, modid + ":" + item.getUnlocalizedName().substring(5), "inventory");
+		registerModel(item, meta, ItemUtil.getModid(item) + ":" + item.getUnlocalizedName().substring(5), "inventory");
 
 	}
 
@@ -86,4 +106,5 @@ public class ClientRegistry {
 	public static void registerModel(Item item, int meta, String location, String variant) {
 		CoreUtil.invokeMethod("Client", "registerModel", ClassObject.forObj(item, meta, location, variant));
 	}
+
 }

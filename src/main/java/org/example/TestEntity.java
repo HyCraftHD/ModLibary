@@ -1,86 +1,118 @@
 package org.example;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderEnd;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TestEntity extends EntityThrowable {
+public class TestEntity extends Entity
+{
+    /** Used to create the rotation animation when rendering the crystal. */
+    public int innerRotation;
+    public int health;
+    private static final String __OBFID = "CL_00001658";
 
-	public TestEntity(World world) {
-		super(world);
-	}
+    public TestEntity(World worldIn)
+ {
+		super(worldIn);
+        this.preventEntitySpawning = true;
+        this.setSize(2.0F, 2.0F);
+        this.health = 5;
+        this.innerRotation = this.rand.nextInt(100000);
+    }
 
-	public TestEntity(World worldIn, EntityLivingBase p_i1783_2_) {
-		super(worldIn, p_i1783_2_);
-	}
+    @SideOnly(Side.CLIENT)
+    public TestEntity(World worldIn, double p_i1699_2_, double p_i1699_4_, double p_i1699_6_)
+    {
+        this(worldIn);
+        this.setPosition(p_i1699_2_, p_i1699_4_, p_i1699_6_);
+    }
 
-	@SideOnly(Side.CLIENT)
-	public TestEntity(World worldIn, double p_i1784_2_, double p_i1784_4_, double p_i1784_6_) {
-		super(worldIn, p_i1784_2_, p_i1784_4_, p_i1784_6_);
-	}
+    /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * prevent them from trampling crops
+     */
+    protected boolean canTriggerWalking()
+    {
+        return false;
+    }
 
-	/**
-	 * Called when this EntityThrowable hits a block or entity.
-	 */
-	protected void onImpact(MovingObjectPosition p_70184_1_) {
-		EntityLivingBase entitylivingbase = this.getThrower();
+    protected void entityInit()
+    {
+        this.dataWatcher.addObject(8, Integer.valueOf(this.health));
+    }
 
-		if (p_70184_1_.entityHit != null) {
-			p_70184_1_.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, entitylivingbase), 0.0F);
-		}
+    /**
+     * Called to update the entity's position/logic.
+     */
+    public void onUpdate()
+    {
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+        ++this.innerRotation;
+        this.dataWatcher.updateObject(8, Integer.valueOf(this.health));
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.posY);
+        int k = MathHelper.floor_double(this.posZ);
 
-		for (int i = 0; i < 32; ++i) {
-			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian(), new int[0]);
-		}
+        if (this.worldObj.provider instanceof WorldProviderEnd && this.worldObj.getBlockState(new BlockPos(i, j, k)).getBlock() != Blocks.fire)
+        {
+            this.worldObj.setBlockState(new BlockPos(i, j, k), Blocks.fire.getDefaultState());
+        }
+    }
 
-		if (!this.worldObj.isRemote) {
-			if (entitylivingbase instanceof EntityPlayerMP) {
-				EntityPlayerMP entityplayermp = (EntityPlayerMP) entitylivingbase;
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    protected void writeEntityToNBT(NBTTagCompound tagCompound) {}
 
-				if (entityplayermp.playerNetServerHandler.getNetworkManager().isChannelOpen() && entityplayermp.worldObj == this.worldObj && !entityplayermp.isPlayerSleeping()) {
-					net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(entityplayermp, this.posX, this.posY, this.posZ, 5.0F);
-					if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
-						if (this.rand.nextFloat() < 0.05F && this.worldObj.getGameRules().getGameRuleBooleanValue("doMobSpawning")) {
-							EntityEndermite entityendermite = new EntityEndermite(this.worldObj);
-							entityendermite.setSpawnedByPlayer(true);
-							entityendermite.setLocationAndAngles(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, entitylivingbase.rotationYaw, entitylivingbase.rotationPitch);
-							this.worldObj.spawnEntityInWorld(entityendermite);
-						}
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    protected void readEntityFromNBT(NBTTagCompound tagCompund) {}
 
-						if (entitylivingbase.isRiding()) {
-							entitylivingbase.mountEntity((Entity) null);
-						}
+    /**
+     * Returns true if other Entities should be prevented from moving through this Entity.
+     */
+    public boolean canBeCollidedWith()
+    {
+        return true;
+    }
 
-						entitylivingbase.setPositionAndUpdate(event.targetX, event.targetY, event.targetZ);
-						entitylivingbase.fallDistance = 0.0F;
-						entitylivingbase.attackEntityFrom(DamageSource.fall, event.attackDamage);
-					}
-				}
-			}
+    /**
+     * Called when the entity is attacked.
+     */
+    public boolean attackEntityFrom(DamageSource source, float amount)
+    {
+        if (this.isEntityInvulnerable(source))
+        {
+            return false;
+        }
+        else
+        {
+            if (!this.isDead && !this.worldObj.isRemote)
+            {
+                this.health = 0;
 
-			this.setDead();
-		}
-	}
+                if (this.health <= 0)
+                {
+                    this.setDead();
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
-	public void onUpdate() {
-		EntityLivingBase entitylivingbase = this.getThrower();
+                    if (!this.worldObj.isRemote)
+                    {
+                        this.worldObj.createExplosion((Entity)null, this.posX, this.posY, this.posZ, 50.0F, true);
+                    }
+                }
+            }
 
-		if (entitylivingbase != null && entitylivingbase instanceof EntityPlayer && !entitylivingbase.isEntityAlive()) {
-			this.setDead();
-		} else {
-			super.onUpdate();
-		}
-	}
+            return true;
+        }
+    }
 }

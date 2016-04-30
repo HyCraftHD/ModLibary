@@ -15,18 +15,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class Common {
 
-	public void addShapedRecipe(ItemStack output, Object... obj) {
-		GameRegistry.addShapedRecipe(output, obj);
-	}
-
-	public void addShapelessRecipe(ItemStack output, Object... obj) {
-		GameRegistry.addShapelessRecipe(output, obj);
-	}
-
-	public void addSmelting(ItemStack input, ItemStack output, Float xp) {
-		GameRegistry.addSmelting(input, output, xp);
-	}
-
 	public void registerBlock(Block block, Class<? extends ItemBlock> itemblock, String blockname) {
 		block.setUnlocalizedName(blockname);
 		GameRegistry.registerBlock(block, itemblock, blockname);
@@ -53,7 +41,4 @@ public class Common {
 		GameRegistry.registerItem(item, itemname);
 	}
 
-	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id) {
-		GameRegistry.registerTileEntity(tileEntityClass, id);
-	}
 }
