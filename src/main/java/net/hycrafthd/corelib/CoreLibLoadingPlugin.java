@@ -2,6 +2,7 @@ package net.hycrafthd.corelib;
 
 import java.util.Map;
 
+import net.hycrafthd.corelib.asm.CoreLibASMTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.Name;
@@ -15,13 +16,8 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions
 public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {
 
 	@Override
-	public String getSetupClass() {
-		return null;
-	}
-
-	@Override
 	public String[] getASMTransformerClass() {
-		return null;
+		return new String[] {CoreLibASMTransformer.class.getName()};
 	}
 
 	public String getModContainerClass() {
@@ -32,6 +28,11 @@ public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {
 	}
 
 	public String getAccessTransformerClass() {
+		return null;
+	}
+	
+	@Override
+	public String getSetupClass() {
 		return null;
 	}
 

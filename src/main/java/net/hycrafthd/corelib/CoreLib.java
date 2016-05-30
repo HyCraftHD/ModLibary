@@ -1,17 +1,23 @@
 package net.hycrafthd.corelib;
 
 import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.HashMap;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
+import net.hycrafthd.corelib.core.CommandCSchematic;
+import net.hycrafthd.corelib.core.ModMetadataFetcherCoreLib;
+import net.hycrafthd.corelib.core.WorldGeneratorCoreLib;
+import net.hycrafthd.corelib.registry.EventRegistry;
+import net.hycrafthd.corelib.registry.GenerationRegistry;
+import net.hycrafthd.corelib.util.event.CoreEventBus;
+import net.hycrafthd.corelib.util.gen.OreGen;
+import net.hycrafthd.corelib.util.process.ProcessHandler;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
-import net.minecraftforge.fml.common.ModMetadata;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CoreLib extends DummyModContainer {
 
@@ -21,28 +27,15 @@ public class CoreLib extends DummyModContainer {
 	public static final String MCVERSION = "1.8";
 	public static final String VERSION = "0.1";
 
-	public static final ArrayList<String> AUTHORS = new ArrayList<String>();
-
-	static {
-		AUTHORS.add("HyCraftHD");
-	}
-
 	private static CoreLib instance;
 
-	private Logger logger;
+	private HashMap<Integer, ArrayList<OreGen>> generationList = new HashMap<Integer, ArrayList<OreGen>>();
+
+	private CoreEventBus bus = new CoreEventBus();
 
 	public CoreLib() {
-		super(new ModMetadata());
-
+		super(new ModMetadataFetcherCoreLib().getModmeta());
 		instance = this;
-
-		logger = LogManager.getLogger(NAME);
-
-		ModMetadata meta = getMetadata();
-		meta.modId = MODID;
-		meta.name = NAME;
-		meta.version = VERSION;
-		meta.authorList = AUTHORS;
 	}
 
 	@Override
@@ -51,12 +44,23 @@ public class CoreLib extends DummyModContainer {
 		return true;
 	}
 
-	// @Subscribe
-	// public void init(FMLInitializationEvent event) {
-	// }
+	@Subscribe
+	public void postinit(FMLPostInitializationEvent event) {
+		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
+		EventRegistry.register(new ProcessHandler());
+	}
 
-	public Logger getLogger() {
-		return logger;
+	@Subscribe
+	public void serverstarting(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandCSchematic());
+	}
+
+	public HashMap<Integer, ArrayList<OreGen>> getGenerationList() {
+		return generationList;
+	}
+
+	public CoreEventBus getEventBus() {
+		return bus;
 	}
 
 	public static CoreLib getInstance() {
