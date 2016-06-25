@@ -2,6 +2,7 @@ package net.hycrafthd.corelib.asm;
 
 import org.objectweb.asm.ClassVisitor;
 
+import net.hycrafthd.corelib.asm.visitor.AbstractClientPlayerVisitor;
 import net.hycrafthd.corelib.asm.visitor.EntityRenderVisitor;
 import net.hycrafthd.corelib.asm.visitor.RenderPlayerVisitor;
 import net.hycrafthd.corelib.util.asm.ClassVisitorCreator;
@@ -31,6 +32,15 @@ public class CoreLibASMTransformer implements IClassTransformer {
 
 			}).getBytes();
 		}
+//		if (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer")) {
+//			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
+//				@Override
+//				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
+//					return new AbstractClientPlayerVisitor(name, cw);
+//				}
+//
+//			}).getBytes();
+//		}
 		return bytes;
 	}
 

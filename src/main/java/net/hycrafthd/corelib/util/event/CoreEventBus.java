@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.logging.log4j.Level;
+
 import net.hycrafthd.corelib.CoreLibLogger;
 
 public class CoreEventBus {
@@ -45,7 +47,8 @@ public class CoreEventBus {
 					try {
 						method.invoke(obj, event);
 					} catch (Exception ex) {
-						CoreLibLogger.error("Failed posting event " + event + " to method " + method, ex);
+						CoreLibLogger.log(Level.ERROR, "Failed posting event " + event + " to method " + method);
+						ex.printStackTrace();
 					}
 				}
 			}

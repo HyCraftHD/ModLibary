@@ -17,7 +17,7 @@ public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[] {CoreLibASMTransformer.class.getName()};
+		return new String[] { CoreLibASMTransformer.class.getName() };
 	}
 
 	public String getModContainerClass() {
@@ -30,7 +30,7 @@ public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {
 	public String getAccessTransformerClass() {
 		return null;
 	}
-	
+
 	@Override
 	public String getSetupClass() {
 		return null;

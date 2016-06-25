@@ -1,6 +1,6 @@
 package net.hycrafthd.corelib.util.asm;
 
-import java.lang.reflect.Method;
+import org.apache.logging.log4j.Level;
 
 import net.hycrafthd.corelib.CoreLibLogger;
 import net.minecraft.launchwrapper.Launch;
@@ -34,7 +34,7 @@ public class ASMUtil {
 				message = "Injected!";
 				break;
 			}
-			CoreLibLogger.info(message);
+			CoreLibLogger.log(Level.INFO, message);
 		} catch (Exception ex) {
 		}
 	}

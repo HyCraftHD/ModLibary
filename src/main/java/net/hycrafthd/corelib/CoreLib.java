@@ -29,6 +29,8 @@ public class CoreLib extends DummyModContainer {
 
 	private static CoreLib instance;
 
+	private static CoreLibLogger logger = new CoreLibLogger();
+
 	private HashMap<Integer, ArrayList<OreGen>> generationList = new HashMap<Integer, ArrayList<OreGen>>();
 
 	private CoreEventBus bus = new CoreEventBus();
@@ -55,16 +57,20 @@ public class CoreLib extends DummyModContainer {
 		event.registerServerCommand(new CommandCSchematic());
 	}
 
+	public static CoreLib getInstance() {
+		return instance;
+	}
+
+	public static CoreLibLogger getLogger() {
+		return logger;
+	}
+
 	public HashMap<Integer, ArrayList<OreGen>> getGenerationList() {
 		return generationList;
 	}
 
 	public CoreEventBus getEventBus() {
 		return bus;
-	}
-
-	public static CoreLib getInstance() {
-		return instance;
 	}
 
 }

@@ -1,30 +1,17 @@
 package net.hycrafthd.corelib;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
 
-public class CoreLibLogger {
+import net.hycrafthd.corelib.logger.AbstractLogger;
 
-	private static Logger logger = LogManager.getLogger(CoreLib.NAME);
+public class CoreLibLogger extends AbstractLogger {
 
-	public static void info(String msg) {
-		logger.info(msg);
+	public CoreLibLogger() {
+		super(CoreLib.NAME);
 	}
 
-	public static void warm(String msg) {
-		logger.warn(msg);
-	}
-
-	public static void error(String msg) {
-		logger.error(msg);
-	}
-
-	public static void error(String msg, Throwable th) {
-		logger.error(msg, th);
-	}
-
-	public static Logger getLogger() {
-		return logger;
+	public static void log(Level loglvl, String msg) {
+		CoreLib.getInstance().getLogger().getLogger().log(loglvl, msg);
 	}
 
 }
