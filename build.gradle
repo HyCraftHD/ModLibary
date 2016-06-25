@@ -25,9 +25,9 @@ group= "net.hycrafthd.corelib" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "corelib"
 
 
-jar {manifest {attributes
-				'FMLCorePlugin': 'net.hycrafthd.core.CoreLoadingPlugin',
-                'FMLCorePluginContainsFMLMod': 'true'
+jar {
+    manifest {
+        attributes("FMLCorePlugin": "net.hycrafthd.corelib.CoreLibLoadingPlugin", "FMLCorePluginContainsFMLMod": "false")
     }
 }
 
