@@ -4,13 +4,11 @@ import java.util.Map;
 
 import net.hycrafthd.corelib.asm.CoreLibASMTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.Name;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 @SortingIndex(0)
-@MCVersion(CoreLib.mcversion)
 @TransformerExclusions("net.hycrafthd.corelib")
 @Name(value = "CoreLibLoadingPlugin")
 public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {
