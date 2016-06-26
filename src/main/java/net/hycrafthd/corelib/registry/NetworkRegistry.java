@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.registry;
 
 import net.hycrafthd.corelib.util.ICustomGuiHandler;
-import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class NetworkRegistry {

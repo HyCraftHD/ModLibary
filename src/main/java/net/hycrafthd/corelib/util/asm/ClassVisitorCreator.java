@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.util.asm;
 
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
 
 public abstract class ClassVisitorCreator {
 

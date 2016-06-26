@@ -2,7 +2,6 @@ package net.hycrafthd.corelib.asm;
 
 import org.objectweb.asm.ClassVisitor;
 
-import net.hycrafthd.corelib.asm.visitor.AbstractClientPlayerVisitor;
 import net.hycrafthd.corelib.asm.visitor.EntityRenderVisitor;
 import net.hycrafthd.corelib.asm.visitor.RenderPlayerVisitor;
 import net.hycrafthd.corelib.util.asm.ClassVisitorCreator;

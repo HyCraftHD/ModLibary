@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.event;
 
 import net.hycrafthd.corelib.util.event.CoreEvent;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

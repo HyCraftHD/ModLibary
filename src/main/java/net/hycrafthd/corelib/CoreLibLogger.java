@@ -10,6 +10,7 @@ public class CoreLibLogger extends AbstractLogger {
 		super(CoreLib.NAME);
 	}
 
+	@SuppressWarnings("static-access")
 	public static void log(Level loglvl, String msg) {
 		CoreLib.getInstance().getLogger().getLogger().log(loglvl, msg);
 	}

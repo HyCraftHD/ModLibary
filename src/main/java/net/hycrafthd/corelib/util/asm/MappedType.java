@@ -2,8 +2,6 @@ package net.hycrafthd.corelib.util.asm;
 
 import org.objectweb.asm.Type;
 
-import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
-
 public class MappedType {
 
 	private String clazzName;
@@ -12,7 +10,7 @@ public class MappedType {
 		return new MappedType(clazzName);
 	}
 
-	public static MappedType from(Class clazz) {
+	public static MappedType from(Class<?> clazz) {
 		return new MappedType(clazz.getName().replace('.', '/'));
 	}
 

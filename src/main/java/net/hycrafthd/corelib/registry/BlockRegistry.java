@@ -1,7 +1,5 @@
 package net.hycrafthd.corelib.registry;
 
-import org.apache.commons.lang3.Validate;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;

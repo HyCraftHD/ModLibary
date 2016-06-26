@@ -1,9 +1,7 @@
 package net.hycrafthd.corelib.registry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import net.hycrafthd.corelib.CoreLib;
 import net.hycrafthd.corelib.util.gen.BaseWorldGenerator;
@@ -11,7 +9,6 @@ import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.gen.OreGenDim;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import scala.annotation.meta.getter;
 
 public class GenerationRegistry {
 

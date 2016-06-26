@@ -1,10 +1,7 @@
 package net.hycrafthd.corelib.util.gen;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.world.World;
 
 public class OreGen {
 

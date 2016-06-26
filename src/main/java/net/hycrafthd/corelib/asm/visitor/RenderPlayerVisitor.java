@@ -9,14 +9,12 @@ import org.objectweb.asm.commons.Method;
 import com.google.common.base.Throwables;
 
 import net.hycrafthd.corelib.CoreLib;
-import net.hycrafthd.corelib.CoreLibLogger;
 import net.hycrafthd.corelib.event.PlayerRenderBodyEvent;
 import net.hycrafthd.corelib.util.asm.ASMLogType;
 import net.hycrafthd.corelib.util.asm.ASMUtil;
 import net.hycrafthd.corelib.util.asm.MappedType;
 import net.hycrafthd.corelib.util.asm.MethodMatcher;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraftforge.common.MinecraftForge;
 
 public class RenderPlayerVisitor extends ClassVisitor {
 

@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.registry;
 
 import net.hycrafthd.corelib.CoreLib;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 

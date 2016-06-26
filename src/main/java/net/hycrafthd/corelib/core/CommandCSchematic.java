@@ -106,6 +106,7 @@ public class CommandCSchematic extends CommandBase {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 1) {

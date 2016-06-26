@@ -7,7 +7,7 @@ import net.minecraft.stats.Achievement;
 
 public class AchievementUtil {
 
-	public static Achievement[] fromClass(Class clazz) {
+	public static Achievement[] fromClass(Class<?> clazz) {
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 		for (Field field : clazz.getFields()) {
 			try {

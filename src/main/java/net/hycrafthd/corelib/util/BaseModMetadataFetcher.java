@@ -2,13 +2,11 @@ package net.hycrafthd.corelib.util;
 
 import java.io.InputStream;
 
-import net.hycrafthd.corelib.CoreLib;
 import net.minecraftforge.fml.common.MetadataCollection;
 import net.minecraftforge.fml.common.ModMetadata;
 
 public class BaseModMetadataFetcher {
 
-	private InputStream inputstream;
 	private ModMetadata modmeta;
 
 	public BaseModMetadataFetcher(String modid) {
