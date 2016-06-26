@@ -7,14 +7,14 @@ import net.minecraftforge.fml.common.ModMetadata;
 public class ModMetadataFetcherCoreLib extends BaseModMetadataFetcher {
 
 	public ModMetadataFetcherCoreLib() {
-		super("/corelib.info", CoreLib.MODID);
+		super("/corelib.info", CoreLib.modid);
 	}
 
 	@Override
 	public ModMetadata getModmeta() {
 		ModMetadata modmeta = super.getModmeta();
-		modmeta.name = CoreLib.NAME;
-		modmeta.version = CoreLib.VERSION;
+		modmeta.name = CoreLib.name;
+		modmeta.version = CoreLib.version;
 		return modmeta;
 	}
 

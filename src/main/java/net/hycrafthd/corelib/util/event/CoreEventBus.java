@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.logging.log4j.Level;
-
-import net.hycrafthd.corelib.CoreLibLogger;
+import net.hycrafthd.corelib.CoreLib;
 
 public class CoreEventBus {
 
@@ -46,9 +44,8 @@ public class CoreEventBus {
 				if (method.getParameters()[0].getType().equals(event.getClass())) {
 					try {
 						method.invoke(obj, event);
-					} catch (Exception ex) {
-						CoreLibLogger.log(Level.ERROR, "Failed posting event " + event + " to method " + method);
-						ex.printStackTrace();
+					} catch (Throwable th) {
+						CoreLib.getLogger().error("Failed posting event " + event + " to method " + method, th);
 					}
 				}
 			}

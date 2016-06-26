@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 @SortingIndex(0)
-@MCVersion(CoreLib.MCVERSION)
+@MCVersion(CoreLib.mcversion)
 @TransformerExclusions("net.hycrafthd.corelib")
 @Name(value = "CoreLibLoadingPlugin")
 public class CoreLibLoadingPlugin implements IFMLLoadingPlugin {

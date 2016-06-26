@@ -21,18 +21,15 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CoreLib extends DummyModContainer {
 
-	public static final String MODID = "corelib";
-	public static final String NAME = "Core Libary";
+	public static final String modid = "corelib";
+	public static final String name = "Core Libary";
 
-	public static final String MCVERSION = "1.8";
-	public static final String VERSION = "0.1";
+	public static final String mcversion = "1.8";
+	public static final String version = "0.1";
 
 	private static CoreLib instance;
-
 	private static CoreLibLogger logger = new CoreLibLogger();
-
 	private HashMap<Integer, ArrayList<OreGen>> generationList = new HashMap<Integer, ArrayList<OreGen>>();
-
 	private CoreEventBus bus = new CoreEventBus();
 
 	public CoreLib() {
@@ -57,20 +54,20 @@ public class CoreLib extends DummyModContainer {
 		event.registerServerCommand(new CommandCSchematic());
 	}
 
-	public static CoreLib getInstance() {
-		return instance;
-	}
-
-	public static CoreLibLogger getLogger() {
-		return logger;
-	}
-
 	public HashMap<Integer, ArrayList<OreGen>> getGenerationList() {
 		return generationList;
 	}
 
 	public CoreEventBus getEventBus() {
 		return bus;
+	}
+
+	public static CoreLib getInstance() {
+		return instance;
+	}
+
+	public static CoreLibLogger getLogger() {
+		return logger;
 	}
 
 }

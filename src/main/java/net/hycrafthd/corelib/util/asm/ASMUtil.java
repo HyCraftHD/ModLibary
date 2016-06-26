@@ -1,8 +1,6 @@
 package net.hycrafthd.corelib.util.asm;
 
-import org.apache.logging.log4j.Level;
-
-import net.hycrafthd.corelib.CoreLibLogger;
+import net.hycrafthd.corelib.CoreLib;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 
@@ -34,7 +32,7 @@ public class ASMUtil {
 				message = "Injected!";
 				break;
 			}
-			CoreLibLogger.log(Level.INFO, message);
+			CoreLib.getLogger().info(message);
 		} catch (Exception ex) {
 		}
 	}
