@@ -45,8 +45,10 @@ public class BlockObj {
 	
 	public NBTTagCompound toNBT(){
 		NBTTagCompound comp = new NBTTagCompound();
-		comp.setString("Name", String.valueOf(Block.blockRegistry.getNameForObject(this.getBlock())));
+		String block = String.valueOf(Block.blockRegistry.getNameForObject(this.getBlock()));
+		comp.setString("Name", block);
 		comp.setInteger("Meta", this.getMeta());
+		if(this.hasNBT())
 		comp.setTag("NBT", this.getTileEntity());
 		return comp;
 	}

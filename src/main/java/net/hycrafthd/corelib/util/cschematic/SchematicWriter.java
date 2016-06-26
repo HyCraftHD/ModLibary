@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.util.cschematic;
 
 import java.io.File;
-
 import net.hycrafthd.corelib.util.NBTUtil;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -26,7 +25,10 @@ public class SchematicWriter {
 				BlockObj[] blockar = schematic.getBlocks();
 				NBTTagList list = new NBTTagList();
 				for (BlockObj blockObj : blockar) {
-					list.appendTag(blockObj.toNBT());
+					if(blockObj != null){
+					NBTTagCompound comp = blockObj.toNBT();
+					list.appendTag(comp);
+					}
 				}
 				NBTTagCompound tag = new NBTTagCompound();
 				tag.setTag("List", list);
@@ -36,11 +38,9 @@ public class SchematicWriter {
 				NBTUtil.writeNBTToFile(tag, name);
 				}catch(Throwable th){
 					System.err.println("Failed to Save Schematic");
-					th.printStackTrace();
 			    }
 			}
 		}).start();
-		System.out.println("Started");
 	}
 	
 }

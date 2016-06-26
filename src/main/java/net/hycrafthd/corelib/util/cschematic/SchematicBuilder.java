@@ -26,17 +26,20 @@ public class SchematicBuilder {
 			public void run() {
 				try{
 				ReadedSchematic re = reader.read();
-				BlockObj[] obs = re.getObjts();
+				BlockObj[] objs = re.getObjts();
 				int i = 0;
 				for (int z = 0; z < re.getDistZ(); z++) {
 					for (int y = 0; y < re.getDistY(); y++) {
-						for (int x = 0; x < re.getDistZ(); x++) {
-			                BlockObj obj = obs[i];
+						for (int x = 0; x < re.getDistX(); x++) {
+			                BlockObj obj = objs[i];
 			                BlockPos p = pos.add(new Vec3i(x, y, z));
 			                worldObj.setBlockState(p, obj.getBlock().getStateFromMeta(obj.getMeta()));
 										                
-			                TileEntity ent = worldObj.getTileEntity(pos);
-			                if(ent != null)ent.setPos(pos);
+			                TileEntity ent = worldObj.getTileEntity(p);
+			                if(ent != null && obj.hasNBT()){
+			                	ent.readFromNBT(obj.getTileEntity());
+			                	ent.setPos(p);
+			                }
 			                i++;
 						}
 					}
@@ -47,7 +50,7 @@ public class SchematicBuilder {
 			}
 		}).start();
 	}
-
+	
 	public World getWorld() {
 		return worldObj;
 	}

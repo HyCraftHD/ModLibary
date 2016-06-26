@@ -1,30 +1,20 @@
 package net.hycrafthd.corelib.core;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import akka.io.Tcp.Command;
-import net.hycrafthd.corelib.util.FileUtil;
-import net.hycrafthd.corelib.util.NBTUtil;
 import net.hycrafthd.corelib.util.cschematic.Schematic;
 import net.hycrafthd.corelib.util.cschematic.SchematicBuilder;
 import net.hycrafthd.corelib.util.cschematic.SchematicReader;
 import net.hycrafthd.corelib.util.cschematic.SchematicUtil;
 import net.hycrafthd.corelib.util.cschematic.SchematicWriter;
-import net.minecraft.client.resources.Language;
-import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandClone;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.command.server.CommandScoreboard;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class CommandCSchematic extends CommandBase {
 

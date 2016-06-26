@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -19,12 +20,12 @@ public class Schematic {
 	public final int disz;
 	
 	public Schematic(BlockPos pos1,BlockPos pos2,World w) {
-		this.pos1 = pos1;
-		this.pos2 = pos2;
+		this.pos1 = new BlockPos(MathUtil.getMinVec(pos1, pos2));
+		this.pos2 = new BlockPos(MathUtil.getMaxVec(pos1, pos2));
 		this.worldObj = w;
-		this.disx = MathUtil.distance(pos1.getX(), pos2.getX() + 1);
-		this.disy = MathUtil.distance(pos1.getY(), pos2.getY() + 1);
-		this.disz = MathUtil.distance(pos1.getZ(), pos2.getZ() + 1);
+		this.disx = MathUtil.distance(this.pos1.getX(), this.pos2.getX() + 1);
+		this.disy = MathUtil.distance(this.pos1.getY(), this.pos2.getY() + 1);
+		this.disz = MathUtil.distance(this.pos1.getZ(), this.pos2.getZ() + 1);
 	}
 
 	public BlockPos getPos1() {
@@ -45,11 +46,14 @@ public class Schematic {
 	
 	public BlockObj[] getBlocks(){
 		ArrayList<BlockObj> args = new ArrayList<BlockObj>();
-		if(worldObj.isAreaLoaded(new StructureBoundingBox(pos1, pos2))){
+		StructureBoundingBox bon = new StructureBoundingBox(pos1, pos2);
+		BlockPos posstart = new BlockPos(MathUtil.getMinVec(pos1, pos2));
+		if(worldObj.isAreaLoaded(bon)){
 			for (int z = 0; z < disz; z++) {
 				for (int y = 0; y < disy; y++) {
 					for (int x = 0; x < disx; x++) {
-						BlockPos pos = new BlockPos(x,y,z);
+						BlockPos pos = posstart.add(new Vec3i(x, y, z));
+						System.out.println(pos.toString());
 						IBlockState stat = worldObj.getBlockState(pos);
 						Block bl = stat.getBlock();
 						int meta = bl.getMetaFromState(stat);
@@ -65,7 +69,7 @@ public class Schematic {
 		}
 		BlockObj[] arr = new BlockObj[args.size()];
 		int i = 0;
-		for (BlockObj blockObj : arr) {
+		for (BlockObj blockObj : args) {
 			arr[i] = blockObj;
 			i++;
 		}
