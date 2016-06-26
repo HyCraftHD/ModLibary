@@ -7,6 +7,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import net.hycrafthd.corelib.core.CommandCSchematic;
+import net.hycrafthd.corelib.core.CoreLibLogger;
 import net.hycrafthd.corelib.core.ModMetadataFetcherCoreLib;
 import net.hycrafthd.corelib.core.WorldGeneratorCoreLib;
 import net.hycrafthd.corelib.registry.EventRegistry;
