@@ -15,7 +15,14 @@ import net.hycrafthd.corelib.util.asm.ASMUtil;
 import net.hycrafthd.corelib.util.asm.MappedType;
 import net.hycrafthd.corelib.util.asm.MethodMatcher;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 
+/**
+ * Visit {@link RenderPlayer} to change player rendering TODO more comments
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class RenderPlayerVisitor extends ClassVisitor {
 
 	private MethodMatcher methodmatcher;

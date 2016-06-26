@@ -5,12 +5,30 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Player render body event (CLIENT SIDE ONLY)
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 @SideOnly(Side.CLIENT)
 public class PlayerRenderBodyEvent implements CoreEvent {
 
+	/**
+	 * Client player
+	 */
 	public final AbstractClientPlayer player;
+	/**
+	 * Partial time
+	 */
 	public final float partialTickTime;
 
+	/**
+	 * Construktor
+	 * 
+	 * @param player
+	 * @param partialTickTime
+	 */
 	public PlayerRenderBodyEvent(AbstractClientPlayer player, float partialTickTime) {
 		this.player = player;
 		this.partialTickTime = partialTickTime;

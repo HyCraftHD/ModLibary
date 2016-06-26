@@ -14,11 +14,20 @@ import net.hycrafthd.corelib.util.asm.ASMLogType;
 import net.hycrafthd.corelib.util.asm.ASMUtil;
 import net.hycrafthd.corelib.util.asm.MappedType;
 import net.hycrafthd.corelib.util.asm.MethodMatcher;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Visit {@link AbstractClientPlayer} class to change skin and cape location
+ * TODO more comments
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class AbstractClientPlayerVisitor extends ClassVisitor {
 
+	// TODO Work
 	private MethodMatcher methodmatcher;
 
 	public AbstractClientPlayerVisitor(String name, ClassVisitor cv) {

@@ -17,6 +17,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
+/**
+ * Visit {@link EntityRenderer} to change camera transform TODO more comments
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class EntityRenderVisitor extends ClassVisitor {
 
 	private MethodMatcher methodmatcher;

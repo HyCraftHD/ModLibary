@@ -10,6 +10,7 @@ import net.hycrafthd.corelib.util.gen.OreGenDim;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+//TODO more comments
 public class GenerationRegistry {
 
 	public static void registerBaseWorldGenerator(BaseWorldGenerator generator, int modGenerationWeight) {

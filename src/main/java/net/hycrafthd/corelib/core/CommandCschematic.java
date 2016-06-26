@@ -18,25 +18,46 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public class CommandCSchematic extends CommandBase {
+/**
+ * Minecraft command to save and load cschematics
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net), MrTroble
+ *
+ */
+public class CommandCschematic extends CommandBase {
 
+	/**
+	 * Languagedata key
+	 */
 	private String lang = "command.cschematic";
 
+	/**
+	 * Command name
+	 */
 	@Override
 	public String getName() {
 		return "cschematic";
 	}
 
+	/**
+	 * Command permission
+	 */
 	@Override
 	public int getRequiredPermissionLevel() {
 		return 2;
 	}
 
+	/**
+	 * Command usage
+	 */
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
 		return lang + ".usage";
 	}
 
+	/**
+	 * Command executed
+	 */
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
@@ -62,18 +83,18 @@ public class CommandCSchematic extends CommandBase {
 					if (!parent.getAbsolutePath().equals(SchematicUtil.getSaveDirectionary().getAbsolutePath()) && !parent.exists()) {
 						parent.mkdir();
 					}
-                    
+
 					Schematic sch = new Schematic(pos1, pos2, world);
 					SchematicWriter writer = new SchematicWriter(sch);
 					writer.write(file);
-					
+
 					notifyOperators(player, this, lang + ".success.save", pos1, pos2, name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					throw new CommandException(lang + ".error", "saving", ex.getClass().getName());
 				}
 			} else if (args[0].equalsIgnoreCase("load")) {
-				if (args.length >= 3 && args.length <=2) {
+				if (args.length >= 3 && args.length <= 2) {
 					throw new WrongUsageException(getCommandUsage(sender) + ".load");
 				}
 				try {
@@ -86,14 +107,14 @@ public class CommandCSchematic extends CommandBase {
 						throw new IllegalArgumentException();
 					}
 
-				    SchematicReader reader = new SchematicReader(file);
-				    SchematicBuilder builder = new SchematicBuilder(reader, world);
-				    if(args.length == 3){
-					builder.build(pos,!Boolean.parseBoolean(args[2]));
-				    }else{
-				    	builder.build(pos, true);
-				    }
-					
+					SchematicReader reader = new SchematicReader(file);
+					SchematicBuilder builder = new SchematicBuilder(reader, world);
+					if (args.length == 3) {
+						builder.build(pos, !Boolean.parseBoolean(args[2]));
+					} else {
+						builder.build(pos, true);
+					}
+
 					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
 					throw new CommandException(lang + ".error", "loading", ex.getClass().getName());
@@ -106,9 +127,11 @@ public class CommandCSchematic extends CommandBase {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
+	/**
+	 * Command tabcompletion
+	 */
 	@Override
-	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+	public List<?> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 1) {
 			return getListOfStringsMatchingLastWord(args, new String[] { "save", "load" });
 		} else {
@@ -128,8 +151,8 @@ public class CommandCSchematic extends CommandBase {
 						return getListOfStringsMatchingLastWord(args, SchematicUtil.getSaveDirectionaryFileListCSchematic());
 					} catch (Exception ex) {
 					}
-				}else if(args.length == 3){
-					return Lists.newArrayList("true","false");
+				} else if (args.length == 3) {
+					return Lists.newArrayList("true", "false");
 				}
 			}
 		}

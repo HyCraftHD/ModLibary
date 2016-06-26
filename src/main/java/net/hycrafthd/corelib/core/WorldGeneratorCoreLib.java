@@ -12,8 +12,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+/**
+ * Worldgenerator for CoreLib
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class WorldGeneratorCoreLib implements IWorldGenerator {
 
+	/**
+	 * Generate
+	 */
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		HashMap<Integer, ArrayList<OreGen>> gen = CoreLib.getInstance().getGenerationList();
