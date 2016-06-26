@@ -7,11 +7,11 @@ import java.util.List;
 import akka.io.Tcp.Command;
 import net.hycrafthd.corelib.util.FileUtil;
 import net.hycrafthd.corelib.util.NBTUtil;
-import net.hycrafthd.corelib.util.cschematic.AbsoluteRegion;
-import net.hycrafthd.corelib.util.cschematic.IllegalSavingPathExeption;
-import net.hycrafthd.corelib.util.cschematic.RelativeRegion;
-import net.hycrafthd.corelib.util.cschematic.SchematicBoundingBox;
+import net.hycrafthd.corelib.util.cschematic.Schematic;
+import net.hycrafthd.corelib.util.cschematic.SchematicBuilder;
+import net.hycrafthd.corelib.util.cschematic.SchematicReader;
 import net.hycrafthd.corelib.util.cschematic.SchematicUtil;
+import net.hycrafthd.corelib.util.cschematic.SchematicWriter;
 import net.minecraft.client.resources.Language;
 import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.command.CommandBase;
@@ -62,7 +62,7 @@ public class CommandCSchematic extends CommandBase {
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
 					if (file.getAbsolutePath().contains("..")) {
-						throw new IllegalSavingPathExeption();
+						throw new IllegalArgumentException(file.getPath());
 					}
 
 					File parent = file.getParentFile();
@@ -70,26 +70,11 @@ public class CommandCSchematic extends CommandBase {
 					if (!parent.getAbsolutePath().equals(SchematicUtil.getSaveDirectionary().getAbsolutePath()) && !parent.exists()) {
 						parent.mkdir();
 					}
-
-					SchematicUtil.saveRegion(world, new SchematicBoundingBox(pos1, pos2), file);
-
-					// AbsoluteRegion abreg = new AbsoluteRegion(world, pos1, pos2);
-					// RelativeRegion relrg = abreg.toRelative();
-					//
-					// File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
-					//
-					// if (file.getAbsolutePath().contains("..")) {
-					// throw new IllegalSavingPathExeption();
-					// }
-					//
-					// File parent = file.getParentFile();
-					//
-					// if (!parent.getAbsolutePath().equals(SchematicUtil.getSaveDirectionary().getAbsolutePath()) && !parent.exists()) {
-					// parent.mkdir();
-					// }
-					//
-					// NBTUtil.writeNBTToFile(relrg.save(), file);
-
+                    
+					Schematic sch = new Schematic(pos1, pos2, world);
+					SchematicWriter writer = new SchematicWriter(sch);
+					writer.write(file);
+					
 					notifyOperators(player, this, lang + ".success.save", pos1, pos2, name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -106,14 +91,14 @@ public class CommandCSchematic extends CommandBase {
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
 					if (file.getAbsolutePath().contains("..")) {
-						throw new IllegalSavingPathExeption();
+						throw new IllegalArgumentException();
 					}
 
-					NBTTagCompound tag = NBTUtil.readNBTFromFile(file);
-					RelativeRegion relrg = RelativeRegion.load(tag);
-					AbsoluteRegion abreg = AbsoluteRegion.fromRelative(relrg, world, pos);
-
-					notifyOperators(player, this, lang + ".success.load", name, abreg.getPos1(), abreg.getPos2());
+				    SchematicReader reader = new SchematicReader(file);
+				    SchematicBuilder builder = new SchematicBuilder(reader, world);
+					builder.build(pos);
+					
+					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
 					throw new CommandException(lang + ".error", "loading", ex.getClass().getName());
 				}

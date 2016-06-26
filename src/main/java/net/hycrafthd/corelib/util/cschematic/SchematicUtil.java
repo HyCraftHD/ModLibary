@@ -1,17 +1,11 @@
 package net.hycrafthd.corelib.util.cschematic;
 
 import java.io.File;
-import java.security.spec.DSAGenParameterSpec;
 import java.util.Collection;
 
-import org.apache.commons.compress.compressors.gzip.GzipUtils;
+import org.apache.commons.io.FileUtils;
 
 import net.hycrafthd.corelib.util.FileUtil;
-import net.hycrafthd.corelib.util.process.ProcessHandler;
-import net.minecraft.command.CommandClone;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
 
 public class SchematicUtil {
 
@@ -24,7 +18,7 @@ public class SchematicUtil {
 	}
 
 	public static Collection<File> getSaveDirectionaryFiles() throws Exception {
-		return FileUtil.FILE_UTILS.listFiles(getSaveDirectionary(), new String[] { "cschematic" }, true);
+		return FileUtils.listFiles(getSaveDirectionary(), new String[] { "cschematic" }, true);
 	}
 
 	public static String[] getSaveDirectionaryFileListCSchematic() throws Exception {
@@ -42,9 +36,5 @@ public class SchematicUtil {
 			c++;
 		}
 		return n;
-	}
-
-	public static void saveRegion(World world, SchematicBoundingBox box, File file) {
-		ProcessHandler.addProcess(new RegionSaver(world, box, file));
 	}
 }
