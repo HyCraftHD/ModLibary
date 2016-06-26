@@ -19,7 +19,7 @@ public class SchematicBuilder {
 		return reader;
 	}
 	
-	public void build(final BlockPos pos){
+	public void build(final BlockPos pos,final boolean b){
 		new Thread(new Runnable() {
 			
 			@Override
@@ -32,7 +32,12 @@ public class SchematicBuilder {
 					for (int y = 0; y < re.getDistY(); y++) {
 						for (int x = 0; x < re.getDistX(); x++) {
 			                BlockObj obj = objs[i];
-			                BlockPos p = pos.add(new Vec3i(x, y, z));
+			                BlockPos p = null;
+			                if(b){
+			                	p = pos.add(new Vec3i(x, y, z));
+			                }else{
+			                	p = pos.add(new Vec3i(z, y, x));
+			                }
 			                worldObj.setBlockState(p, obj.getBlock().getStateFromMeta(obj.getMeta()));
 										                
 			                TileEntity ent = worldObj.getTileEntity(p);

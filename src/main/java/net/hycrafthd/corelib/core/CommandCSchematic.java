@@ -3,6 +3,8 @@ package net.hycrafthd.corelib.core;
 import java.io.File;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import net.hycrafthd.corelib.util.cschematic.Schematic;
 import net.hycrafthd.corelib.util.cschematic.SchematicBuilder;
 import net.hycrafthd.corelib.util.cschematic.SchematicReader;
@@ -71,7 +73,7 @@ public class CommandCSchematic extends CommandBase {
 					throw new CommandException(lang + ".error", "saving", ex.getClass().getName());
 				}
 			} else if (args[0].equalsIgnoreCase("load")) {
-				if (args.length != 2) {
+				if (args.length >= 3 && args.length <=2) {
 					throw new WrongUsageException(getCommandUsage(sender) + ".load");
 				}
 				try {
@@ -86,7 +88,11 @@ public class CommandCSchematic extends CommandBase {
 
 				    SchematicReader reader = new SchematicReader(file);
 				    SchematicBuilder builder = new SchematicBuilder(reader, world);
-					builder.build(pos);
+				    if(args.length == 3){
+					builder.build(pos,!Boolean.parseBoolean(args[2]));
+				    }else{
+				    	builder.build(pos, true);
+				    }
 					
 					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
@@ -121,6 +127,8 @@ public class CommandCSchematic extends CommandBase {
 						return getListOfStringsMatchingLastWord(args, SchematicUtil.getSaveDirectionaryFileListCSchematic());
 					} catch (Exception ex) {
 					}
+				}else if(args.length == 3){
+					return Lists.newArrayList("true","false");
 				}
 			}
 		}
