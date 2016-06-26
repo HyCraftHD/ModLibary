@@ -36,9 +36,11 @@ public class SchematicWriter {
 				NBTUtil.writeNBTToFile(tag, name);
 				}catch(Throwable th){
 					System.err.println("Failed to Save Schematic");
-				}
+					th.printStackTrace();
+			    }
 			}
 		}).start();
+		System.out.println("Started");
 	}
 	
 }
