@@ -41,6 +41,7 @@ public class CoreLibASMTransformer implements IClassTransformer {
 
 			}).getBytes();
 		}
+		/*
 		if (transformedName.equals("net.minecraft.client.Minecraft")) {
 			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
 				@Override
@@ -50,6 +51,7 @@ public class CoreLibASMTransformer implements IClassTransformer {
 
 			}).getBytes();
 		}
+		/
 		// if
 		// (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer"))
 		// {
@@ -63,6 +65,8 @@ public class CoreLibASMTransformer implements IClassTransformer {
 		//
 		// }).getBytes();
 		// }
+		 * 
+		 */
 		return bytes;
 	}
 

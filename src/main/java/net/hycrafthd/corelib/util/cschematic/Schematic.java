@@ -53,7 +53,6 @@ public class Schematic {
 				for (int y = 0; y < disy; y++) {
 					for (int x = 0; x < disx; x++) {
 						BlockPos pos = posstart.add(new Vec3i(x, y, z));
-						System.out.println(pos.toString());
 						IBlockState stat = worldObj.getBlockState(pos);
 						Block bl = stat.getBlock();
 						int meta = bl.getMetaFromState(stat);

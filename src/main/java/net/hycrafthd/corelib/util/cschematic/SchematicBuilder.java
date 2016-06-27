@@ -1,5 +1,6 @@
 package net.hycrafthd.corelib.util.cschematic;
 
+import net.hycrafthd.corelib.CoreLib;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3i;
@@ -24,6 +25,7 @@ public class SchematicBuilder {
 			
 			@Override
 			public void run() {
+				Thread.currentThread().setName("Schematic Builder");
 				try{
 				ReadedSchematic re = reader.read();
 				BlockObj[] objs = re.getObjts();
@@ -39,9 +41,15 @@ public class SchematicBuilder {
 			                	p = pos.add(new Vec3i(z, y, x));
 			                }
 			                worldObj.setBlockState(p, obj.getBlock().getStateFromMeta(obj.getMeta()));
-										                
+			        		CoreLib.getLogger().info(obj.getBlock().toString());
+			        		CoreLib.getLogger().info("" + obj.getMeta());
+			        		CoreLib.getLogger().info(obj.getBlock().getStateFromMeta(obj.getMeta()).toString());
+			        		CoreLib.getLogger().info(p.toString());
+			        		CoreLib.getLogger().info("Count:" + i);
 			                TileEntity ent = worldObj.getTileEntity(p);
 			                if(ent != null && obj.hasNBT()){
+			                	CoreLib.getLogger().info("true");
+			                	CoreLib.getLogger().info(obj.getTileEntity().toString());
 			                	ent.readFromNBT(obj.getTileEntity());
 			                	ent.setPos(p);
 			                }
@@ -50,7 +58,7 @@ public class SchematicBuilder {
 					}
 				}
 				}catch(Throwable thr){
-					
+					thr.printStackTrace();
 				}
 			}
 		}).start();

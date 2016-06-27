@@ -74,7 +74,7 @@ public class CommandCschematic extends CommandBase {
 
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
-					if (!file.getName().equals("cschematic")) {
+					if (!file.getParent().contains("cschematic")) {
 						throw new IllegalArgumentException();
 					}
 
@@ -103,7 +103,7 @@ public class CommandCschematic extends CommandBase {
 
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
-					if (!file.getName().equals("cschematic")) {
+					if (!file.getParent().contains("cschematic")) {
 						throw new IllegalArgumentException();
 					}
 

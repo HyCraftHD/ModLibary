@@ -22,6 +22,7 @@ public class SchematicWriter {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				Thread.currentThread().setName("Schematic Builder");
 				try{
 				BlockObj[] blockar = schematic.getBlocks();
 				NBTTagList list = new NBTTagList();
