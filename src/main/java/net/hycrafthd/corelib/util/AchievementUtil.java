@@ -5,8 +5,21 @@ import java.util.ArrayList;
 
 import net.minecraft.stats.Achievement;
 
+/**
+ * Util methods for {@link Achievement}
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class AchievementUtil {
 
+	/**
+	 * Get all initialized achievement fields as a list
+	 * 
+	 * @param clazz
+	 *            Achievement class
+	 * @return Return all initialized achievements as a list
+	 */
 	public static Achievement[] fromClass(Class<?> clazz) {
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 		for (Field field : clazz.getFields()) {

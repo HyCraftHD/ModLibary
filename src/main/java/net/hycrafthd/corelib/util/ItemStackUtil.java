@@ -5,8 +5,21 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Util methods for {@link ItemStack}
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class ItemStackUtil {
 
+	/**
+	 * Get itemstack from object
+	 * 
+	 * @param obj
+	 *            Object
+	 * @return Itemstack or null if not found
+	 */
 	public static ItemStack from(Object obj) {
 		ItemStack stack = null;
 		if (obj instanceof ItemStack) {
@@ -32,7 +45,14 @@ public class ItemStackUtil {
 		}
 		return stack;
 	}
-	
+
+	/**
+	 * Get registry name for object
+	 * 
+	 * @param obj
+	 *            Object
+	 * @return Registry name or null if not found
+	 */
 	public static String getRegistryName(Object obj) {
 		Object name = Item.itemRegistry.getNameForObject(from(obj).getItem());
 		if (name instanceof String) {
@@ -44,11 +64,25 @@ public class ItemStackUtil {
 		return null;
 	}
 
+	/**
+	 * Get modid for object
+	 * 
+	 * @param obj
+	 *            Object
+	 * @return Modid or null if not found
+	 */
 	public static String getModID(Object obj) {
-		return getRegistryName(obj).split(":")[0];
+		return getRegistryName(obj) != null ? getRegistryName(obj).split(":")[0] : null;
 	}
 
+	/**
+	 * Get name for object
+	 * 
+	 * @param obj
+	 *            Object
+	 * @return Name or null if not found
+	 */
 	public static String getName(Object obj) {
-		return getRegistryName(obj).split(":")[1];
+		return getRegistryName(obj) != null ? getRegistryName(obj).split(":")[1] : null;
 	}
 }

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * Registry for item and block models ({@link RenderItem})
+ * Registry for item and block models ({@link RenderItem}) (CLIENT SIDE ONLY)
  * 
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
