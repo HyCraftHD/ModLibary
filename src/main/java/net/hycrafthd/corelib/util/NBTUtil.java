@@ -8,8 +8,23 @@ import java.io.IOException;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 
+/**
+ * Utils for Colors ({@link NBTTagCompound})
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class NBTUtil {
 
+	/**
+	 * Write NBTTag to file
+	 * 
+	 * @param tag
+	 *            NBTTagCompound
+	 * @param file
+	 *            File
+	 * @throws IOException
+	 */
 	public static void writeNBTToFile(NBTTagCompound tag, File file) throws IOException {
 		FileOutputStream stream = new FileOutputStream(file);
 		try {
@@ -19,7 +34,15 @@ public class NBTUtil {
 			stream.close();
 		}
 	}
-	
+
+	/**
+	 * Read NBTTag from file
+	 * 
+	 * @param file
+	 *            File
+	 * @return NBTTagCompound
+	 * @throws IOException
+	 */
 	public static NBTTagCompound readNBTFromFile(File file) throws IOException {
 		FileInputStream stream = new FileInputStream(file);
 		NBTTagCompound tag;

@@ -15,9 +15,9 @@ public class RecipeRegistry {
 	 * Register a new shaped crafting recipe
 	 * 
 	 * @param output
-	 *            Instance of output itemstack
+	 *            Output itemstack
 	 * @param params
-	 *            Object for arrangement
+	 *            Object for arrangement (input)
 	 */
 	public static void registerShaped(ItemStack output, Object... params) {
 		GameRegistry.addShapedRecipe(output, params);
@@ -27,9 +27,9 @@ public class RecipeRegistry {
 	 * Register a new shapeless crafting recipe
 	 * 
 	 * @param output
-	 *            Instance of output itemstack
+	 *            Output itemstack
 	 * @param params
-	 *            Object for itemstacks or items or blocks
+	 *            Object for itemstacks or items or blocks (input)
 	 */
 	public static void registerShapeless(ItemStack output, Object... params) {
 		GameRegistry.addShapelessRecipe(output, params);
