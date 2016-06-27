@@ -5,9 +5,21 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Registry for {@link KeyBinding} (CLIENT SIDE ONLY)
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 @SideOnly(Side.CLIENT)
 public class KeybindingRegistry {
 
+	/**
+	 * Register a new Keybind
+	 * 
+	 * @param key
+	 *            Keybinding instance
+	 */
 	public static void register(KeyBinding key) {
 		ClientRegistry.registerKeyBinding(key);
 	}

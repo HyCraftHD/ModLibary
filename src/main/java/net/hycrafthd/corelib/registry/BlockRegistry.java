@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockRegistry {
 
 	/**
-	 * Register a new {@link Block}
+	 * Register a new block
 	 * 
 	 * @param block
 	 *            Block instance
@@ -25,7 +25,7 @@ public class BlockRegistry {
 	}
 
 	/**
-	 * Register a new {@link Block}
+	 * Register a new block
 	 * 
 	 * @param block
 	 *            Block instance
