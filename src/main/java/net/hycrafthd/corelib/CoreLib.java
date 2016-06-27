@@ -44,11 +44,12 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Allowed Minecraft versions
 	 */
-	public static final String mcversion = "[1.8,1.8.8,1.8.9]";
+	// public static final String mcversion = "[1.8,1.8.8,1.8.9]";
+	public static final String mcversion = "[1.8]";
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.1";
+	public static final String version = "0.2";
 
 	/**
 	 * CoreLib instance
@@ -100,7 +101,7 @@ public class CoreLib extends DummyModContainer {
 		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
 		EventRegistry.register(new ProcessHandler());
 	}
-	
+
 	/**
 	 * Serverstarting event
 	 */
@@ -144,7 +145,5 @@ public class CoreLib extends DummyModContainer {
 	public static CoreLibLogger getLogger() {
 		return logger;
 	}
-	
-	
 
 }
