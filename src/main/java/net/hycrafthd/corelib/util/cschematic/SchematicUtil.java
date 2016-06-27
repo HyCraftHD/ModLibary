@@ -10,7 +10,7 @@ import net.hycrafthd.corelib.util.FileUtil;
 public class SchematicUtil {
 
 	public static File getSaveDirectionary() {
-		File file = new File(FileUtil.getMainDirectionary(), "cschematic");
+		File file = new File(FileUtil.getMainDirectory(), "cschematic");
 		if (!file.exists()) {
 			file.mkdir();
 		}
