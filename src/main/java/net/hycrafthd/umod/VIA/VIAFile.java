@@ -13,13 +13,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VIAFile extends File{
 
+	private static final long serialVersionUID = -6555601798412566588L;
 	public String File;
 	private boolean Proceed;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 165456468846L;
 	
+	/**
+	 * Register A VIA File
+	 * 
+	 * Vertex Interpretion API (VIA)
+	 * is an API to easely creat a vertex draw
+	 * by using an external file
+	 * 
+	 * @param String arg - The file name
+	 * 
+	 * @author MrTroble
+	 */
 	@SideOnly(Side.CLIENT)
 	public VIAFile(String arg0) {
 		super(arg0);
@@ -45,6 +53,13 @@ public class VIAFile extends File{
 		}
 	}
 
+	/**THIS IS THE NECESSARY METHOD
+	 * 
+	 * @param int Group - count of Group 
+	 * after order in file 
+	 * 
+	 * @return The Vertex of the group to draw
+	 */
 	public Vertex interpretVertex(int gr){
 		if(!Proceed)return null;		
 		return new Vertex(getPoint(gr, 0), getPoint(gr, 1), getPoint(gr, 2), getPoint(gr, 3));
@@ -107,5 +122,9 @@ public class VIAFile extends File{
 	
 	public int getMaxPointsOfGroup(int gr){
 		return splitPoints(gr).length - 1;
+	}
+	
+	public boolean canProceed(){
+		return Proceed;
 	}
 }

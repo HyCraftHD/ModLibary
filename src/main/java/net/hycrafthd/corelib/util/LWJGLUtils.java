@@ -1,12 +1,16 @@
 package net.hycrafthd.corelib.util;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.lwjgl.opengl.GL11;
 
-import net.hycrafthd.umod.VIA.VIADrawer;
-import net.hycrafthd.umod.VIA.VIARegister;
 import net.hycrafthd.umod.VIA.Vertex;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -457,9 +461,7 @@ public class LWJGLUtils {
     	Vec3 corn32 = new Vec3(-1, 0, 0.2);
     	Vec3 corn42 = new Vec3(1, 0, 0.2);
     	drawTexturePoints(text, corn22,corn12, corn32, corn42,u,v);
-    	
-    	drawVertex(text, VIARegister.viaTest.interpretVertex(0),0, 0, 0);
-    	
+    	    	
     	GlStateManager.popMatrix();
     }
 	
@@ -469,7 +471,7 @@ public class LWJGLUtils {
     	GlStateManager.enableNormalize();
     	RenderHelper.disableStandardItemLighting();
     	
-        new VIADrawer(VIARegister.viaRailPart).drawNormal("iron", 0, 0, 0);
+        //new VIADrawer(VIARegister.viaRailPart).drawNormal("iron", 0, 0, 0);
 
         GlStateManager.popMatrix();
 	}
@@ -477,4 +479,22 @@ public class LWJGLUtils {
 	public static void drawVertex(String str,Vertex ve,double x,double y,double z){
 		drawTexturePoints(str, ve.getVec1(), ve.getVec2(), ve.getVec3(), ve.getVec4(), 0, 0);
 	}
+	
+	public static ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
+    {
+        BufferedImage bufferedimage = ImageIO.read(imageStream);
+        int[] aint = bufferedimage.getRGB(0, 0, bufferedimage.getWidth(), bufferedimage.getHeight(), (int[])null, 0, bufferedimage.getWidth());
+        ByteBuffer bytebuffer = ByteBuffer.allocate(4 * aint.length);
+        int[] aint1 = aint;
+        int i = aint.length;
+
+        for (int j = 0; j < i; ++j)
+        {
+            int k = aint1[j];
+            bytebuffer.putInt(k << 8 | k >> 24 & 255);
+        }
+
+        bytebuffer.flip();
+        return bytebuffer;
+    }
 }
