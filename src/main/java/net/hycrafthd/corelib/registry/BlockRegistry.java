@@ -35,6 +35,7 @@ public class BlockRegistry {
 	 *            Block name
 	 */
 	public static void register(Block block, Class<? extends ItemBlock> itemblock, String name) {
+		block.setUnlocalizedName(name);
 		GameRegistry.registerBlock(block, itemblock, name);
 	}
 

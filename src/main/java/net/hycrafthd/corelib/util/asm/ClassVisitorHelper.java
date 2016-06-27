@@ -4,10 +4,29 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 
+/**
+ * Asm visitor helper
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public class ClassVisitorHelper {
 
+	/**
+	 * Modified bytes
+	 */
 	private byte[] bytes;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param bytes
+	 *            Default bytes
+	 * @param name
+	 *            Name
+	 * @param creator
+	 *            Classvisitorcreator
+	 */
 	public ClassVisitorHelper(byte[] bytes, String name, ClassVisitorCreator creator) {
 		ClassReader cr = new ClassReader(bytes);
 		ClassWriter cw = new ClassWriter(cr, creator.getFlags());
@@ -21,6 +40,11 @@ public class ClassVisitorHelper {
 		}
 	}
 
+	/**
+	 * Getter for bytes
+	 * 
+	 * @return bytes
+	 */
 	public byte[] getBytes() {
 		return bytes;
 	}
