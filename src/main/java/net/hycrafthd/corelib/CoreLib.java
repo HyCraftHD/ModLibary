@@ -129,7 +129,7 @@ public class CoreLib extends DummyModContainer {
 	}
 
 	/**
-	 * Gets the current instance
+	 * Get the current instance
 	 * 
 	 * @return instance of corelib mod
 	 */
@@ -138,7 +138,7 @@ public class CoreLib extends DummyModContainer {
 	}
 
 	/**
-	 * Gets the logger of corelib
+	 * Get the logger of corelib
 	 * 
 	 * @return logger
 	 */
