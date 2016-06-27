@@ -1,19 +1,18 @@
 package net.hycrafthd.umod.VIA;
 
 import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class VIAFile extends File{
+public class VIAFile{
 
-	private static final long serialVersionUID = -6555601798412566588L;
 	public String File;
 	private boolean Proceed;
 	
@@ -29,10 +28,9 @@ public class VIAFile extends File{
 	 * @author MrTroble
 	 */
 	@SideOnly(Side.CLIENT)
-	public VIAFile(String arg0) {
-		super(arg0);
+	public VIAFile(ResourceLocation arg0) {
 		try {
-			DataInputStream stream = new DataInputStream(new FileInputStream(this));
+			DataInputStream stream = new DataInputStream(Minecraft.getMinecraft().mcDefaultResourcePack.getInputStreamAssets(arg0));
 			ArrayList<Byte> ar = new ArrayList<Byte>();
 			while(stream.available() > 0){
 				ar.add((byte) stream.read());

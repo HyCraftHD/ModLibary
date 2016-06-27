@@ -1,12 +1,7 @@
 package net.hycrafthd.corelib;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import org.lwjgl.opengl.Display;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -17,22 +12,17 @@ import net.hycrafthd.corelib.core.ModMetadataFetcherCoreLib;
 import net.hycrafthd.corelib.core.WorldGeneratorCoreLib;
 import net.hycrafthd.corelib.registry.EventRegistry;
 import net.hycrafthd.corelib.registry.GenerationRegistry;
-import net.hycrafthd.corelib.util.LWJGLUtils;
 import net.hycrafthd.corelib.util.VersionCompare;
 import net.hycrafthd.corelib.util.event.CoreEventBus;
 import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.process.ProcessHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.WrongMinecraftVersionException;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 /**
@@ -89,7 +79,6 @@ public class CoreLib extends DummyModContainer {
 			CoreLib.getLogger().error(crash.getCompleteReport());
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
-
 		instance = this;
 	}
 

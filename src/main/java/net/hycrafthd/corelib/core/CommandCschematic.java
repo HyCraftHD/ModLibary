@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 public class CommandCschematic extends CommandBase {
 
 	/**
-	 * Languagedata key
+	 * Language data key
 	 */
 	private String lang = "command.cschematic";
 
@@ -74,8 +74,8 @@ public class CommandCschematic extends CommandBase {
 
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
-					if (file.getAbsolutePath().contains("..")) {
-						throw new IllegalArgumentException(file.getPath());
+					if (!file.getName().equals("cschematic")) {
+						throw new IllegalArgumentException();
 					}
 
 					File parent = file.getParentFile();
@@ -103,7 +103,7 @@ public class CommandCschematic extends CommandBase {
 
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
 
-					if (file.getAbsolutePath().contains("..")) {
+					if (!file.getName().equals("cschematic")) {
 						throw new IllegalArgumentException();
 					}
 
@@ -128,7 +128,7 @@ public class CommandCschematic extends CommandBase {
 	}
 
 	/**
-	 * Command tabcompletion
+	 * Command Tab completion
 	 */
 	@Override
 	public List<?> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {

@@ -36,34 +36,111 @@ import net.minecraft.util.Vec3i;
 @SuppressWarnings("deprecation")
 public class LWJGLUtils {
 
+	
+	/**
+	 * Draws a Horizontal Line<br>
+	 *<br>x = x Start Position of Line
+	 *<br>x2 = x End Position of Line
+	 *<br>y = y Position of Line
+	 *<br>r = your Color as {@link RGBA}
+	 * 
+	 * @param 
+	 * 
+	 */
 	public static void drawHLine(double x, double x2, double y, RGBA r) {
 		drawGradientRect(x, y, x2, y + 1, r, r);
 	}
 
+	/**
+	 * Draws a Vertical Line<br>
+	 *<br>x = x Position of Line
+	 *<br>y = y Start Position of Line
+	 *<br>down = y End Position of Line
+	 *<br>r = your Color as {@link RGBA}
+	 * 
+	 * @param 
+	 * 
+	 */
 	public static void drawVLine(double x, double y, double down, RGBA r) {
 		drawGradientRect(x, y, x + 1, down, r, r);
 	}
 	
+	/**
+	 * Draws a Horizontal Line with Z Pos<br>
+	 *<br>x = x Start Position of Line
+	 *<br>x2 = x End Position of Line
+	 *<br>y = y Position of Line
+	 *<br>r = your Color as {@link RGBA}
+	 * <br>z = z Position in 3D Rooms only
+	 * @param 
+	 */
 	public static void drawHLine(double x, double x2, double y, RGBA r,double z) {
 		drawGradientRect(x, y, x2, y + 1, r, r,z);
 	}
 
+	/**
+	 * Draws a Vertical Line with Z Pos<br>
+	 *<br>x = x Position of Line
+	 *<br>y = y Start Position of Line
+	 *<br>down = y End Position of Line
+	 *<br>r = your Color as {@link RGBA}
+	 * <br>z = z Position in 3D Rooms only
+	 * @param 
+	 */
 	public static void drawVLine(double x, double y, double down, RGBA r,double z) {
 		drawGradientRect(x, y, x + 1, down, r, r,z);
 	}
 
+	
+	/**
+	 * Draws a given Region
+	 * 
+	 * <br>rgb = Color as {@link RGBA}
+	 * 
+	 * @param 
+	 */
 	public static void drawGradientRect(double left, double top, double right, double bottom, RGBA rgb,double z){
 		drawGradientRect(left, top, right, bottom, rgb, rgb,z);
 	}
 	
+	/**
+	 * Draws a given Region
+	 * 
+	 * <br>rgb = Color as {@link RGBA}
+	 * 
+	 * @param 
+	 */
 	public static void drawGradientRect(double left, double top, double right, double bottom, RGBA rgb){
 		drawGradientRect(left, top, right, bottom, rgb, rgb);
 	}
 	
+	/**
+	 * Draws a given Region
+	 * 
+	 * <br>start = Start Color as {@link RGBA}
+	 * <br>end = End Color as {@link RGBA}
+	 * <br>
+	 * <br>Just try out how the Start or End Color
+	 * effects your draw
+	 * 
+	 * @param 
+	 */
 	public static void drawGradientRect(double left, double top, double right, double bottom, RGBA start, RGBA end){
 		drawGradientRect(left, top, right, bottom, start, end, 0);
 	}
 	
+	
+	/**
+	 * Draws a given Region
+	 * 
+	 * <br>start = Start Color as {@link RGBA}
+	 * <br>end = End Color as {@link RGBA}
+	 * <br>
+	 * <br>Just try out how the Start or End Color
+	 * effects your draw
+	 * 
+	 * @param 
+	 */
 	public static void drawGradientRect(double left, double top, double right, double bottom, RGBA start, RGBA end,double z) {
 		GlStateManager.disableTexture2D();
 		GlStateManager.enableBlend();
@@ -86,7 +163,18 @@ public class LWJGLUtils {
 		GlStateManager.enableTexture2D();
 	}
 	
-	public static void drawGradientRectWithMultiplier(int left, int top, int right, int bottom, RGBA start, RGBA end,double z,double multiplier,boolean flag) {
+	/**
+	 * Draws a given Region with a Z multiplier<br>
+	 * (means that you get a Curved Region)<br>
+	 * <br>start = Start Color as {@link RGBA}
+	 * <br>end = End Color as {@link RGBA}
+	 * <br>
+	 * <br>Just try out how the Start or End Color
+	 * effects your draw
+	 * 
+	 * @param 
+	 */
+	public static void drawGradientRectWithMultiplier(int left, int top, int right, int bottom, RGBA start, RGBA end,double z,double multiplier) {
 		double oldZ = z;
 		for(int i = 0;i < right;i++){
 		z = z + (multiplier + (i * 0.005));
@@ -137,16 +225,24 @@ public class LWJGLUtils {
 		GlStateManager.popMatrix();
 		oldZ = z;
 		}
-		if(flag){
-		//drawGradientRectWithMultiplier(-left, -top, -right, -bottom, start, end, oldZ, multiplier,false);
-		}
 	}
 
-	
+	/**
+	 * Draws a Frame of a given Region
+	 * <br>
+	 * <br>rgb = Start Color as {@link RGBA} 
+	 * @param 
+	 */
 	public static void drawFrame(double x ,double y,double width,double height,RGBA rgb){
 	      drawFrame(x, y, width, height, rgb, 0);
 	}
 	
+	/**
+	 * Draws a Frame of a given Region
+	 * <br>
+	 * <br>rgb = Start Color as {@link RGBA} 
+	 * @param 
+	 */
 	public static void drawFrame(double x ,double y,double width,double height,RGBA rgb,double z){
 		drawHLine(x - 1, x + width + 1, y - 1, rgb,z);
 		drawHLine(x - 1, x + width + 1, y + height, rgb,z);
@@ -154,6 +250,16 @@ public class LWJGLUtils {
 		drawVLine(x + width, y, y + height, rgb,z);
 	}
 	
+	/**
+	 * Draws a String in the World with Background and Frame
+	 * <br>
+	 * <br>start = Start Color as {@link RGBA} 
+	 * <br>end = End Color as {@link RGBA} 
+	 * <br>Frame = Frame Color as {@link RGBA} 
+	 * <br>color = Integer The Color of String
+	 * 
+	 * @param 
+	 */
 	public static void drawStringInWorld(BlockPos pos,double posX,double posY,double posZ,int p_180535_9_,String text,RGBA start,RGBA end,RGBA frame,int color){
 		EntityPlayer pl  = Minecraft.getMinecraft().thePlayer;
         BlockPos po = pl.getPosition();
@@ -190,8 +296,14 @@ public class LWJGLUtils {
         GlStateManager.popMatrix();
 		}
 	}
-	
-	public static void drawOnlyStringInWorld(BlockPos pos,double posX,double posY,double posZ,int p_180535_9_,String text,int color){
+	/**
+	 * Draws a String in the World
+	 * <br>
+	 * <br>color = Integer The Color of String
+	 * 
+	 * @param 
+	 */
+	public static void drawOnlyStringInWorld(BlockPos pos,double posX,double posY,double posZ,String text,int color){
 		EntityPlayer pl  = Minecraft.getMinecraft().thePlayer;
         BlockPos po = pl.getPosition();
 		if (pos.getX() + 10 > po.getX() && pos.getX() - 10 < po.getX() && pos.getY() + 10 > po.getY() && pos.getY() - 10 < po.getY() && pos.getZ() + 10 > po.getZ() && pos.getZ() - 10 < po.getZ())
@@ -223,6 +335,13 @@ public class LWJGLUtils {
         GlStateManager.popMatrix();
 		}
 	}
+	/**
+	 * Draws something in the World
+	 * <br>
+	 * <br>color = Integer The Color of String
+	 * <br>run = a Runnable with your stuff to Render
+	 * @param 
+	 */
 	public static void drawSmThInWorld(BlockPos pos,double posX,double posY,double posZ,Runnable run){
 		EntityPlayer pl  = Minecraft.getMinecraft().thePlayer;
         BlockPos po = pl.getPosition();
@@ -252,6 +371,12 @@ public class LWJGLUtils {
 		}
 	}
 	
+	/**
+	 * Draws a Frame in the World
+	 * <br>
+	 * <br>frame = Color of Frame in {@link RGBA}
+	 * @param 
+	 */
 	public static void drawFrameInWorld(BlockPos pos,double posX,double posY,double posZ,final double width,final double height,final RGBA frame){
 	   drawSmThInWorld(pos, posX, posY, posZ, new Runnable() {
 		@Override
@@ -269,6 +394,11 @@ public class LWJGLUtils {
 	   });
 	}
 	
+	
+	/**Draws a Texture
+	 * 
+	 * @param
+	 */
 	public static void drawTexture(ResourceLocation location, double textureWidth, double textureHeight, double x, double y,double z, double width, double height, double u, double v){
 		Minecraft.getMinecraft().getTextureManager().bindTexture(location);
 		double f4 = 1.0F / textureWidth;
@@ -283,6 +413,10 @@ public class LWJGLUtils {
         tessellator.draw();
 	}
 	
+	/**Draws a Cube with a given Texture
+	 * 
+	 * @param
+	 */
 	public static void drawTexturedCube(ResourceLocation location, double x, double y,double z, double width, double height,double depth){
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + width/2, y + height/2, z + depth/2);
@@ -308,11 +442,18 @@ public class LWJGLUtils {
 		GlStateManager.popMatrix();
 	}
 	
+	/**Draws a Block with a given Texture
+	 * 
+	 * @param
+	 */
 	public static void drawBlock(ResourceLocation loc,double posX ,double posY, double posZ,double d,double e,double f){
 		drawTexturedCube(loc, posX + (0.5 - d/2), posY + (0.5 - e/2), posZ + (0.5 - f/2), d, e, f);
 	}
 	
-    
+	/**Draws a Block as Conduit
+	 * 
+	 * @param
+	 */
 	public static void renderBlockConduit(ItemStack stack, double x, double y,double z)
     {
         IBakedModel ibakedmodel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
@@ -480,6 +621,12 @@ public class LWJGLUtils {
 		drawTexturePoints(str, ve.getVec1(), ve.getVec2(), ve.getVec3(), ve.getVec4(), 0, 0);
 	}
 	
+	
+	/**
+	 * @param imageStream
+	 * @return {@link ByteBuffer}
+	 * @throws IOException
+	 */
 	public static ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
     {
         BufferedImage bufferedimage = ImageIO.read(imageStream);
