@@ -61,6 +61,7 @@ public class CommandCschematic extends CommandBase {
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
+
 		World world = player.getEntityWorld();
 		if (args.length > 0) {
 			if (args[0].equalsIgnoreCase("save")) {
@@ -94,7 +95,8 @@ public class CommandCschematic extends CommandBase {
 					throw new CommandException(lang + ".error", "saving", ex.getClass().getName());
 				}
 			} else if (args[0].equalsIgnoreCase("load")) {
-				if (args.length >= 3 && args.length <= 2) {
+				System.out.println(args.length);
+				if (args.length != 2 && args.length != 3) {
 					throw new WrongUsageException(getCommandUsage(sender) + ".load");
 				}
 				try {
@@ -117,6 +119,7 @@ public class CommandCschematic extends CommandBase {
 
 					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
+					ex.printStackTrace();
 					throw new CommandException(lang + ".error", "loading", ex.getClass().getName());
 				}
 			} else {

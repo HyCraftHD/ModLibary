@@ -98,6 +98,7 @@ public class CoreLib extends DummyModContainer {
 	 */
 	@Subscribe
 	public void postinit(FMLPostInitializationEvent event) {
+		// StringTranslate.inject(getClass().getResourceAsStream("/assets/corelib/lang/en_US.lang"));
 		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
 		EventRegistry.register(new ProcessHandler());
 	}

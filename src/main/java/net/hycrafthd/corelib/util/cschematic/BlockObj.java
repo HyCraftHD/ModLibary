@@ -93,6 +93,6 @@ public class BlockObj {
 	 * @return BlockObj of NBTTag
 	 */
 	public static BlockObj fromNBT(NBTTagCompound comp) {
-		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(comp.getString("Name"))), Validate.notNull(comp.getInteger("Meta")), Validate.notNull((NBTTagCompound) comp.getTag("NBT")));
+		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(comp.getString("Name"))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
 	}
 }

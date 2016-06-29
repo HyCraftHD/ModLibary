@@ -1,6 +1,0 @@
-command.cschematic.usage=/cschematic <save|load> ...
-command.cschematic.usage.save=/cschematic <save> <name> <x1> <y1> <z1> <x2> <y2> <z2>
-command.cschematic.usage.load=/cschematic <load> <name>
-command.cschematic.success.save=Successfully saved region [%s to %s] under file %s.cschematic.
-command.cschematic.success.load=Successfully loaded file %s.cschematic to region [%s to %s]. 
-command.cschematic.error=Error while %s region: %s
