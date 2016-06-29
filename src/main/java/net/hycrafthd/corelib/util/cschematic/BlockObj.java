@@ -1,5 +1,7 @@
 package net.hycrafthd.corelib.util.cschematic;
 
+import org.apache.commons.lang3.Validate;
+
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -8,16 +10,19 @@ public class BlockObj {
 	private Block block;
 	private int meta;
 	private NBTTagCompound ent;
-	
+
 	/**
 	 * Class to Save A Block for Schematic
 	 * 
-	 * @param Block block - Block to Save
-	 * @param int meta - meta of block
-	 * @param NBTTagCompound ent - NBT of TileEntity (writeToNBT)
+	 * @param Block
+	 *            block - Block to Save
+	 * @param int
+	 *            meta - meta of block
+	 * @param NBTTagCompound
+	 *            ent - NBT of TileEntity (writeToNBT)
 	 */
-	
-	public BlockObj(Block block,int meta,NBTTagCompound ent) {
+
+	public BlockObj(Block block, int meta, NBTTagCompound ent) {
 		this.block = block;
 		this.meta = meta;
 		this.ent = ent;
@@ -56,37 +61,38 @@ public class BlockObj {
 	}
 
 	/**
-	 * @param NBTTag of Tile
+	 * @param NBTTag
+	 *            of Tile
 	 */
 	public void setTileEntity(NBTTagCompound ent) {
 		this.ent = ent;
 	}
-	
+
 	/**
 	 * @return has this NBT
 	 */
-	public boolean hasNBT(){
+	public boolean hasNBT() {
 		return ent != null;
 	}
-	
+
 	/**
 	 * @return this transformed in a NBTTag
 	 */
-	public NBTTagCompound toNBT(){
+	public NBTTagCompound toNBT() {
 		NBTTagCompound comp = new NBTTagCompound();
 		String block = String.valueOf(Block.blockRegistry.getNameForObject(this.getBlock()));
 		comp.setString("Name", block);
 		comp.setInteger("Meta", this.getMeta());
-		if(this.hasNBT())
-		comp.setTag("NBT", this.getTileEntity());
+		if (this.hasNBT())
+			comp.setTag("NBT", this.getTileEntity());
 		return comp;
 	}
-	
+
 	/**
 	 * @param NBTTag
 	 * @return BlockObj of NBTTag
 	 */
-	public static BlockObj fromNBT(NBTTagCompound comp){
-		return new BlockObj((Block)Block.blockRegistry.getObject(comp.getString("Name")), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
+	public static BlockObj fromNBT(NBTTagCompound comp) {
+		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(comp.getString("Name"))), Validate.notNull(comp.getInteger("Meta")), Validate.notNull((NBTTagCompound) comp.getTag("NBT")));
 	}
 }

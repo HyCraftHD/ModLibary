@@ -20,7 +20,7 @@ public class VIAFile{
 	 * Register A VIA File
 	 * 
 	 * Vertex Interpretion API (VIA)
-	 * is an API to easely creat a vertex draw
+	 * is an API to easely create a vertex draw
 	 * by using an external file
 	 * 
 	 * @param String arg - The file name
