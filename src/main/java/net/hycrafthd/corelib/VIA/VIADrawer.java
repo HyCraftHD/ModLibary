@@ -1,4 +1,4 @@
-package net.hycrafthd.umod.VIA;
+package net.hycrafthd.corelib.VIA;
 
 import net.hycrafthd.corelib.CoreLib;
 import net.hycrafthd.corelib.util.LWJGLUtils;

@@ -1,4 +1,4 @@
-package net.hycrafthd.umod.VIA;
+package net.hycrafthd.corelib.VIA;
 
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;

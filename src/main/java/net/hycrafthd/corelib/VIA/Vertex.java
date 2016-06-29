@@ -1,4 +1,4 @@
-package net.hycrafthd.umod.VIA;
+package net.hycrafthd.corelib.VIA;
 
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.relauncher.Side;
