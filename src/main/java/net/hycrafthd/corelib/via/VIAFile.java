@@ -1,4 +1,4 @@
-package net.hycrafthd.corelib.VIA;
+package net.hycrafthd.corelib.via;
 
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;

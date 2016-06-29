@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.opengl.GL11;
 
-import net.hycrafthd.corelib.VIA.Vertex;
+import net.hycrafthd.corelib.via.Vertex;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.EntityRenderer;
