@@ -80,7 +80,7 @@ public class BaseModMetadataFetcher {
 		try {
 			Class<ModMetadata> clazz = ModMetadata.class;
 			for (Field field : clazz.getDeclaredFields()) {
-				field.set(modmetatoapply, field.get(modmeta));
+				field.set(modmetatoapply, field.get(getModmeta()));
 			}
 		} catch (Throwable th) {
 			CoreLib.getLogger().error("Error while appling new modmeta!", th);
