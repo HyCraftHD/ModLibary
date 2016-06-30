@@ -6,14 +6,59 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+/**
+ * Custom worldgenerator for default dimensions
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 public abstract class BaseWorldGenerator implements IWorldGenerator {
 
+	/**
+	 * Nether
+	 * 
+	 * @param random
+	 *            Random
+	 * @param x
+	 *            Chunk X
+	 * @param z
+	 *            Chunk Z
+	 * @param world
+	 *            World
+	 */
 	protected abstract void nether(Random random, int x, int z, World world);
 
+	/**
+	 * Overworld
+	 * 
+	 * @param random
+	 *            Random
+	 * @param x
+	 *            Chunk X
+	 * @param z
+	 *            Chunk Z
+	 * @param world
+	 *            World
+	 */
 	protected abstract void overworld(Random random, int x, int z, World world);
 
+	/**
+	 * End
+	 * 
+	 * @param random
+	 *            Random
+	 * @param x
+	 *            Chunk X
+	 * @param z
+	 *            Chunk Z
+	 * @param world
+	 *            World
+	 */
 	protected abstract void end(Random random, int x, int z, World world);
 
+	/**
+	 * Generate method from {@link IWorldGenerator}
+	 */
 	@Override
 	public final void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		int x = chunkX * 16;

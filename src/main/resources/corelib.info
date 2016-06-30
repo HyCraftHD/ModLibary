@@ -1,11 +1,11 @@
 [
 {
   "modid": "corelib",
-  "description": "CoreLibary for many modding stuff",
+  "description": "CoreLibary for many modding stuff!",
   "url": "https://www.hycrafthd.net/mods/corelibary",
   "updateUrl": "",
-  "authorList": ["HyCraftHD"],
-  "credits": "Thanks to all the helpers.",
+  "authorList": ["HyCraftHD", "MrTroble"],
+  "credits": "Thanks to all helpers!",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

@@ -18,23 +18,23 @@ import net.hycrafthd.corelib.util.asm.MethodMatcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-public class DisplayVisitor extends ClassVisitor{
+public class DisplayVisitor extends ClassVisitor {
 
 	private MethodMatcher methodmatcher;
 
-	public DisplayVisitor(String name,ClassVisitor vis) {
-		super(Opcodes.ASM5,vis);
+	public DisplayVisitor(String name, ClassVisitor vis) {
+		super(Opcodes.ASM5, vis);
 		ASMUtil.asmLogger(ASMLogType.TRYING, name);
 		Type type = Type.getMethodType(Type.VOID_TYPE);
 		methodmatcher = new MethodMatcher(name, type.getDescriptor(), "setWindowIcon", "setWindowIcon");
 		ASMUtil.asmLogger(ASMLogType.MATCHING, methodmatcher.toString());
 
 	}
-	
-	public static void icon(){
+
+	public static void icon() {
 		try {
 			InputStream str = Minecraft.getMinecraft().mcDefaultResourcePack.getInputStreamAssets(new ResourceLocation("stone"));
-			Display.setIcon(new ByteBuffer[] {LWJGLUtils.readImageToBuffer(str), LWJGLUtils.readImageToBuffer(str)});
+			Display.setIcon(new ByteBuffer[] { LWJGLUtils.readImageToBuffer(str), LWJGLUtils.readImageToBuffer(str) });
 		} catch (IOException e) {
 			ASMUtil.asmLogger(ASMLogType.TRYING, "NULL");
 		}
@@ -42,21 +42,21 @@ public class DisplayVisitor extends ClassVisitor{
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-		if(methodmatcher.match(name, desc)){
-		MethodVisitor parent = super.visitMethod(access, name, desc, signature, exceptions);
-		if(parent != null){
-		return new IconMethod(parent);
-		}else{
-			return new IconMethod();
-		}
+		if (methodmatcher.match(name, desc)) {
+			MethodVisitor parent = super.visitMethod(access, name, desc, signature, exceptions);
+			if (parent != null) {
+				return new IconMethod(parent);
+			} else {
+				return new IconMethod();
+			}
 		}
 		return super.visitMethod(access, name, desc, signature, exceptions);
 	}
-	
-	public class IconMethod extends MethodVisitor{
+
+	public class IconMethod extends MethodVisitor {
 
 		private Method method;
-		
+
 		public IconMethod() {
 			super(Opcodes.ASM5);
 			init();
@@ -66,7 +66,7 @@ public class DisplayVisitor extends ClassVisitor{
 			super(Opcodes.ASM5, mv);
 			init();
 		}
-		
+
 		private void init() {
 			try {
 				method = Method.getMethod(DisplayVisitor.class.getMethod("icon"));
@@ -76,7 +76,7 @@ public class DisplayVisitor extends ClassVisitor{
 				e.printStackTrace();
 			}
 		}
-		
+
 		@Override
 		public void visitInsn(int opcode) {
 			if (opcode == Opcodes.RETURN) {
