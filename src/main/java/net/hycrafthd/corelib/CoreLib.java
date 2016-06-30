@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.WrongMinecraftVersionException;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
@@ -107,6 +106,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Serverstarting event
 	 */
+	@Subscribe
 	public static void serverstarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandCschematic());
 		
