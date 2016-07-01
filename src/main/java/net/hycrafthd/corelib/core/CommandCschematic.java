@@ -61,7 +61,6 @@ public class CommandCschematic extends CommandBase {
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
-
 		World world = player.getEntityWorld();
 		if (args.length > 0) {
 			if (args[0].equalsIgnoreCase("save")) {

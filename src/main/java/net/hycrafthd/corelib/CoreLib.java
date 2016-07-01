@@ -1,5 +1,6 @@
 package net.hycrafthd.corelib;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -98,7 +99,6 @@ public class CoreLib extends DummyModContainer {
 	 */
 	@Subscribe
 	public void postinit(FMLPostInitializationEvent event) {
-		// StringTranslate.inject(getClass().getResourceAsStream("/assets/corelib/lang/en_US.lang"));
 		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
 		EventRegistry.register(new ProcessHandler());
 	}
@@ -109,7 +109,14 @@ public class CoreLib extends DummyModContainer {
 	@Subscribe
 	public static void serverstarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandCschematic());
-		
+	}
+
+	/**
+	 * Fix this to non null //TODO
+	 */
+	@Override
+	public File getSource() {
+		return null;
 	}
 
 	/**

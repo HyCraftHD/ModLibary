@@ -27,7 +27,7 @@ public class EntityRegistry {
 	 * @param sendsVelocityUpdates
 	 *            Should the entity sends velocity updated
 	 */
-	public void register(Class<? extends Entity> entityClass, String entityName, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates) {
+	public static void register(Class<? extends Entity> entityClass, String entityName, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates) {
 		net.minecraftforge.fml.common.registry.EntityRegistry.registerModEntity(entityClass, entityName, net.minecraftforge.fml.common.registry.EntityRegistry.findGlobalUniqueEntityId(), mod, trackingRange, updateFrequency, sendsVelocityUpdates);
 	}
 
@@ -49,7 +49,7 @@ public class EntityRegistry {
 	 * @param sendsVelocityUpdates
 	 *            Should the entity sends velocity updated
 	 */
-	public void register(Class<? extends Entity> entityClass, String entityName, Integer id, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates) {
+	public static void register(Class<? extends Entity> entityClass, String entityName, Integer id, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates) {
 		net.minecraftforge.fml.common.registry.EntityRegistry.registerModEntity(entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates);
 	}
 
@@ -73,7 +73,7 @@ public class EntityRegistry {
 	 * @param eggSecondary
 	 *            Secondary color of spawnegg
 	 */
-	public void registerWithEggs(Class<? extends Entity> entityClass, String entityName, Integer id, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates, Integer eggPrimary, Integer eggSecondary) {
+	public static void registerWithEggs(Class<? extends Entity> entityClass, String entityName, Integer id, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates, Integer eggPrimary, Integer eggSecondary) {
 		net.minecraftforge.fml.common.registry.EntityRegistry.registerModEntity(entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
 	}
 
@@ -99,7 +99,7 @@ public class EntityRegistry {
 	 * @param eggSecondary
 	 *            Secondary color of spawnegg
 	 */
-	public void registerWithEggs(Class<? extends Entity> entityClass, String entityName, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates, Integer eggPrimary, Integer eggSecondary) {
+	public static void registerWithEggs(Class<? extends Entity> entityClass, String entityName, String mod, Integer trackingRange, Integer updateFrequency, Boolean sendsVelocityUpdates, Integer eggPrimary, Integer eggSecondary) {
 		net.minecraftforge.fml.common.registry.EntityRegistry.registerModEntity(entityClass, entityName, net.minecraftforge.fml.common.registry.EntityRegistry.findGlobalUniqueEntityId(), mod, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
 	}
 
