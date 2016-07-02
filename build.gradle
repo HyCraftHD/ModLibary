@@ -20,14 +20,14 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 
-version = "0.2.1-alpha"
+version = "0.3-alpha"
 group= "net.hycrafthd.corelib" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "corelib"
 
 
 jar {
     manifest {
-        attributes("FMLCorePlugin": "net.hycrafthd.corelib.CoreLibLoadingPlugin", "FMLCorePluginContainsFMLMod": "false")
+        attributes("FMLCorePlugin": "net.hycrafthd.corelib.CoreLibLoadingPlugin", "FMLCorePluginContainsFMLMod": "true")
     }
 }
 
