@@ -1,6 +1,5 @@
 package net.hycrafthd.corelib.util.cschematic;
 
-import net.hycrafthd.corelib.CoreLib;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3i;
@@ -47,8 +46,8 @@ public class SchematicBuilder {
 								 */
 								TileEntity ent = worldObj.getTileEntity(p);
 								if (ent != null && obj.hasNBT()) {
-									CoreLib.getLogger().info("true");
-									CoreLib.getLogger().info(obj.getTileEntity().toString());
+									// CoreLib.getLogger().info("true");
+									// CoreLib.getLogger().info(obj.getTileEntity().toString());
 									ent.readFromNBT(obj.getTileEntity());
 									ent.setPos(p);
 								}

@@ -9,7 +9,7 @@ import java.util.List;
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
  */
-public class VersionCompare {
+public class McVersionCompare {
 
 	/**
 	 * Versions
@@ -21,7 +21,7 @@ public class VersionCompare {
 	 * 
 	 * @param versionrange
 	 */
-	public VersionCompare(String versionrange) {
+	public McVersionCompare(String versionrange) {
 		try {
 			versions = Arrays.asList(versionrange.replace("[", "").replace("]", "").split(","));
 		} catch (Exception ex) {

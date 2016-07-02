@@ -1,6 +1,7 @@
 package net.hycrafthd.corelib;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,10 +11,11 @@ import com.google.common.eventbus.Subscribe;
 import net.hycrafthd.corelib.core.CommandCschematic;
 import net.hycrafthd.corelib.core.CoreLibLogger;
 import net.hycrafthd.corelib.core.ModMetadataFetcherCoreLib;
+import net.hycrafthd.corelib.core.UpdaterInformation;
 import net.hycrafthd.corelib.core.WorldGeneratorCoreLib;
 import net.hycrafthd.corelib.registry.EventRegistry;
 import net.hycrafthd.corelib.registry.GenerationRegistry;
-import net.hycrafthd.corelib.util.VersionCompare;
+import net.hycrafthd.corelib.util.McVersionCompare;
 import net.hycrafthd.corelib.util.event.CoreEventBus;
 import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.process.ProcessHandler;
@@ -25,6 +27,7 @@ import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.WrongMinecraftVersionException;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * CoreLib mod class
@@ -50,7 +53,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.2.1 alpha";
+	public static final String version = "0.3-alpha";
 
 	/**
 	 * CoreLib instance
@@ -75,14 +78,28 @@ public class CoreLib extends DummyModContainer {
 	public CoreLib() {
 		super(new ModMetadataFetcherCoreLib().getModmeta());
 
-		VersionCompare versioncompare = new VersionCompare(mcversion);
+		// Allow access to cloudflare protected urls
+		System.setProperty("http.agent", "Chrome");
+
+		McVersionCompare versioncompare = new McVersionCompare(mcversion);
 
 		if (!versioncompare.containsVersion(ForgeVersion.mcVersion)) {
 			CrashReport crash = CrashReport.makeCrashReport(new WrongMinecraftVersionException(this), "Mcversion is not supported! Allowed: " + mcversion);
 			CoreLib.getLogger().error(crash.getCompleteReport());
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
+
 		instance = this;
+	}
+
+	@Override
+	public URL getUpdateUrl() {
+		try {
+			return new URL("https://www.hycrafthd.net/mods/corelib/update.json");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -101,6 +118,10 @@ public class CoreLib extends DummyModContainer {
 	public void postinit(FMLPostInitializationEvent event) {
 		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
 		EventRegistry.register(new ProcessHandler());
+		if (event.getSide() == Side.CLIENT) {
+			EventRegistry.register(new UpdaterInformation());
+
+		}
 	}
 
 	/**
