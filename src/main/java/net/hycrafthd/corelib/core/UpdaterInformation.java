@@ -10,6 +10,7 @@ import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.common.ForgeVersion.CheckResult;
+import net.minecraftforge.common.ForgeVersion.Status;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,7 +33,7 @@ public class UpdaterInformation {
 			for (ModContainer container : Loader.instance().getActiveModList()) {
 				if (!container.getModId().startsWith("mcp") && !container.getModId().equalsIgnoreCase("mcp") && !container.getModId().equalsIgnoreCase("FML") && !container.getModId().equalsIgnoreCase("Forge")) {
 					CheckResult res = ForgeVersion.getResult(container);
-					if (res != null) {
+					if (res != null && res.status != Status.PENDING) {
 						IChatComponent comp = new ChatComponentText("\u00a7eNew version (\u00a77" + res.target + "\u00a7e) for\u00a7a " + container.getName() + " \u00a7eis available for Minecraft " + ForgeVersion.mcVersion + "!\n\u00a7bDownload at: \u00a7a" + res.url);
 						ChatStyle style = comp.getChatStyle();
 						style.setColor(EnumChatFormatting.YELLOW);
