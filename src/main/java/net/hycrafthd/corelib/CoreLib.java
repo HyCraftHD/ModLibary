@@ -120,7 +120,6 @@ public class CoreLib extends DummyModContainer {
 		EventRegistry.register(new ProcessHandler());
 		if (event.getSide() == Side.CLIENT) {
 			EventRegistry.register(new UpdaterInformation());
-
 		}
 	}
 
