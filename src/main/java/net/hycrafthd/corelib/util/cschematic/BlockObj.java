@@ -1,7 +1,5 @@
 package net.hycrafthd.corelib.util.cschematic;
 
-import org.apache.commons.lang3.Validate;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -80,7 +78,7 @@ public class BlockObj {
 	 */
 	public NBTTagCompound toNBT() {
 		NBTTagCompound comp = new NBTTagCompound();
-		String block = String.valueOf(Block.blockRegistry.getNameForObject(this.getBlock()));
+		String block = String.valueOf(Block.REGISTRY.getNameForObject(this.getBlock()));
 		comp.setString("Name", block);
 		comp.setInteger("Meta", this.getMeta());
 		if (this.hasNBT())
@@ -93,6 +91,6 @@ public class BlockObj {
 	 * @return BlockObj of NBTTag
 	 */
 	public static BlockObj fromNBT(NBTTagCompound comp) {
-		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(comp.getString("Name"))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
+		return new BlockObj(Block.getBlockFromName(comp.getString("name")), comp.getInteger("meta"), comp);
 	}
 }

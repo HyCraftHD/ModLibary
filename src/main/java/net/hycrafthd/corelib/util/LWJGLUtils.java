@@ -18,21 +18,21 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 
+//FIXME
 @SuppressWarnings("deprecation")
 public class LWJGLUtils {
 
@@ -148,14 +148,15 @@ public class LWJGLUtils {
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		GlStateManager.shadeModel(7425);
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		worldrenderer.addVertex((double) right, (double) top, (double) z);
-		worldrenderer.addVertex((double) left, (double) top, (double) z);
-		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		worldrenderer.addVertex((double) left, (double) bottom, (double) z);
-		worldrenderer.addVertex((double) right, (double) bottom, (double) z);
+		//FIXME 
+//		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+//		worldrenderer.startDrawingQuads();
+//		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
+//		worldrenderer.addVertex((double) right, (double) top, (double) z);
+//		worldrenderer.addVertex((double) left, (double) top, (double) z);
+//		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
+//		worldrenderer.addVertex((double) left, (double) bottom, (double) z);
+//		worldrenderer.addVertex((double) right, (double) bottom, (double) z);
 		tessellator.draw();
 		GlStateManager.shadeModel(7424);
 		GlStateManager.disableBlend();
@@ -174,6 +175,7 @@ public class LWJGLUtils {
 	 * 
 	 * @param 
 	 */
+	@SuppressWarnings("unused")
 	public static void drawGradientRectWithMultiplier(int left, int top, int right, int bottom, RGBA start, RGBA end,double z,double multiplier) {
 		double oldZ = z;
 		for(int i = 0;i < right;i++){
@@ -187,14 +189,15 @@ public class LWJGLUtils {
 	    GlStateManager.enableBlend();
 	    GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		worldrenderer.addVertex((double) left + i, (double) top, (double) oldZ);
-		worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) z);
-		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) z);
-		worldrenderer.addVertex((double) left + i, (double) bottom, (double) oldZ);
+		//FIXME replace WorldRenderer
+//		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+//		worldrenderer.startDrawingQuads();
+//		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
+//		worldrenderer.addVertex((double) left + i, (double) top, (double) oldZ);
+//		worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) z);
+//		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
+//		worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) z);
+//		worldrenderer.addVertex((double) left + i, (double) bottom, (double) oldZ);
 		tessellator.draw();
 		GlStateManager.shadeModel(7424);
 		GlStateManager.disableBlend();
@@ -210,13 +213,14 @@ public class LWJGLUtils {
 		}
 		GlStateManager.disableTexture2D();
 		GlStateManager.enableBlend();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		worldrenderer.addVertex((double) left + i, (double) top, (double) -oldZ);
-		worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) -z);
-		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) -z);
-		worldrenderer.addVertex((double) left + i, (double) bottom, (double) -oldZ);
+		//FIXME
+//		worldrenderer.startDrawingQuads();
+//		worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
+//		worldrenderer.addVertex((double) left + i, (double) top, (double) -oldZ);
+//		worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) -z);
+//		worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
+//		worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) -z);
+//		worldrenderer.addVertex((double) left + i, (double) bottom, (double) -oldZ);
 		tessellator.draw();
 		GlStateManager.shadeModel(7424);
 		GlStateManager.disableBlend();
@@ -399,17 +403,19 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
+	@SuppressWarnings("unused")
 	public static void drawTexture(ResourceLocation location, double textureWidth, double textureHeight, double x, double y,double z, double width, double height, double u, double v){
 		Minecraft.getMinecraft().getTextureManager().bindTexture(location);
 		double f4 = 1.0F / textureWidth;
 		double f5 = 1.0F / textureHeight;
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        worldrenderer.startDrawingQuads();
-        worldrenderer.addVertexWithUV((double)x, (double)(y + height), z, (double)(u * f4), (double)((v + (float)height) * f5));
-        worldrenderer.addVertexWithUV((double)(x + width), (double)(y + height), z, (double)((u + (float)width) * f4), (double)((v + (float)height) * f5));
-        worldrenderer.addVertexWithUV((double)(x + width), (double)y, z, (double)((u + (float)width) * f4), (double)(v * f5));
-        worldrenderer.addVertexWithUV((double)x, (double)y, z, (double)(u * f4), (double)(v * f5));
+        //FIXME
+//        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+//        worldrenderer.startDrawingQuads();
+//        worldrenderer.addVertexWithUV((double)x, (double)(y + height), z, (double)(u * f4), (double)((v + (float)height) * f5));
+//        worldrenderer.addVertexWithUV((double)(x + width), (double)(y + height), z, (double)((u + (float)width) * f4), (double)((v + (float)height) * f5));
+//        worldrenderer.addVertexWithUV((double)(x + width), (double)y, z, (double)((u + (float)width) * f4), (double)(v * f5));
+//        worldrenderer.addVertexWithUV((double)x, (double)y, z, (double)(u * f4), (double)(v * f5));
         tessellator.draw();
 	}
 	
@@ -458,22 +464,22 @@ public class LWJGLUtils {
     {
         IBakedModel ibakedmodel = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
         GlStateManager.pushMatrix();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-        Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
         GlStateManager.enableRescaleNormal();
         GlStateManager.enableAlpha();
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 771);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        ibakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(ibakedmodel, ItemCameraTransforms.TransformType.HEAD);
+        ibakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(ibakedmodel, ItemCameraTransforms.TransformType.HEAD, false);
         renderItem(stack, ibakedmodel,x,y,z);
         GlStateManager.disableAlpha();
         GlStateManager.disableRescaleNormal();
         GlStateManager.disableLighting();
         GlStateManager.popMatrix();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-        Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture).restoreLastBlurMipmap();
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
     }
     
 	public static void renderItem(ItemStack stack, IBakedModel model,double x,double y,double z)
@@ -489,75 +495,76 @@ public class LWJGLUtils {
 	private static void renderModel(IBakedModel model, int color, ItemStack stack)
     {
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        worldrenderer.startDrawingQuads();
-        worldrenderer.setVertexFormat(DefaultVertexFormats.ITEM);
-        EnumFacing[] aenumfacing = EnumFacing.values();
-        int j = aenumfacing.length;
-
-        for (int k = 0; k < j; ++k)
-        {
-            EnumFacing enumfacing = aenumfacing[k];
-            renderQuads(worldrenderer, model.getFaceQuads(enumfacing), color, stack);
-        }
-
-        renderQuads(worldrenderer, model.getGeneralQuads(), color, stack);
+        //FIXME
+//        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+//        worldrenderer.startDrawingQuads();
+//        worldrenderer.setVertexFormat(DefaultVertexFormats.ITEM);
+//        EnumFacing[] aenumfacing = EnumFacing.values();
+//        int j = aenumfacing.length;
+//
+//        for (int k = 0; k < j; ++k)
+//        {
+//            EnumFacing enumfacing = aenumfacing[k];
+//            renderQuads(worldrenderer, model.getFaceQuads(enumfacing), color, stack);
+//        }
+//
+//        renderQuads(worldrenderer, model.getGeneralQuads(), color, stack);
         tessellator.draw();
     }
     
-    @SuppressWarnings("rawtypes")
-	private static void renderQuads(WorldRenderer renderer, List quads, int color, ItemStack stack)
-    {
-        boolean flag = color == -1 && stack != null;
-        BakedQuad bakedquad;
-        int j;
-
-        for (Iterator iterator = quads.iterator(); iterator.hasNext(); renderQuad(renderer, bakedquad, j))
-        {
-            bakedquad = (BakedQuad)iterator.next();
-            j = color;
-
-            if (flag && bakedquad.hasTintIndex())
-            {
-                j = stack.getItem().getColorFromItemStack(stack, bakedquad.getTintIndex());
-
-                if (EntityRenderer.anaglyphEnable)
-                {
-                    j = TextureUtil.anaglyphColor(j);
-                }
-
-                j |= -16777216;
-            }
-        }
-    }
-    
-    private static void renderQuad(WorldRenderer renderer, BakedQuad quad, int color)
-    {
-        renderer.addVertexData(quad.getVertexData());
-        if(quad instanceof net.minecraftforge.client.model.IColoredBakedQuad)
-            net.minecraftforge.client.ForgeHooksClient.putQuadColor(renderer, quad, color);
-        else
-        renderer.putColor4(color);
-        putQuadNormal(renderer, quad);
-    }
-
-    private static void putQuadNormal(WorldRenderer renderer, BakedQuad quad)
-    {
-        Vec3i vec3i = quad.getFace().getDirectionVec();
-        renderer.putNormal((float)vec3i.getX(), (float)vec3i.getY(), (float)vec3i.getZ());
-    }
-    
-    public static void drawTexturePoints(String text,Vec3 vec,Vec3 vec1,Vec3 vec2,Vec3 vec3,double u,double v){
-    	Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(text));
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        worldrenderer.startDrawingQuads();
-        worldrenderer.addVertexWithUV( vec.xCoord, vec.yCoord, vec.zCoord, 0,v);
-        worldrenderer.addVertexWithUV( vec1.xCoord, vec1.yCoord, vec1.zCoord, 0,0);
-        worldrenderer.addVertexWithUV( vec2.xCoord, vec2.yCoord, vec2.zCoord, u,0);
-        worldrenderer.addVertexWithUV( vec3.xCoord, vec3.yCoord, vec3.zCoord, u,v);
-        tessellator.draw();
-    }
+//    @SuppressWarnings("rawtypes")
+//	private static void renderQuads(WorldRenderer renderer, List quads, int color, ItemStack stack)
+//    {
+//        boolean flag = color == -1 && stack != null;
+//        BakedQuad bakedquad;
+//        int j;
+//
+//        for (Iterator iterator = quads.iterator(); iterator.hasNext(); renderQuad(renderer, bakedquad, j))
+//        {
+//            bakedquad = (BakedQuad)iterator.next();
+//            j = color;
+//
+//            if (flag && bakedquad.hasTintIndex())
+//            {
+//                j = stack.getItem().getColorFromItemStack(stack, bakedquad.getTintIndex());
+//
+//                if (EntityRenderer.anaglyphEnable)
+//                {
+//                    j = TextureUtil.anaglyphColor(j);
+//                }
+//
+//                j |= -16777216;
+//            }
+//        }
+//    }
+//    
+//    private static void renderQuad(WorldRenderer renderer, BakedQuad quad, int color)
+//    {
+//        renderer.addVertexData(quad.getVertexData());
+//        if(quad instanceof net.minecraftforge.client.model.IColoredBakedQuad)
+//            net.minecraftforge.client.ForgeHooksClient.putQuadColor(renderer, quad, color);
+//        else
+//        renderer.putColor4(color);
+//        putQuadNormal(renderer, quad);
+//    }
+//
+//    private static void putQuadNormal(WorldRenderer renderer, BakedQuad quad)
+//    {
+//        Vec3i vec3i = quad.getFace().getDirectionVec();
+//        renderer.putNormal((float)vec3i.getX(), (float)vec3i.getY(), (float)vec3i.getZ());
+//    }
+//    
+//    public static void drawTexturePoints(String text,Vec3 vec,Vec3 vec1,Vec3 vec2,Vec3 vec3,double u,double v){
+//    	Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(text));
+//        Tessellator tessellator = Tessellator.getInstance();
+//        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+//        worldrenderer.startDrawingQuads();
+//        worldrenderer.addVertexWithUV( vec.xCoord, vec.yCoord, vec.zCoord, 0,v);
+//        worldrenderer.addVertexWithUV( vec1.xCoord, vec1.yCoord, vec1.zCoord, 0,0);
+//        worldrenderer.addVertexWithUV( vec2.xCoord, vec2.yCoord, vec2.zCoord, u,0);
+//        worldrenderer.addVertexWithUV( vec3.xCoord, vec3.yCoord, vec3.zCoord, u,v);
+//        tessellator.draw();
+//    }
 
 	public static void drawSwell(String text,double x,double y,double z){
     	GlStateManager.pushMatrix();
@@ -577,10 +584,10 @@ public class LWJGLUtils {
     	
     	GlStateManager.rotate(-90, 1.0F, 0, 0);
     	    	
-    	Vec3 corn13 = new Vec3(0.8, 0.2, 0.1);
-    	Vec3 corn23 = new Vec3(0.8, 0.2, -0.1);
-    	Vec3 corn33 = new Vec3(1, 0, 0.2);
-    	Vec3 corn43 = new Vec3(1, 0, -0.2);
+    	Vec3d corn13 = new Vec3d(0.8, 0.2, 0.1);
+    	Vec3d corn23 = new Vec3d(0.8, 0.2, -0.1);
+    	Vec3d corn33 = new Vec3d(1, 0, 0.2);
+    	Vec3d corn43 = new Vec3d(1, 0, -0.2);
 		drawTexturePoints(text, corn23,corn13, corn33, corn43,u,v);
     	
     	Vec3 corn1 = new Vec3(-0.8, 0.2, 0.1);

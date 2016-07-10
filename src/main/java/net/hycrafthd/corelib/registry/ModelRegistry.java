@@ -3,10 +3,11 @@ package net.hycrafthd.corelib.registry;
 import net.hycrafthd.corelib.util.ItemStackUtil;
 import net.hycrafthd.corelib.util.ItemUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -63,8 +64,8 @@ public class ModelRegistry {
 	 * @param names
 	 *            Resourcelocations like minecraft:stone
 	 */
-	public static void registerVariants(Object obj, String... names) {
-		ModelBakery.addVariantName(ItemUtil.from(obj), names);
+	public static void registerVariants(Object obj, ResourceLocation... names) {
+		ModelBakery.registerItemVariants(ItemUtil.from(obj), names);
 	}
 
 }

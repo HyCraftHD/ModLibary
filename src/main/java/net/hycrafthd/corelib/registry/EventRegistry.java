@@ -2,7 +2,6 @@ package net.hycrafthd.corelib.registry;
 
 import net.hycrafthd.corelib.CoreLib;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 /**
  * Registry for EventHandler
@@ -20,7 +19,6 @@ public class EventRegistry {
 	 */
 	public static void register(Object obj) {
 		MinecraftForge.EVENT_BUS.register(obj);
-		FMLCommonHandler.instance().bus().register(obj);
 		CoreLib.getInstance().getEventBus().register(obj);
 	}
 

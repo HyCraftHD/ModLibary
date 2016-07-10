@@ -54,7 +54,7 @@ public class ItemStackUtil {
 	 * @return Registry name or null if not found
 	 */
 	public static String getRegistryName(Object obj) {
-		Object name = Item.itemRegistry.getNameForObject(from(obj).getItem());
+		Object name = Item.REGISTRY.getNameForObject(from(obj).getItem());
 		if (name instanceof String) {
 			return (String) name;
 		}

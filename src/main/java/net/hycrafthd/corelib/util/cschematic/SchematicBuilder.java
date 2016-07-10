@@ -1,8 +1,8 @@
 package net.hycrafthd.corelib.util.cschematic;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 public class SchematicBuilder {
@@ -19,9 +19,11 @@ public class SchematicBuilder {
 		return reader;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void build(final BlockPos pos, final boolean b) {
 		new Thread(new Runnable() {
 
+			
 			@Override
 			public void run() {
 				Thread.currentThread().setName("Schematic Builder");

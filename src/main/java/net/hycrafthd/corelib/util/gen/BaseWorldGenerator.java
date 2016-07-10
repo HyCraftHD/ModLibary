@@ -3,6 +3,7 @@ package net.hycrafthd.corelib.util.gen;
 import java.util.Random;
 
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
@@ -60,10 +61,10 @@ public abstract class BaseWorldGenerator implements IWorldGenerator {
 	 * Generate method from {@link IWorldGenerator}
 	 */
 	@Override
-	public final void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	public final void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		int x = chunkX * 16;
 		int z = chunkZ * 16;
-		switch (world.provider.getDimensionId()) {
+		switch (world.provider.getDimension()) {
 		case -1:
 			nether(random, x, z, world);
 			break;
