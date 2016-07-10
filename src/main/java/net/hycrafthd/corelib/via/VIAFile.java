@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -109,9 +109,9 @@ public class VIAFile{
 		return retu;
 	}
 	
-	public Vec3 getPoint(int vg,int i){
+	public Vec3d getPoint(int vg,int i){
 		String[] args = splitPoints(vg)[i].split(",");
-		return new Vec3(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]));
+		return new Vec3d(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]));
 	}
 	
 	public int getMaxGroups(){

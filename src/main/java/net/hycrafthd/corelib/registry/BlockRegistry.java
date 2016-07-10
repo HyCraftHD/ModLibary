@@ -1,7 +1,7 @@
 package net.hycrafthd.corelib.registry;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -21,7 +21,7 @@ public class BlockRegistry {
 	 *            Block name
 	 */
 	public static void register(Block block, String name) {
-		register(block, ItemBlock.class, name);
+		register(block, Item.getItemFromBlock(block), name);
 	}
 
 	/**
@@ -34,9 +34,11 @@ public class BlockRegistry {
 	 * @param name
 	 *            Block name
 	 */
-	public static void register(Block block, Class<? extends ItemBlock> itemblock, String name) {
+	public static void register(Block block, Item itemblock, String name) {
+		block.setRegistryName(name);
 		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, itemblock, name);
+		GameRegistry.register(block);
+		GameRegistry.register(itemblock);
 	}
 
 }

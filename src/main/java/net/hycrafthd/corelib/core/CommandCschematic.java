@@ -15,7 +15,8 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.BlockPos;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -35,7 +36,7 @@ public class CommandCschematic extends CommandBase {
 	 * Command name
 	 */
 	@Override
-	public String getName() {
+	public String getCommandName() {
 		return "cschematic";
 	}
 
@@ -59,7 +60,7 @@ public class CommandCschematic extends CommandBase {
 	 * Command executed
 	 */
 	@Override
-	public void execute(ICommandSender sender, String[] args) throws CommandException {
+	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		World world = player.getEntityWorld();
 		if (args.length > 0) {
@@ -69,6 +70,7 @@ public class CommandCschematic extends CommandBase {
 				}
 				try {
 					String name = args[1];
+					//FIXME waht is the updated deobfuscated name of that function? (func_175757_a)
 					BlockPos pos1 = func_175757_a(sender, args, 2, false);
 					BlockPos pos2 = func_175757_a(sender, args, 5, false);
 
@@ -88,6 +90,7 @@ public class CommandCschematic extends CommandBase {
 					SchematicWriter writer = new SchematicWriter(sch);
 					writer.write(file);
 
+					//FIXME --> new name of that method??
 					notifyOperators(player, this, lang + ".success.save", pos1, pos2, name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -116,6 +119,7 @@ public class CommandCschematic extends CommandBase {
 						builder.build(pos, true);
 					}
 
+					//FIXME (same as above)
 					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -133,7 +137,7 @@ public class CommandCschematic extends CommandBase {
 	 * Command Tab completion
 	 */
 	@Override
-	public List<?> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+	public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 1) {
 			return getListOfStringsMatchingLastWord(args, new String[] { "save", "load" });
 		} else {
@@ -141,6 +145,7 @@ public class CommandCschematic extends CommandBase {
 				if (args.length == 2) {
 					return getListOfStringsMatchingLastWord(args, "name");
 				}
+				//FIXME updated deobfuscated name of func_175771_a
 				if (args.length >= 3 && args.length <= 5) {
 					return func_175771_a(args, 2, pos);
 				}

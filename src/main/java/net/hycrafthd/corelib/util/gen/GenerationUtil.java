@@ -2,8 +2,8 @@ package net.hycrafthd.corelib.util.gen;
 
 import java.util.Random;
 
-import net.minecraft.block.state.pattern.BlockHelper;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
@@ -38,7 +38,7 @@ public class GenerationUtil {
 			int posX = x + random.nextInt(16);
 			int posY = random.nextInt(hightRange) + oregen.getMinY();
 			int posZ = z + random.nextInt(16);
-			new WorldGenMinable(oregen.getState(), vienSize, BlockHelper.forBlock(oregen.getBlockin())).generate(world, random, new BlockPos(posX, posY, posZ));
+			new WorldGenMinable(oregen.getState(), vienSize, BlockMatcher.forBlock(oregen.getBlockin())).generate(world, random, new BlockPos(posX, posY, posZ));
 		}
 	}
 

@@ -20,8 +20,8 @@ public class ItemRegistry {
 	 *            Item name
 	 */
 	public static void register(Item item, String name) {
-		item.setUnlocalizedName(name);
-		GameRegistry.registerItem(item, name);
+		item.setRegistryName(name);
+		GameRegistry.register(item);
 	}
 
 }

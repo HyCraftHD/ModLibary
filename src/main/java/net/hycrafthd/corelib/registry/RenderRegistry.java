@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
  */
+@SuppressWarnings("deprecation")
 @SideOnly(Side.CLIENT)
 public class RenderRegistry {
 
@@ -26,7 +27,7 @@ public class RenderRegistry {
 	 * @param renderer
 	 *            Render instance
 	 */
-	public static void registerEntity(Class<? extends Entity> entityClass, Render renderer) {
+	public static void registerEntity(Class<? extends Entity> entityClass, Render<? extends Entity> renderer) {
 		RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
 	}
 
@@ -38,6 +39,7 @@ public class RenderRegistry {
 	 * @param specialRenderer
 	 *            SpecialRender instance
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, TileEntitySpecialRenderer specialRenderer) {
 		ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
 	}
