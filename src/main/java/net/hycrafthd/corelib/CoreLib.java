@@ -41,7 +41,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.4-alpha";
+	public static final String version = "0.5-alpha";
 	
 	/**
 	 * CoreLib instance
