@@ -19,6 +19,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
+*/
 
 version = "0.5-alpha"
 group= "net.hycrafthd.corelib" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
