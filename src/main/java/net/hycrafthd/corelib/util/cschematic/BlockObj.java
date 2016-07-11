@@ -4,6 +4,7 @@ import org.apache.commons.lang3.Validate;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * 
@@ -98,6 +99,6 @@ public class BlockObj {
 	 * @return BlockObj of NBTTag
 	 */
 	public static BlockObj fromNBT(NBTTagCompound comp) {
-		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(comp.getString("Name"))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
+		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(new ResourceLocation(comp.getString("Name")))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
 	}
 }

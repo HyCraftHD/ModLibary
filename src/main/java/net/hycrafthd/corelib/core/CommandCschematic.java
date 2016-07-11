@@ -18,20 +18,20 @@ import net.minecraft.world.World;
  *
  */
 public class CommandCschematic extends CommandBase {
-
+	
 	/**
 	 * Language data key
 	 */
 	private String lang = "command.cschematic";
-
+	
 	/**
 	 * Command name
 	 */
 	@Override
-	public String getName() {
+	public String getCommandName() {
 		return "cschematic";
 	}
-
+	
 	/**
 	 * Command permission
 	 */
@@ -39,7 +39,7 @@ public class CommandCschematic extends CommandBase {
 	public int getRequiredPermissionLevel() {
 		return 2;
 	}
-
+	
 	/**
 	 * Command usage
 	 */
@@ -47,12 +47,12 @@ public class CommandCschematic extends CommandBase {
 	public String getCommandUsage(ICommandSender sender) {
 		return lang + ".usage";
 	}
-
+	
 	/**
 	 * Command executed
 	 */
 	@Override
-	public void execute(ICommandSender sender, String[] args) throws CommandException {
+	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		World world = player.getEntityWorld();
 		if (args.length > 0) {
@@ -62,25 +62,25 @@ public class CommandCschematic extends CommandBase {
 				}
 				try {
 					String name = args[1];
-					BlockPos pos1 = func_175757_a(sender, args, 2, false);
-					BlockPos pos2 = func_175757_a(sender, args, 5, false);
-
+					BlockPos pos1 = parseBlockPos(sender, args, 2, false);
+					BlockPos pos2 = parseBlockPos(sender, args, 5, false);
+					
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
-
+					
 					if (!file.getParent().contains("cschematic")) {
 						throw new IllegalArgumentException();
 					}
-
+					
 					File parent = file.getParentFile();
-
+					
 					if (!parent.getAbsolutePath().equals(SchematicUtil.getSaveDirectionary().getAbsolutePath()) && !parent.exists()) {
 						parent.mkdir();
 					}
-
+					
 					Schematic sch = new Schematic(pos1, pos2, world);
 					SchematicWriter writer = new SchematicWriter(sch);
 					writer.write(file);
-
+					
 					notifyOperators(player, this, lang + ".success.save", pos1, pos2, name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -94,13 +94,13 @@ public class CommandCschematic extends CommandBase {
 				try {
 					String name = args[1];
 					BlockPos pos = player.getPosition();
-
+					
 					File file = new File(SchematicUtil.getSaveDirectionary(), name + ".cschematic");
-
+					
 					if (!file.getParent().contains("cschematic")) {
 						throw new IllegalArgumentException();
 					}
-
+					
 					SchematicReader reader = new SchematicReader(file);
 					SchematicBuilder builder = new SchematicBuilder(reader, world);
 					if (args.length == 3) {
@@ -108,7 +108,7 @@ public class CommandCschematic extends CommandBase {
 					} else {
 						builder.build(pos, true);
 					}
-
+					
 					notifyOperators(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -121,12 +121,12 @@ public class CommandCschematic extends CommandBase {
 			throw new WrongUsageException(getCommandUsage(sender));
 		}
 	}
-
+	
 	/**
 	 * Command Tab completion
 	 */
 	@Override
-	public List<?> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 1) {
 			return getListOfStringsMatchingLastWord(args, new String[] { "save", "load" });
 		} else {
@@ -153,5 +153,5 @@ public class CommandCschematic extends CommandBase {
 		}
 		return null;
 	}
-
+	
 }
