@@ -1,6 +1,5 @@
 package net.hycrafthd.corelib.registry;
 
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -24,8 +23,8 @@ public class RenderRegistry {
 	 * @param renderer
 	 *            Render instance
 	 */
-	public static void registerEntity(Class<? extends Entity> entityClass, Render<? extends Entity> renderer) {
-		RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
+	public static void registerEntity(Class<? extends Entity> entityClass, IRenderFactory<? super Entity> renderFactory) {
+		RenderingRegistry.registerEntityRenderingHandler(entityClass, renderFactory);
 	}
 	
 	/**
@@ -36,7 +35,7 @@ public class RenderRegistry {
 	 * @param specialRenderer
 	 *            SpecialRender class
 	 */
-	public static <T extends TileEntity> void bindTileEntitySpecialRenderer(Class<T> tileEntityClass, TileEntitySpecialRenderer<T> specialRenderer) {
+	public static void bindTileEntitySpecialRenderer(Class<? extends TileEntity> tileEntityClass, TileEntitySpecialRenderer<? super TileEntity> specialRenderer) {
 		ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
 	}
 	

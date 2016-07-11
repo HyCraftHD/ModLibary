@@ -72,7 +72,7 @@ public class CoreLib extends DummyModContainer {
 		McVersionCompare versioncompare = new McVersionCompare(mcversion);
 		
 		if (!versioncompare.containsVersion(ForgeVersion.mcVersion)) {
-			CrashReport crash = CrashReport.makeCrashReport(new WrongMinecraftVersionException(this), "Mcversion is not supported! Allowed: " + mcversion);
+			CrashReport crash = CrashReport.makeCrashReport(new WrongMinecraftVersionException(this, ForgeVersion.mcVersion), "Mcversion is not supported! Allowed: " + mcversion);
 			CoreLib.getLogger().error(crash.getCompleteReport());
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
