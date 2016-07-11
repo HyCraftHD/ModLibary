@@ -2,11 +2,8 @@ package net.hycrafthd.corelib.asm;
 
 import org.objectweb.asm.ClassVisitor;
 
-import net.hycrafthd.corelib.asm.visitor.EntityRenderVisitor;
-import net.hycrafthd.corelib.asm.visitor.RenderPlayerVisitor;
-import net.hycrafthd.corelib.util.asm.ClassVisitorCreator;
-import net.hycrafthd.corelib.util.asm.ClassVisitorHelper;
-import net.hycrafthd.corelib.util.asm.ClassWriterFlags;
+import net.hycrafthd.corelib.asm.visitor.*;
+import net.hycrafthd.corelib.util.asm.*;
 import net.minecraft.launchwrapper.IClassTransformer;
 
 /**

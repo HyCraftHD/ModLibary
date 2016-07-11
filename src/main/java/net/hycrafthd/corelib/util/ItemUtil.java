@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib.util;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 
 /**
  * Util methods for {@link Item}

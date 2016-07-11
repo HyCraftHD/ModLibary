@@ -3,8 +3,7 @@ package net.hycrafthd.corelib.via;
 import net.hycrafthd.corelib.CoreLib;
 import net.hycrafthd.corelib.util.LWJGLUtils;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class VIADrawer {
 

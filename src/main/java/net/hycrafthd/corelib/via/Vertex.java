@@ -1,8 +1,7 @@
 package net.hycrafthd.corelib.via;
 
 import net.minecraft.util.Vec3;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class Vertex {
 

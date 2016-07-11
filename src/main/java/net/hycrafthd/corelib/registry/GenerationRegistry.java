@@ -1,12 +1,9 @@
 package net.hycrafthd.corelib.registry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 import net.hycrafthd.corelib.CoreLib;
-import net.hycrafthd.corelib.util.gen.BaseWorldGenerator;
-import net.hycrafthd.corelib.util.gen.OreGen;
-import net.hycrafthd.corelib.util.gen.OreGenDim;
+import net.hycrafthd.corelib.util.gen.*;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

@@ -1,20 +1,14 @@
 package net.hycrafthd.corelib.asm.visitor;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.opengl.Display;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
+import org.objectweb.asm.*;
 import org.objectweb.asm.commons.Method;
 
 import net.hycrafthd.corelib.util.LWJGLUtils;
-import net.hycrafthd.corelib.util.asm.ASMLogType;
-import net.hycrafthd.corelib.util.asm.ASMUtil;
-import net.hycrafthd.corelib.util.asm.MethodMatcher;
+import net.hycrafthd.corelib.util.asm.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 

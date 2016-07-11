@@ -1,8 +1,7 @@
 package net.hycrafthd.corelib.util;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 
 /**

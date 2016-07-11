@@ -3,8 +3,7 @@ package net.hycrafthd.corelib.event;
 import net.hycrafthd.corelib.util.event.CoreEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 /**
  * Cape update event (CLIENT SIDE ONLY) TODO Skin update

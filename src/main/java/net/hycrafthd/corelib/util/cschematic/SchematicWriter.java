@@ -3,8 +3,7 @@ package net.hycrafthd.corelib.util.cschematic;
 import java.io.File;
 
 import net.hycrafthd.corelib.util.NBTUtil;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.*;
 
 public class SchematicWriter {
 

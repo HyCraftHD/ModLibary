@@ -2,8 +2,7 @@ package net.hycrafthd.corelib.registry;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 /**
  * Registry for {@link KeyBinding} (CLIENT SIDE ONLY)

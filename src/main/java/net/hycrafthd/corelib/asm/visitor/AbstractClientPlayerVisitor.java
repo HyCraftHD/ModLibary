@@ -1,19 +1,13 @@
 package net.hycrafthd.corelib.asm.visitor;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
+import org.objectweb.asm.*;
 import org.objectweb.asm.commons.Method;
 
 import com.google.common.base.Throwables;
 
 import net.hycrafthd.corelib.CoreLib;
 import net.hycrafthd.corelib.event.CapeUpdatedEvent;
-import net.hycrafthd.corelib.util.asm.ASMLogType;
-import net.hycrafthd.corelib.util.asm.ASMUtil;
-import net.hycrafthd.corelib.util.asm.MappedType;
-import net.hycrafthd.corelib.util.asm.MethodMatcher;
+import net.hycrafthd.corelib.util.asm.*;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;

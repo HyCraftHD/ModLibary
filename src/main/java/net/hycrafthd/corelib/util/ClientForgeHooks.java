@@ -1,8 +1,7 @@
 package net.hycrafthd.corelib.util;
 
 import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 /**
  * Refer to {@link ForgeHooksClient} (CLIENT SIDE ONLY)

@@ -4,8 +4,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 
 import net.hycrafthd.corelib.CoreLib;
-import net.minecraftforge.fml.common.MetadataCollection;
-import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 /**
