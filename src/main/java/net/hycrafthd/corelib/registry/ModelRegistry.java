@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.*;
 
 /**
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.relauncher.*;
  */
 @SideOnly(Side.CLIENT)
 public class ModelRegistry {
-
+	
 	/**
 	 * Register an item or block model with meta 0 and resource location from the registry name
 	 * 
@@ -25,7 +26,7 @@ public class ModelRegistry {
 	public static void register(Object obj) {
 		register(obj, 0);
 	}
-
+	
 	/**
 	 * Register an item or block model with resource location from the registry name
 	 * 
@@ -37,7 +38,7 @@ public class ModelRegistry {
 	public static void register(Object obj, int meta) {
 		register(ItemUtil.from(obj), meta, new ModelResourceLocation(ItemStackUtil.getRegistryName(obj), "inventory"));
 	}
-
+	
 	/**
 	 * Register an item model with meta and model resource location
 	 * 
@@ -51,7 +52,7 @@ public class ModelRegistry {
 	public static void register(Item item, int meta, ModelResourceLocation location) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, location);
 	}
-
+	
 	/**
 	 * Register model variants for metadata
 	 * 
@@ -60,8 +61,8 @@ public class ModelRegistry {
 	 * @param names
 	 *            Resourcelocations like minecraft:stone
 	 */
-	public static void registerVariants(Object obj, String... names) {
-		ModelBakery.addVariantName(ItemUtil.from(obj), names);
+	public static void registerVariants(Object obj, ResourceLocation... res) {
+		ModelBakery.registerItemVariants(ItemUtil.from(obj), res);
 	}
-
+	
 }

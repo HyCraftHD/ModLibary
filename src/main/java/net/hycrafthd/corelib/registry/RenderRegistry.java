@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.*;
  */
 @SideOnly(Side.CLIENT)
 public class RenderRegistry {
-
+	
 	/**
 	 * Register renderer for entity
 	 * 
@@ -24,20 +24,20 @@ public class RenderRegistry {
 	 * @param renderer
 	 *            Render instance
 	 */
-	public static void registerEntity(Class<? extends Entity> entityClass, Render renderer) {
+	public static void registerEntity(Class<? extends Entity> entityClass, Render<? extends Entity> renderer) {
 		RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
 	}
-
+	
 	/**
 	 * Register special tileentity renderer
 	 * 
 	 * @param tileEntityClass
-	 *            Class extends tileentity
+	 *            Tileentity class
 	 * @param specialRenderer
-	 *            SpecialRender instance
+	 *            SpecialRender class
 	 */
-	public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, TileEntitySpecialRenderer specialRenderer) {
+	public static <T extends TileEntity> void bindTileEntitySpecialRenderer(Class<T> tileEntityClass, TileEntitySpecialRenderer<T> specialRenderer) {
 		ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass, specialRenderer);
 	}
-
+	
 }
