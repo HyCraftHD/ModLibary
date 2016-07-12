@@ -37,7 +37,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Allowed Minecraft versions
 	 */
-	public static final String mcversion = "[1.10]";
+	public static final String mcversion = "[1.10.2]";
 	/**
 	 * Current version of CoreLib
 	 */
