@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
  *
  */
 public class ItemStackUtil {
-
+	
 	/**
 	 * Get itemstack from object
 	 * 
@@ -44,7 +44,7 @@ public class ItemStackUtil {
 		}
 		return stack;
 	}
-
+	
 	/**
 	 * Get registry name for object
 	 * 
@@ -53,7 +53,7 @@ public class ItemStackUtil {
 	 * @return Registry name or null if not found
 	 */
 	public static String getRegistryName(Object obj) {
-		Object name = Item.itemRegistry.getNameForObject(from(obj).getItem());
+		Object name = Item.REGISTRY.getNameForObject(from(obj).getItem());
 		if (name instanceof String) {
 			return (String) name;
 		}
@@ -62,7 +62,7 @@ public class ItemStackUtil {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Get modid for object
 	 * 
@@ -73,7 +73,7 @@ public class ItemStackUtil {
 	public static String getModID(Object obj) {
 		return getRegistryName(obj) != null ? getRegistryName(obj).split(":")[0] : null;
 	}
-
+	
 	/**
 	 * Get name for object
 	 * 

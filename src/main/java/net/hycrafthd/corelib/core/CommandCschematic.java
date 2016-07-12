@@ -81,8 +81,7 @@ public class CommandCschematic extends CommandBase {
 					Schematic sch = new Schematic(pos1, pos2, world);
 					SchematicWriter writer = new SchematicWriter(sch);
 					writer.write(file);
-					
-					notifyOperators(player, this, lang + ".success.save", pos1, pos2, name);
+					notifyCommandListener(player, this, lang + ".success.save", pos1, pos2, name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					throw new CommandException(lang + ".error", "saving", ex.getClass().getName());
@@ -110,7 +109,7 @@ public class CommandCschematic extends CommandBase {
 						builder.build(pos, true);
 					}
 					
-					notifyOperators(player, this, lang + ".success.load", name);
+					notifyCommandListener(player, this, lang + ".success.load", name);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					throw new CommandException(lang + ".error", "loading", ex.getClass().getName());

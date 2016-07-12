@@ -86,7 +86,7 @@ public class BlockObj {
 	 */
 	public NBTTagCompound toNBT() {
 		NBTTagCompound comp = new NBTTagCompound();
-		String block = String.valueOf(Block.blockRegistry.getNameForObject(this.getBlock()));
+		String block = String.valueOf(Block.REGISTRY.getNameForObject(this.getBlock()));
 		comp.setString("Name", block);
 		comp.setInteger("Meta", this.getMeta());
 		if (this.hasNBT())
@@ -99,6 +99,6 @@ public class BlockObj {
 	 * @return BlockObj of NBTTag
 	 */
 	public static BlockObj fromNBT(NBTTagCompound comp) {
-		return new BlockObj(Validate.notNull((Block) Block.blockRegistry.getObject(new ResourceLocation(comp.getString("Name")))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
+		return new BlockObj(Validate.notNull((Block) Block.REGISTRY.getObject(new ResourceLocation(comp.getString("Name")))), comp.getInteger("Meta"), (NBTTagCompound) comp.getTag("NBT"));
 	}
 }
