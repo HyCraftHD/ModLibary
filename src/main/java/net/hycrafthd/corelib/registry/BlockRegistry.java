@@ -1,5 +1,7 @@
 package net.hycrafthd.corelib.registry;
 
+import java.lang.reflect.Constructor;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -11,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  *
  */
 public class BlockRegistry {
-
+	
 	/**
 	 * Register a new block
 	 * 
@@ -23,7 +25,7 @@ public class BlockRegistry {
 	public static void register(Block block, String name) {
 		register(block, ItemBlock.class, name);
 	}
-
+	
 	/**
 	 * Register a new block
 	 * 
@@ -34,9 +36,20 @@ public class BlockRegistry {
 	 * @param name
 	 *            Block name
 	 */
-	public static void register(Block block, Class<? extends ItemBlock> itemblock, String name) {
+	public static void register(Block block, Class<? extends ItemBlock> itemblockClass, String name) {
 		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, itemblock, name);
+		block.setRegistryName(name);
+		GameRegistry.register(block);
+		
+		ItemBlock itemblock = null;
+		
+		try {
+			Constructor<?> cons = itemblockClass.getConstructor(Block.class);
+			itemblock = (ItemBlock) cons.newInstance(block);
+		} catch (Throwable th) {
+			itemblock = new ItemBlock(block);
+		}
+		GameRegistry.register(itemblock.setUnlocalizedName(name).setRegistryName(name));
 	}
-
+	
 }

@@ -2,7 +2,7 @@ package net.hycrafthd.corelib.util;
 
 import java.util.Random;
 
-import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 
 /**
  * Util methods for Math operations

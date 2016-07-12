@@ -8,7 +8,8 @@ import com.google.common.collect.Lists;
 import net.hycrafthd.corelib.util.cschematic.*;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.BlockPos;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -52,7 +53,7 @@ public class CommandCschematic extends CommandBase {
 	 * Command executed
 	 */
 	@Override
-	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = getCommandSenderAsPlayer(sender);
 		World world = player.getEntityWorld();
 		if (args.length > 0) {
@@ -126,7 +127,7 @@ public class CommandCschematic extends CommandBase {
 	 * Command Tab completion
 	 */
 	@Override
-	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+	public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 1) {
 			return getListOfStringsMatchingLastWord(args, new String[] { "save", "load" });
 		} else {
@@ -135,10 +136,10 @@ public class CommandCschematic extends CommandBase {
 					return getListOfStringsMatchingLastWord(args, "name");
 				}
 				if (args.length >= 3 && args.length <= 5) {
-					return func_175771_a(args, 2, pos);
+					return getTabCompletionCoordinate(args, 2, pos);
 				}
 				if (args.length >= 5 && args.length <= 8) {
-					return func_175771_a(args, 5, pos);
+					return getTabCompletionCoordinate(args, 5, pos);
 				}
 			} else if (args[0].equalsIgnoreCase("load")) {
 				if (args.length == 2) {
@@ -151,7 +152,7 @@ public class CommandCschematic extends CommandBase {
 				}
 			}
 		}
-		return null;
+		return super.getTabCompletionOptions(server, sender, args, pos);
 	}
 	
 }

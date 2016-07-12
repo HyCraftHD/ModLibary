@@ -3,7 +3,7 @@ package net.hycrafthd.corelib.util;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
  *
  */
 public class BlockUtil {
-
+	
 	/**
 	 * Get block from object
 	 * 
@@ -28,7 +28,7 @@ public class BlockUtil {
 		}
 		return Block.getBlockFromItem(stack.getItem());
 	}
-
+	
 	/**
 	 * Gets the tileentity at block position
 	 * 
@@ -41,5 +41,5 @@ public class BlockUtil {
 	public static TileEntity getTileEntity(World world, BlockPos pos) {
 		return world.getTileEntity(pos);
 	}
-
+	
 }

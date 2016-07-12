@@ -2,8 +2,8 @@ package net.hycrafthd.corelib.registry;
 
 import net.hycrafthd.corelib.util.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.*;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.*;
