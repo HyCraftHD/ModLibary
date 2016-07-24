@@ -1,9 +1,11 @@
 package net.hycrafthd.corelib.util;
 
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -12,18 +14,31 @@ import org.lwjgl.opengl.GL11;
 import net.hycrafthd.corelib.via.Vertex;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
 
 @SuppressWarnings("deprecation")
 public class LWJGLUtils {
 	
 	/**
+	 * @deprecated
 	 * Draws a Horizontal Line<br>
 	 * <br>
 	 * x = x Start Position of Line <br>
@@ -34,11 +49,13 @@ public class LWJGLUtils {
 	 * @param
 	 * 
 	 */
+	@Deprecated
 	public static void drawHLine(double x, double x2, double y, RGBA r) {
 		drawGradientRect(x, y, x2, y + 1, r, r);
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Vertical Line<br>
 	 * <br>
 	 * x = x Position of Line <br>
@@ -49,11 +66,13 @@ public class LWJGLUtils {
 	 * @param
 	 * 
 	 */
+	@Deprecated
 	public static void drawVLine(double x, double y, double down, RGBA r) {
 		drawGradientRect(x, y, x + 1, down, r, r);
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Horizontal Line with Z Pos<br>
 	 * <br>
 	 * x = x Start Position of Line <br>
@@ -64,11 +83,13 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
+	@Deprecated
 	public static void drawHLine(double x, double x2, double y, RGBA r, double z) {
 		drawGradientRect(x, y, x2, y + 1, r, r, z);
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Vertical Line with Z Pos<br>
 	 * <br>
 	 * x = x Position of Line <br>
@@ -79,6 +100,7 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
+	@Deprecated
 	public static void drawVLine(double x, double y, double down, RGBA r, double z) {
 		drawGradientRect(x, y, x + 1, down, r, r, z);
 	}
@@ -133,27 +155,24 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
-	@NotWorking
 	public static void drawGradientRect(double left, double top, double right, double bottom, RGBA start, RGBA end, double z) {
-		// GlStateManager.disableTexture2D();
-		// GlStateManager.enableBlend();
-		// GlStateManager.disableAlpha();
-		// GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-		// GlStateManager.shadeModel(7425);
-		// Tessellator tessellator = Tessellator.getInstance();
-		// WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		// worldrenderer.addVertex((double) right, (double) top, (double) z);
-		// worldrenderer.addVertex((double) left, (double) top, (double) z);
-		// worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		// worldrenderer.addVertex((double) left, (double) bottom, (double) z);
-		// worldrenderer.addVertex((double) right, (double) bottom, (double) z);
-		// tessellator.draw();
-		// GlStateManager.shadeModel(7424);
-		// GlStateManager.disableBlend();
-		// GlStateManager.enableAlpha();
-		// GlStateManager.enableTexture2D();
+		 GlStateManager.disableTexture2D();
+		 GlStateManager.enableBlend();
+		 GlStateManager.disableAlpha();
+		 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+		 GlStateManager.shadeModel(7425);
+		 Tessellator tessellator = Tessellator.getInstance();
+		 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+		 worldrenderer.pos((double) right, (double) top, (double) z).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left, (double) top, (double) z).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left, (double) bottom, (double) z).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 worldrenderer.pos((double) right, (double) bottom, (double) z).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 tessellator.draw();
+		 GlStateManager.shadeModel(7424);
+		 GlStateManager.disableBlend();
+		 GlStateManager.enableAlpha();
+		 GlStateManager.enableTexture2D();
 	}
 	
 	/**
@@ -167,78 +186,77 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
-	@NotWorking
 	public static void drawGradientRectWithMultiplier(int left, int top, int right, int bottom, RGBA start, RGBA end, double z, double multiplier) {
-		// double oldZ = z;
-		// for (int i = 0; i < right; i++) {
-		// z = z + (multiplier + (i * 0.005));
-		// GlStateManager.pushMatrix();
-		// GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-		// GlStateManager.disableTexture2D();
-		// GlStateManager.enableBlend();
-		// GlStateManager.disableLighting();
-		// GlStateManager.depthMask(false);
-		// GlStateManager.enableBlend();
-		// GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-		// Tessellator tessellator = Tessellator.getInstance();
-		// WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		// worldrenderer.addVertex((double) left + i, (double) top, (double) oldZ);
-		// worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) z);
-		// worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		// worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) z);
-		// worldrenderer.addVertex((double) left + i, (double) bottom, (double) oldZ);
-		// tessellator.draw();
-		// GlStateManager.shadeModel(7424);
-		// GlStateManager.disableBlend();
-		// GlStateManager.enableAlpha();
-		// GlStateManager.enableTexture2D();
-		// GlStateManager.popMatrix();
-		// GlStateManager.pushMatrix();
-		// GlStateManager.rotate(180F, 0F, 1.0F, 0F);
-		// if (left > 0) {
-		// GlStateManager.translate(-left, 0, 0);
-		// } else {
-		// GlStateManager.translate(37, 0, 0);
-		// }
-		// GlStateManager.disableTexture2D();
-		// GlStateManager.enableBlend();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.setColorRGBA(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha());
-		// worldrenderer.addVertex((double) left + i, (double) top, (double) -oldZ);
-		// worldrenderer.addVertex((double) left + 1 + i, (double) top, (double) -z);
-		// worldrenderer.setColorRGBA(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha());
-		// worldrenderer.addVertex((double) left + 1 + i, (double) bottom, (double) -z);
-		// worldrenderer.addVertex((double) left + i, (double) bottom, (double) -oldZ);
-		// tessellator.draw();
-		// GlStateManager.shadeModel(7424);
-		// GlStateManager.disableBlend();
-		// GlStateManager.enableAlpha();
-		// GlStateManager.enableTexture2D();
-		// GlStateManager.popMatrix();
-		// oldZ = z;
-		// }
+		 double oldZ = z;
+		 for (int i = 0; i < right; i++) {
+		 z = z + (multiplier + (i * 0.005));
+		 GlStateManager.pushMatrix();
+		 GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+		 GlStateManager.disableTexture2D();
+		 GlStateManager.enableBlend();
+		 GlStateManager.disableLighting();
+		 GlStateManager.depthMask(false);
+		 GlStateManager.enableBlend();
+		 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+		 Tessellator tessellator = Tessellator.getInstance();
+		 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		 worldrenderer.pos((double) left + i, (double) top, (double) oldZ).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + 1 + i, (double) top, (double) z).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + 1 + i, (double) bottom, (double) z).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + i, (double) bottom, (double) oldZ).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 tessellator.draw();
+		 GlStateManager.shadeModel(7424);
+		 GlStateManager.disableBlend();
+		 GlStateManager.enableAlpha();
+		 GlStateManager.enableTexture2D();
+		 GlStateManager.popMatrix();
+		 GlStateManager.pushMatrix();
+		 GlStateManager.rotate(180F, 0F, 1.0F, 0F);
+		 if (left > 0) {
+		 GlStateManager.translate(-left, 0, 0);
+		 } else {
+		 GlStateManager.translate(37, 0, 0);
+		 }
+		 GlStateManager.disableTexture2D();
+		 GlStateManager.enableBlend();
+	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		 worldrenderer.pos((double) left + i, (double) top, (double) -oldZ).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + 1 + i, (double) top, (double) -z).color(start.getRed(), start.getGreen(), start.getBlue(), start.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + 1 + i, (double) bottom, (double) -z).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 worldrenderer.pos((double) left + i, (double) bottom, (double) -oldZ).color(end.getRed(), end.getGreen(), end.getBlue(), end.getAlpha()).endVertex();
+		 tessellator.draw();
+		 GlStateManager.shadeModel(7424);
+		 GlStateManager.disableBlend();
+		 GlStateManager.enableAlpha();
+		 GlStateManager.enableTexture2D();
+		 GlStateManager.popMatrix();
+		 oldZ = z;
+		 }
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Frame of a given Region <br>
 	 * <br>
 	 * rgb = Start Color as {@link RGBA}
 	 * 
 	 * @param
 	 */
+	@Deprecated
 	public static void drawFrame(double x, double y, double width, double height, RGBA rgb) {
 		drawFrame(x, y, width, height, rgb, 0);
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Frame of a given Region <br>
 	 * <br>
 	 * rgb = Start Color as {@link RGBA}
 	 * 
 	 * @param
 	 */
+	@Deprecated
 	public static void drawFrame(double x, double y, double width, double height, RGBA rgb, double z) {
 		drawHLine(x - 1, x + width + 1, y - 1, rgb, z);
 		drawHLine(x - 1, x + width + 1, y + height, rgb, z);
@@ -247,6 +265,7 @@ public class LWJGLUtils {
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a String in the World with Background and Frame <br>
 	 * <br>
 	 * start = Start Color as {@link RGBA} <br>
@@ -368,12 +387,14 @@ public class LWJGLUtils {
 	}
 	
 	/**
+	 * @deprecated
 	 * Draws a Frame in the World <br>
 	 * <br>
 	 * frame = Color of Frame in {@link RGBA}
 	 * 
 	 * @param
 	 */
+	@Deprecated
 	public static void drawFrameInWorld(BlockPos pos, double posX, double posY, double posZ, final double width, final double height, final RGBA frame) {
 		drawSmThInWorld(pos, posX, posY, posZ, new Runnable() {
 			
@@ -397,19 +418,18 @@ public class LWJGLUtils {
 	 * 
 	 * @param
 	 */
-	@NotWorking
 	public static void drawTexture(ResourceLocation location, double textureWidth, double textureHeight, double x, double y, double z, double width, double height, double u, double v) {
-		// Minecraft.getMinecraft().getTextureManager().bindTexture(location);
-		// double f4 = 1.0F / textureWidth;
-		// double f5 = 1.0F / textureHeight;
-		// Tessellator tessellator = Tessellator.getInstance();
-		// WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.addVertexWithUV((double) x, (double) (y + height), z, (double) (u * f4), (double) ((v + (float) height) * f5));
-		// worldrenderer.addVertexWithUV((double) (x + width), (double) (y + height), z, (double) ((u + (float) width) * f4), (double) ((v + (float) height) * f5));
-		// worldrenderer.addVertexWithUV((double) (x + width), (double) y, z, (double) ((u + (float) width) * f4), (double) (v * f5));
-		// worldrenderer.addVertexWithUV((double) x, (double) y, z, (double) (u * f4), (double) (v * f5));
-		// tessellator.draw();
+		 Minecraft.getMinecraft().getTextureManager().bindTexture(location);
+		 double f4 = 1.0F / textureWidth;
+		 double f5 = 1.0F / textureHeight;
+		 Tessellator tessellator = Tessellator.getInstance();
+	     WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		 worldrenderer.pos((double) x, (double) (y + height), z).tex((double) (u * f4), (double) ((v + (float) height) * f5)).endVertex();
+		 worldrenderer.pos((double) (x + width), (double) (y + height), z).tex((double) ((u + (float) width) * f4), (double) ((v + (float) height) * f5)).endVertex();
+		 worldrenderer.pos((double) (x + width), (double) y, z).tex((double) ((u + (float) width) * f4), (double) (v * f5)).endVertex();
+		 worldrenderer.pos((double) x, (double) y, z).tex((double) (u * f4), (double) (v * f5)).endVertex();
+		 tessellator.draw();
 	}
 	
 	/**
@@ -486,25 +506,23 @@ public class LWJGLUtils {
 		GlStateManager.popMatrix();
 	}
 	
-	@NotWorking
 	private static void renderModel(IBakedModel model, int color, ItemStack stack) {
-		// Tessellator tessellator = Tessellator.getInstance();
-		// WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.setVertexFormat(DefaultVertexFormats.ITEM);
-		// EnumFacing[] aenumfacing = EnumFacing.values();
-		// int j = aenumfacing.length;
-		//
-		// for (int k = 0; k < j; ++k) {
-		// EnumFacing enumfacing = aenumfacing[k];
-		// renderQuads(worldrenderer, model.getFaceQuads(enumfacing), color, stack);
-		// }
-		//
-		// renderQuads(worldrenderer, model.getGeneralQuads(), color, stack);
-		// tessellator.draw();
+		 Tessellator tessellator = Tessellator.getInstance();
+		 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		 worldrenderer.begin(7,DefaultVertexFormats.ITEM);
+		 EnumFacing[] aenumfacing = EnumFacing.values();
+		 int j = aenumfacing.length;
+		
+		 for (int k = 0; k < j; ++k) {
+		 EnumFacing enumfacing = aenumfacing[k];
+		 renderQuads(worldrenderer, model.getFaceQuads(enumfacing), color, stack);
+		 }
+		
+		 renderQuads(worldrenderer, model.getGeneralQuads(), color, stack);
+		 tessellator.draw();
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unused" })
+	@SuppressWarnings({ "rawtypes"})
 	private static void renderQuads(WorldRenderer renderer, List quads, int color, ItemStack stack) {
 		boolean flag = color == -1 && stack != null;
 		BakedQuad bakedquad;
@@ -540,17 +558,16 @@ public class LWJGLUtils {
 		renderer.putNormal((float) vec3i.getX(), (float) vec3i.getY(), (float) vec3i.getZ());
 	}
 	
-	@NotWorking
 	public static void drawTexturePoints(String text, Vec3 vec, Vec3 vec1, Vec3 vec2, Vec3 vec3, double u, double v) {
-		// Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(text));
-		// Tessellator tessellator = Tessellator.getInstance();
-		// WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		// worldrenderer.startDrawingQuads();
-		// worldrenderer.addVertexWithUV(vec.xCoord, vec.yCoord, vec.zCoord, 0, v);
-		// worldrenderer.addVertexWithUV(vec1.xCoord, vec1.yCoord, vec1.zCoord, 0, 0);
-		// worldrenderer.addVertexWithUV(vec2.xCoord, vec2.yCoord, vec2.zCoord, u, 0);
-		// worldrenderer.addVertexWithUV(vec3.xCoord, vec3.yCoord, vec3.zCoord, u, v);
-		// tessellator.draw();
+		 Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(text));
+		 Tessellator tessellator = Tessellator.getInstance();
+		 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		 worldrenderer.pos(vec.xCoord, vec.yCoord, vec.zCoord).tex(0, v).endVertex();
+		 worldrenderer.pos(vec1.xCoord, vec1.yCoord, vec1.zCoord).tex(0, 0).endVertex();
+		 worldrenderer.pos(vec2.xCoord, vec2.yCoord, vec2.zCoord).tex(u, 0).endVertex();
+		 worldrenderer.pos(vec3.xCoord, vec3.yCoord, vec3.zCoord).tex(u, v).endVertex();
+		 tessellator.draw();
 	}
 	
 	public static void drawSwell(String text, double x, double y, double z) {
@@ -600,14 +617,13 @@ public class LWJGLUtils {
 		GlStateManager.popMatrix();
 	}
 	
+	@Deprecated
 	public static void drawRailPart(String text, double x, double y, double z) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x + 0.5, y, z);
 		GlStateManager.enableNormalize();
 		RenderHelper.disableStandardItemLighting();
-		
-		// new VIADrawer(VIARegister.viaRailPart).drawNormal("iron", 0, 0, 0);
-		
+				
 		GlStateManager.popMatrix();
 	}
 	
