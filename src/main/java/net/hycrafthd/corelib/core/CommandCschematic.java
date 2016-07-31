@@ -5,8 +5,15 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.hycrafthd.corelib.util.cschematic.*;
-import net.minecraft.command.*;
+import net.hycrafthd.corelib.util.cschematic.Schematic;
+import net.hycrafthd.corelib.util.cschematic.SchematicBuilder;
+import net.hycrafthd.corelib.util.cschematic.SchematicReader;
+import net.hycrafthd.corelib.util.cschematic.SchematicUtil;
+import net.hycrafthd.corelib.util.cschematic.SchematicWriter;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;

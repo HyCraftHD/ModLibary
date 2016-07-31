@@ -1,11 +1,25 @@
 package net.hycrafthd.corelib.via;
 
 import net.minecraft.util.Vec3;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class Vertex {
+public class Vertex implements BaseVertex{
 
 	private final Vec3 vec1,vec2,vec3,vec4;
+	
+	/**
+	 * @author MrTroble
+	 * 
+	 * Tells the {@link VIADrawer} how to draw
+	 * 
+	 * Just a save class nothing usefull
+	 * 
+	 * @param vec1
+	 * @param vec2
+	 * @param vec3
+	 * @param vec4
+	 */
 	
 	@SideOnly(Side.CLIENT)
 	public Vertex(Vec3 vec1,Vec3 vec2,Vec3 vec3,Vec3 vec4) {

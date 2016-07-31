@@ -1,7 +1,8 @@
 package net.hycrafthd.corelib.util.cschematic;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
 public class SchematicBuilder {
