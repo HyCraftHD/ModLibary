@@ -600,13 +600,23 @@ public class LWJGLUtils {
     	GlStateManager.enableNormalize();
     	RenderHelper.disableStandardItemLighting();
     	
-        //new VIADrawer(VIARegister.viaRailPart).drawNormal("iron", 0, 0, 0);
-
         GlStateManager.popMatrix();
 	}
 	
-	public static void drawVertex(String str,Vertex ve,double x,double y,double z){
-		drawTexturePoints(str, ve.getVec1(), ve.getVec2(), ve.getVec3(), ve.getVec4(), 0, 0);
+	public static void drawVertex(String str,Vertex ve,double x,double y,double z,RGBA rgb){
+		Vec3 vec = ve.getVec1();
+    	Vec3 vec1 = ve.getVec2();
+    	Vec3 vec2 = ve.getVec3();
+    	Vec3 vec3 = ve.getVec4();
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.startDrawingQuads();
+		worldrenderer.setColorRGBA(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), rgb.getAlpha());
+        worldrenderer.addVertex( vec.xCoord, vec.yCoord, vec.zCoord);
+        worldrenderer.addVertex( vec1.xCoord, vec1.yCoord, vec1.zCoord);
+        worldrenderer.addVertex( vec2.xCoord, vec2.yCoord, vec2.zCoord);
+        worldrenderer.addVertex( vec3.xCoord, vec3.yCoord, vec3.zCoord);
+        tessellator.draw();
 	}
 	
 	

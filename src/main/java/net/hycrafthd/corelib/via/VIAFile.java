@@ -1,11 +1,15 @@
 package net.hycrafthd.corelib.via;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VIAFile{
 
@@ -54,8 +58,16 @@ public class VIAFile{
 	 * 
 	 * @return The Vertex of the group to draw
 	 */
-	public Vertex interpretVertex(int gr){
-		if(!Proceed)return null;		
+	public BaseVertex interpretVertex(int gr){
+		if(!Proceed)return null;
+		int pofg = this.getMaxPointsOfGroup(gr);
+		if(pofg != 4){
+			Vec3[] vecs = new Vec3[pofg];
+			for(int i = 0;i < pofg;i++){
+				vecs[i] = getPoint(gr, pofg);
+			}
+			return new MegaVertex(vecs);
+		}
 		return new Vertex(getPoint(gr, 0), getPoint(gr, 1), getPoint(gr, 2), getPoint(gr, 3));
 	}
 	
