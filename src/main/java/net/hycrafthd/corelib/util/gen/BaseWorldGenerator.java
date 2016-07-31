@@ -3,7 +3,8 @@ package net.hycrafthd.corelib.util.gen;
 import java.util.Random;
 
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.*;
+import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 /**

@@ -1,6 +1,7 @@
 package net.hycrafthd.corelib.util;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Compare minecraft versions

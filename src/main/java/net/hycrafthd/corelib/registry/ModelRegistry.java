@@ -1,12 +1,15 @@
 package net.hycrafthd.corelib.registry;
 
-import net.hycrafthd.corelib.util.*;
+import net.hycrafthd.corelib.util.ItemStackUtil;
+import net.hycrafthd.corelib.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.*;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Registry for item and block models ({@link RenderItem}) (CLIENT SIDE ONLY)

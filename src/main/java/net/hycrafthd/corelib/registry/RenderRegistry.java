@@ -3,8 +3,11 @@ package net.hycrafthd.corelib.registry;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.client.registry.*;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Registry for renderer ({@link RenderingRegistry}, {@link ClientRegistry}) (CLIENT SIDE ONLY)

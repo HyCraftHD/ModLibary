@@ -2,20 +2,31 @@ package net.hycrafthd.corelib;
 
 import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import com.google.common.eventbus.*;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
-import net.hycrafthd.corelib.core.*;
-import net.hycrafthd.corelib.registry.*;
+import net.hycrafthd.corelib.core.CommandCschematic;
+import net.hycrafthd.corelib.core.CoreLibLogger;
+import net.hycrafthd.corelib.core.ModMetadataFetcherCoreLib;
+import net.hycrafthd.corelib.core.UpdaterInformation;
+import net.hycrafthd.corelib.core.WorldGeneratorCoreLib;
+import net.hycrafthd.corelib.registry.EventRegistry;
+import net.hycrafthd.corelib.registry.GenerationRegistry;
 import net.hycrafthd.corelib.util.McVersionCompare;
 import net.hycrafthd.corelib.util.event.CoreEventBus;
 import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.process.ProcessHandler;
 import net.minecraft.crash.CrashReport;
 import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.DummyModContainer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.LoadController;
+import net.minecraftforge.fml.common.WrongMinecraftVersionException;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**

@@ -1,7 +1,8 @@
 package net.hycrafthd.corelib.util;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.*;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Refer to {@link ForgeHooks}

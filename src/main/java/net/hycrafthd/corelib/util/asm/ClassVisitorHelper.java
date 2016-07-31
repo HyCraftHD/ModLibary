@@ -1,6 +1,8 @@
 package net.hycrafthd.corelib.util.asm;
 
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
 
 /**
  * Asm visitor helper

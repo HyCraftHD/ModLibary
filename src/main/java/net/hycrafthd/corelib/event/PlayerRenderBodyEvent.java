@@ -2,7 +2,8 @@ package net.hycrafthd.corelib.event;
 
 import net.hycrafthd.corelib.util.event.CoreEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Player render body event (CLIENT SIDE ONLY)

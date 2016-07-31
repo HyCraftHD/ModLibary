@@ -1,9 +1,13 @@
 package net.hycrafthd.corelib.util.cschematic;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import net.hycrafthd.corelib.util.NBTUtil;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class SchematicReader {
 

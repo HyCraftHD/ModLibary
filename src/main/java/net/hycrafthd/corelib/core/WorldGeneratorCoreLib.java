@@ -1,11 +1,16 @@
 package net.hycrafthd.corelib.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import net.hycrafthd.corelib.CoreLib;
-import net.hycrafthd.corelib.util.gen.*;
+import net.hycrafthd.corelib.util.gen.GenerationUtil;
+import net.hycrafthd.corelib.util.gen.OreGen;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.*;
+import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 /**

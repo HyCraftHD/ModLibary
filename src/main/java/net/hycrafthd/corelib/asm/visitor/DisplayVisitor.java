@@ -1,9 +1,14 @@
 package net.hycrafthd.corelib.asm.visitor;
 
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Method;
 
-import net.hycrafthd.corelib.util.asm.*;
+import net.hycrafthd.corelib.util.asm.ASMLogType;
+import net.hycrafthd.corelib.util.asm.ASMUtil;
+import net.hycrafthd.corelib.util.asm.MethodMatcher;
 
 public class DisplayVisitor extends ClassVisitor {
 	

@@ -531,9 +531,16 @@ public class LWJGLUtils {
 		GlStateManager.popMatrix();
 	}
 	
-	public static void drawVertex(String str, Vertex ve, double x, double y, double z) {
-		drawTexturePoints(str, ve.getVec1(), ve.getVec2(), ve.getVec3(), ve.getVec4(), 0, 0);
-	}
+	public static void drawVertex(String str, Vertex ve, double x, double y, double z,RGBA rgb) {
+		 		 Tessellator tessellator = Tessellator.getInstance();
+		 		 VertexBuffer worldrenderer = tessellator.getBuffer();
+		 	     worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		 		 worldrenderer.pos(ve.getVec1().xCoord, ve.getVec1().yCoord, ve.getVec1().zCoord).color(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), rgb.getAlpha()).endVertex();
+		 		 worldrenderer.pos(ve.getVec2().xCoord, ve.getVec2().yCoord, ve.getVec2().zCoord).color(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), rgb.getAlpha()).endVertex();
+		 		 worldrenderer.pos(ve.getVec3().xCoord, ve.getVec3().yCoord, ve.getVec3().zCoord).color(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), rgb.getAlpha()).endVertex();
+		 		 worldrenderer.pos(ve.getVec4().xCoord, ve.getVec4().yCoord, ve.getVec4().zCoord).color(rgb.getRed(), rgb.getGreen(), rgb.getBlue(), rgb.getAlpha()).endVertex();
+		 		 tessellator.draw();
+    }
 	
 	/**
 	 * @param imageStream

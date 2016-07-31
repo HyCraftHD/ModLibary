@@ -1,14 +1,21 @@
 package net.hycrafthd.corelib.core;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.*;
-import net.minecraft.util.text.event.*;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.common.ForgeVersion.*;
-import net.minecraftforge.fml.common.*;
+import net.minecraftforge.common.ForgeVersion.CheckResult;
+import net.minecraftforge.common.ForgeVersion.Status;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class UpdaterInformation {

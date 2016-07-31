@@ -1,8 +1,12 @@
 package net.hycrafthd.corelib.util;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Utils for Colors ({@link NBTTagCompound})
