@@ -1,14 +1,13 @@
 package net.hycrafthd.corelib;
 
 import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 import com.google.common.eventbus.*;
 
 import net.hycrafthd.corelib.core.*;
 import net.hycrafthd.corelib.registry.*;
-import net.hycrafthd.corelib.util.McVersionCompare;
+import net.hycrafthd.corelib.util.*;
 import net.hycrafthd.corelib.util.event.CoreEventBus;
 import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.process.ProcessHandler;
@@ -41,7 +40,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.5-alpha";
+	public static final String version = "0.4-alpha";
 	
 	/**
 	 * CoreLib instance
@@ -77,18 +76,9 @@ public class CoreLib extends DummyModContainer {
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
 		
+		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/update.json");
+		
 		instance = this;
-	}
-	
-	@Override
-	public URL getUpdateUrl() {
-		try {
-			// TODO own updater
-			return new URL("https://www.hycrafthd.net/mods/corelib/update.json");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
 	}
 	
 	/**
@@ -107,6 +97,7 @@ public class CoreLib extends DummyModContainer {
 	public void postinit(FMLPostInitializationEvent event) {
 		GenerationRegistry.registerWorldGenerator(new WorldGeneratorCoreLib(), 0);
 		EventRegistry.register(new ProcessHandler());
+		UpdateChecker.startUpdatechecking();
 		if (event.getSide() == Side.CLIENT) {
 			EventRegistry.register(new UpdaterInformation());
 		}

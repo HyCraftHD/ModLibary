@@ -13,12 +13,12 @@ import net.hycrafthd.corelib.CoreLib;
  *
  */
 public class CoreEventBus {
-
+	
 	/**
 	 * Listener list
 	 */
 	private ConcurrentHashMap<Object, ArrayList<Method>> listenerlist = new ConcurrentHashMap<Object, ArrayList<Method>>();
-
+	
 	/**
 	 * Register an object for event handler
 	 * 
@@ -30,19 +30,23 @@ public class CoreEventBus {
 			return;
 		}
 		ArrayList<Method> methods = new ArrayList<Method>();
-		for (Method method : obj.getClass().getDeclaredMethods()) {
-			method.setAccessible(true);
-			if (method.isAnnotationPresent(SubscribeCoreEvent.class)) {
-				if (method.getParameterCount() == 1) {
-					if (CoreEvent.class.isAssignableFrom(method.getParameters()[0].getType())) {
-						methods.add(method);
+		try {
+			for (Method method : obj.getClass().getDeclaredMethods()) {
+				method.setAccessible(true);
+				if (method.isAnnotationPresent(SubscribeCoreEvent.class)) {
+					if (method.getParameterCount() == 1) {
+						if (CoreEvent.class.isAssignableFrom(method.getParameters()[0].getType())) {
+							methods.add(method);
+						}
 					}
 				}
 			}
+		} catch (Throwable th) {
+			CoreLib.getLogger().error("Error while register SubscribeCoreEvent's", th);
 		}
 		listenerlist.put(obj, methods);
 	}
-
+	
 	/**
 	 * Unregister an object from listener list
 	 * 
@@ -54,7 +58,7 @@ public class CoreEventBus {
 			listenerlist.remove(obj);
 		}
 	}
-
+	
 	/**
 	 * Post event to all event handler
 	 * 
@@ -77,5 +81,5 @@ public class CoreEventBus {
 			}
 		}
 	}
-
+	
 }

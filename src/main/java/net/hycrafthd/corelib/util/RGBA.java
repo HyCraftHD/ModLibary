@@ -4,18 +4,18 @@ import org.lwjgl.util.Color;
 
 public class RGBA {
 
-	private int Red;
-	private int Green;
-	private int Blue;
-	private int Alpha;
+	private int red;
+	private int green;
+	private int blue;
+	private int alpha;
 
 	public static final RGBA NULL = new RGBA(0, 0, 0, 0);
 
 	public RGBA(int r, int g, int b, int a) {
-		Red = r;
-		Green = g;
-		Blue = b;
-		Alpha = a;
+		red = r;
+		green = g;
+		blue = b;
+		alpha = a;
 	}
 
 	public RGBA(Color cl) {
@@ -27,31 +27,31 @@ public class RGBA {
 	}
 
 	public int getRed() {
-		return Red;
+		return red;
 	}
 
 	public int getGreen() {
-		return Green;
+		return green;
 	}
 
 	public int getBlue() {
-		return Blue;
+		return blue;
 	}
 
 	public int getAlpha() {
-		return Alpha;
+		return alpha;
 	}
 
 	public RGBA setAlpha(int i) {
-		Alpha = i;
+		alpha = i;
 		return this;
 	}
 
 	public java.awt.Color toAWTColor() {
-		return new java.awt.Color(Red, Green, Blue, Alpha);
+		return new java.awt.Color(red, green, blue, alpha);
 	}
 
 	public Color toColor() {
-		return new Color(Red, Green, Blue, Alpha);
+		return new Color(red, green, blue, alpha);
 	}
 }

@@ -5,22 +5,22 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class SchematicBuilder {
-
+	
 	private final SchematicReader reader;
 	private final World worldObj;
-
+	
 	public SchematicBuilder(SchematicReader reader, World world) {
 		this.reader = reader;
 		this.worldObj = world;
 	}
-
+	
 	public SchematicReader getReader() {
 		return reader;
 	}
-
+	
 	public void build(final BlockPos pos, final boolean b) {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
 				Thread.currentThread().setName("Schematic Builder");
@@ -38,17 +38,13 @@ public class SchematicBuilder {
 								} else {
 									p = pos.add(new Vec3i(z, y, x));
 								}
-								worldObj.setBlockState(p, obj.getBlock().getStateFromMeta(obj.getMeta()));
-								/*
-								 * CoreLib.getLogger().info(obj.getBlock().toString()); CoreLib.getLogger().info("" + obj.getMeta());
-								 * CoreLib.getLogger().info(obj.getBlock().getStateFromMeta(obj.getMeta()).toString()); CoreLib.getLogger().info(p.toString()); CoreLib.getLogger().info("Count:" + i);
-								 */
-								TileEntity ent = worldObj.getTileEntity(p);
-								if (ent != null && obj.hasNBT()) {
-									// CoreLib.getLogger().info("true");
-									// CoreLib.getLogger().info(obj.getTileEntity().toString());
-									ent.readFromNBT(obj.getTileEntity());
-									ent.setPos(p);
+								synchronized (worldObj) {
+									worldObj.setBlockState(p, obj.getBlock().getStateFromMeta(obj.getMeta()));
+									TileEntity ent = worldObj.getTileEntity(p);
+									if (ent != null && obj.hasNBT()) {
+										ent.readFromNBT(obj.getTileEntity());
+										ent.setPos(p);
+									}
 								}
 								i++;
 							}
@@ -60,7 +56,7 @@ public class SchematicBuilder {
 			}
 		}).start();
 	}
-
+	
 	public World getWorld() {
 		return worldObj;
 	}
