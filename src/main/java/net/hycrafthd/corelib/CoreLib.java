@@ -1,7 +1,6 @@
 package net.hycrafthd.corelib;
 
 import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 import com.google.common.eventbus.*;
@@ -41,7 +40,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.5-alpha";
+	public static final String version = "0.6-alpha";
 	
 	/**
 	 * CoreLib instance
@@ -80,16 +79,16 @@ public class CoreLib extends DummyModContainer {
 		instance = this;
 	}
 	
-	@Override
-	public URL getUpdateUrl() {
-		try {
-			// TODO own updater
-			return new URL("https://www.hycrafthd.net/mods/corelib/update.json");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
-	}
+	// @Override
+	// public URL getUpdateUrl() {
+	// try {
+	// // TODO own updater
+	// return new URL("https://www.hycrafthd.net/mods/corelib/update.json");
+	// } catch (Exception ex) {
+	// ex.printStackTrace();
+	// }
+	// return null;
+	// }
 	
 	/**
 	 * Register this class for {@link EventBus}
@@ -120,13 +119,13 @@ public class CoreLib extends DummyModContainer {
 		event.registerServerCommand(new CommandCschematic());
 	}
 	
-	/**
-	 * Fix this to non null //TODO
-	 */
-	@Override
-	public File getSource() {
-		return null;
-	}
+//	/**
+//	 * Fix this to non null //TODO
+//	 */
+//	@Override
+//	public File getSource() {
+//		return null;
+//	}
 	
 	/**
 	 * Getter for generationList

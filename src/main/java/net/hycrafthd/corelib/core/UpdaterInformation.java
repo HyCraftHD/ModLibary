@@ -10,11 +10,17 @@ import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.*;
 
+/**
+ * Displays updates in chat
+ * 
+ * @author HyCraftHD (https://www.hycrafthd.net)
+ *
+ */
 @SideOnly(Side.CLIENT)
 public class UpdaterInformation {
-
+	
 	private boolean show = false;
-
+	
 	@SubscribeEvent
 	public void firstRender(RenderGameOverlayEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
@@ -39,5 +45,5 @@ public class UpdaterInformation {
 			}
 		}
 	}
-
+	
 }
