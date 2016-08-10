@@ -47,10 +47,10 @@ public class AbstractClientPlayerVisitor extends ClassVisitor {
 	// // return event.getRes();
 	// }
 
-	public static void injectMethod(NetworkPlayerInfo network) {
+	public static ResourceLocation injectMethod(NetworkPlayerInfo network) {
 		CapeUpdatedEvent event = new CapeUpdatedEvent(null, network != null ? network.getLocationCape() : null);
 		CoreLib.getInstance().getEventBus().post(event);
-		// return event.getRes();
+	    return event.getRes();
 	}
 
 	private static class AbstractClientPlayerVisitorMethodGetLocationCape extends MethodVisitor {
