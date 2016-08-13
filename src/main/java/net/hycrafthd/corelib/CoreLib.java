@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.google.common.eventbus.*;
 
+import net.hycrafthd.corelib.analytics.*;
 import net.hycrafthd.corelib.core.*;
 import net.hycrafthd.corelib.registry.*;
 import net.hycrafthd.corelib.util.*;
@@ -23,7 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
  */
-public class CoreLib extends DummyModContainer {
+public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 	
 	/**
 	 * Modid of CoreLib
@@ -40,7 +41,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.4-alpha";
+	public static final String version = "0.6-alpha";
 	
 	/**
 	 * CoreLib instance
@@ -58,6 +59,10 @@ public class CoreLib extends DummyModContainer {
 	 * CoreLib eventbus
 	 */
 	private CoreEventBus bus = new CoreEventBus();
+	/**
+	 * Analytics
+	 */
+	private Analytics analytics;
 	
 	/**
 	 * Constructor
@@ -76,8 +81,7 @@ public class CoreLib extends DummyModContainer {
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
 		
-		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/update.json");
-		
+		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/updater.json");
 		instance = this;
 	}
 	
@@ -91,6 +95,18 @@ public class CoreLib extends DummyModContainer {
 	}
 	
 	/**
+	 * Init event
+	 * 
+	 * @param event
+	 */
+	@Subscribe
+	public void init(FMLInitializationEvent event) {
+		if (event.getSide() == Side.CLIENT) {
+			analytics = new Analytics(this);
+		}
+	}
+	
+	/**
 	 * Postinit event
 	 */
 	@Subscribe
@@ -100,6 +116,7 @@ public class CoreLib extends DummyModContainer {
 		UpdateChecker.startUpdatechecking();
 		if (event.getSide() == Side.CLIENT) {
 			EventRegistry.register(new UpdaterInformation());
+			analytics.startAnalytics();
 		}
 	}
 	
@@ -153,6 +170,20 @@ public class CoreLib extends DummyModContainer {
 	 */
 	public static CoreLibLogger getLogger() {
 		return logger;
+	}
+	
+	@Override
+	public void addStatsToAnalytics(Analytics analytics) {
+		String mods = "";
+		for (ModContainer container : Loader.instance().getModList()) {
+			mods = mods + container.getModId() + "@" + container.getVersion() + ";";
+		}
+		analytics.addStat("mods", mods);
+	}
+	
+	@Override
+	public boolean isAnalyticsEnabled() {
+		return true;
 	}
 	
 }

@@ -59,14 +59,14 @@ public class UpdateChecker {
 						throw new NullPointerException("Mod " + modid + " not loaded");
 					}
 					
-					CoreLib.getLogger().info(String.format("[%s] Starting version check at %s", mod.getModId(), url.toString()));
+					CoreLib.getLogger().info(String.format("Starting version check at %s", url.toString()));
 					ComparableVersion target = null;
 					
 					InputStream con = url.openStream();
 					String data = new String(ByteStreams.toByteArray(con));
 					con.close();
 					
-					CoreLib.getLogger().info(String.format("[%s] Received data!", mod.getModId()));
+					CoreLib.getLogger().info(String.format("Received data!"));
 					
 					@SuppressWarnings("unchecked")
 					Map<String, Object> json = new Gson().fromJson(data, Map.class);
@@ -107,7 +107,7 @@ public class UpdateChecker {
 					} else
 						status = Status.BETA;
 					
-					CoreLib.getLogger().info(String.format("[%s] Found status: %s Target: %s", mod.getModId(), status, target));
+					CoreLib.getLogger().info(String.format("Found status: %s Target: %s", status, target));
 					
 					Map<ComparableVersion, String> changes = new LinkedHashMap<ComparableVersion, String>();
 					@SuppressWarnings("unchecked")
