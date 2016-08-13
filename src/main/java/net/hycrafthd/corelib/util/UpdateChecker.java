@@ -39,7 +39,6 @@ public class UpdateChecker {
 			
 			@Override
 			public void run() {
-				
 				for (Entry<String, URL> entry : checkUpdates.entrySet()) {
 					this.process(entry.getKey(), entry.getValue());
 				}

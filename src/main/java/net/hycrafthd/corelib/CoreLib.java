@@ -9,6 +9,7 @@ import net.hycrafthd.corelib.analytics.*;
 import net.hycrafthd.corelib.core.*;
 import net.hycrafthd.corelib.registry.*;
 import net.hycrafthd.corelib.util.*;
+import net.hycrafthd.corelib.util.asm.ASMUtil;
 import net.hycrafthd.corelib.util.event.CoreEventBus;
 import net.hycrafthd.corelib.util.gen.OreGen;
 import net.hycrafthd.corelib.util.process.ProcessHandler;
@@ -73,9 +74,6 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 	 */
 	public CoreLib() {
 		super(new ModMetadataFetcherCoreLib().getModmeta());
-		
-		// Allow access to cloudflare protected urls
-		System.setProperty("http.agent", "Chrome");
 		
 		McVersionCompare versioncompare = new McVersionCompare(mcversion);
 		
@@ -193,6 +191,7 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 			mods = mods + container.getModId() + "@" + container.getVersion() + ";";
 		}
 		analytics.addStat("mods", mods);
+		analytics.addStat("dev", ASMUtil.useSrgNames());
 	}
 	
 	@Override

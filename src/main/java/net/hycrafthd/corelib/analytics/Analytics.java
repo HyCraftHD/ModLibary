@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
+import net.hycrafthd.corelib.CoreLib;
 import net.minecraft.util.HttpUtil;
 import net.minecraftforge.common.ForgeVersion;
 
@@ -34,7 +35,7 @@ public class Analytics {
 	
 	public Analytics(IPlayerAnalytics playeranalytics) {
 		try {
-			this.serverUrl = new URL("http://local.hycrafthd.net:8080/analytics/index.php");
+			this.serverUrl = new URL("https://www.hycrafthd.net/mods/corelib/analytics.php");
 		} catch (MalformedURLException malformedurlexception) {
 			throw new IllegalArgumentException();
 		}
@@ -64,8 +65,8 @@ public class Analytics {
 							hashmap.put("count", Integer.valueOf(Analytics.access(Analytics.this)));
 							hashmap.put("token", Analytics.this.uniqueID);
 						}
-						HttpUtil.postMap(Analytics.this.serverUrl, hashmap, true);
-						System.out.println("test----------------------------...");
+						CoreLib.getLogger().info("Sending analytics....");
+						HttpUtil.postMap(Analytics.this.serverUrl, hashmap, false);
 					}
 				}
 			}, 0L, 600000L);
