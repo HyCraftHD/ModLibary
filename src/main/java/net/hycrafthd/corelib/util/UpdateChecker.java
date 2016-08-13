@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.versioning.ComparableVersion;
 
 public class UpdateChecker {
 	
-	private static ConcurrentHashMap<String, URL> checkUpdates = new ConcurrentHashMap<>();
-	public static ConcurrentHashMap<String, CheckResult> updateMods = new ConcurrentHashMap<>();
+	private static ConcurrentHashMap<String, URL> checkUpdates = new ConcurrentHashMap<String, URL>();
+	public static ConcurrentHashMap<String, CheckResult> updateMods = new ConcurrentHashMap<String, CheckResult>();
 	
 	public static void add(String modid, String url) {
 		try {
