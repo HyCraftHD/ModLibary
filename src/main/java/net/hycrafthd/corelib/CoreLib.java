@@ -40,7 +40,7 @@ public class CoreLib extends DummyModContainer {
 	/**
 	 * Current version of CoreLib
 	 */
-	public static final String version = "0.4-alpha";
+	public static final String version = "0.6-alpha";
 	
 	/**
 	 * CoreLib instance
@@ -76,7 +76,7 @@ public class CoreLib extends DummyModContainer {
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
 		
-		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/update.json");
+		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/updater.json");
 		
 		instance = this;
 	}

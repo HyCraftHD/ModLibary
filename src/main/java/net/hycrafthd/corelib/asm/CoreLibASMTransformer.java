@@ -13,7 +13,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
  *
  */
 public class CoreLibASMTransformer implements IClassTransformer {
-
+	
 	/**
 	 * Manipulate javabytecode
 	 */
@@ -21,20 +21,22 @@ public class CoreLibASMTransformer implements IClassTransformer {
 	public byte[] transform(String name, String transformedName, byte[] bytes) {
 		if (transformedName.equals("net.minecraft.client.renderer.entity.RenderPlayer")) {
 			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
+				
 				@Override
 				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
 					return new RenderPlayerVisitor(name, cw);
 				}
-
+				
 			}).getBytes();
 		}
 		if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer")) {
 			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
+				
 				@Override
 				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
 					return new EntityRenderVisitor(name, cw);
 				}
-
+				
 			}).getBytes();
 		}
 		/*
@@ -42,12 +44,19 @@ public class CoreLibASMTransformer implements IClassTransformer {
 		 * 
 		 * @Override public ClassVisitor createClassVisitor(String name, ClassVisitor cw) { return new DisplayVisitor(name, cw); }
 		 * 
-		 * }).getBytes(); } / // if // (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer")) // { // return new ClassVisitorHelper(bytes, name, new //
-		 * ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) { // @Override // public ClassVisitor createClassVisitor(String name, ClassVisitor cw) // { // return new
-		 * AbstractClientPlayerVisitor(name, cw); // } // // }).getBytes(); // }
-		 * 
+		 * }).getBytes(); }
 		 */
+//		if (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer")) {
+//			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
+//				
+//				@Override
+//				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
+//					return new AbstractClientPlayerVisitor(name, cw);
+//				}
+//			}).getBytes();
+//		}
+		
 		return bytes;
 	}
-
+	
 }
