@@ -1,7 +1,7 @@
 [
 {
   "modid": "corelib",
-  "description": "CoreLibary for many modding stuff!",
+  "description": "CoreLibary for many modding stuff! It's still in alpha, so we there could be some bugs! Please report them to: https://github.com/HyCraftHD/ModLibary/issues\nWe want to collect information about your machine to help improve CoreLib by knowing what we can support and where the biggest problems are. All of this information is completely anonymous. We promise we won't do anything bad with this data, but if you want to opt out then feel free to toggle it off in the config (.minecraft/config/corelib.cfg)!\nWhat do we collect?\n-Your current Modlist\n-Timestamp\n-Os system and properties\n-Java system\n-Memory stats",
   "url": "https://www.hycrafthd.net/mods/corelib",
   "updateUrl": "",
   "authorList": ["HyCraftHD", "MrTroble"],

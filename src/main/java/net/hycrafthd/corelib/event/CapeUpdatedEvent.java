@@ -1,39 +1,40 @@
 package net.hycrafthd.corelib.event;
 
 import net.hycrafthd.corelib.util.event.CoreEvent;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.*;
 
 /**
- * Cape update event (CLIENT SIDE ONLY) TODO Skin update
+ * Cape update event (CLIENT SIDE ONLY)
  * 
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
  */
 @SideOnly(Side.CLIENT)
 public class CapeUpdatedEvent implements CoreEvent {
-
+	
 	/**
-	 * Client player
+	 * Network player info
 	 */
-	public final AbstractClientPlayer player;
+	public final NetworkPlayerInfo info;
 	/**
 	 * Cape resourcelocation
 	 */
-	public ResourceLocation res;
-
+	private ResourceLocation res;
+	
 	/**
 	 * Constructor
 	 * 
 	 * @param player
 	 * @param res
 	 */
-	public CapeUpdatedEvent(AbstractClientPlayer player, ResourceLocation res) {
-		this.player = player;
-		this.res = res;
+	
+	public CapeUpdatedEvent(NetworkPlayerInfo network) {
+		this.info = network;
+		this.res = network.getLocationCape();
 	}
-
+	
 	/**
 	 * Setter for res
 	 * 
@@ -43,7 +44,7 @@ public class CapeUpdatedEvent implements CoreEvent {
 	public void setRes(ResourceLocation res) {
 		this.res = res;
 	}
-
+	
 	/**
 	 * Getter for res
 	 * 
@@ -52,5 +53,5 @@ public class CapeUpdatedEvent implements CoreEvent {
 	public ResourceLocation getRes() {
 		return res;
 	}
-
+	
 }

@@ -13,7 +13,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * Visit {@link AbstractClientPlayer} class to change skin and cape location TODO more comments
+ * Visit {@link AbstractClientPlayer} class to change cape resource location
  * 
  * @author HyCraftHD (https://www.hycrafthd.net)
  *
@@ -37,7 +37,7 @@ public class AbstractClientPlayerVisitor extends ClassVisitor {
 	}
 	
 	public static ResourceLocation injectMethod(NetworkPlayerInfo network) {
-		CapeUpdatedEvent event = new CapeUpdatedEvent(null, network != null ? network.getLocationCape() : null);
+		CapeUpdatedEvent event = new CapeUpdatedEvent(network);
 		CoreLib.getInstance().getEventBus().post(event);
 		return event.getRes();
 	}
@@ -62,7 +62,6 @@ public class AbstractClientPlayerVisitor extends ClassVisitor {
 		public void visitInsn(int opcode) {
 			if (opcode == Opcodes.ARETURN) {
 				Type type = Type.getType(AbstractClientPlayerVisitor.class);
-				// visitFieldInsn(Opcodes.GETFIELD, AbstractClientPlayer.class.getName(), "this", "I");
 				visitVarInsn(Opcodes.ALOAD, 1);
 				visitMethodInsn(Opcodes.INVOKESTATIC, type.getInternalName(), method.getName(), method.getDescriptor(), false);
 				ASMUtil.asmLogger(ASMLogType.INJECTED);

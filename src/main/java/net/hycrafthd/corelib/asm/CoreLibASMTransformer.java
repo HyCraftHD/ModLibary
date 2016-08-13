@@ -46,15 +46,15 @@ public class CoreLibASMTransformer implements IClassTransformer {
 		 * 
 		 * }).getBytes(); }
 		 */
-//		if (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer")) {
-//			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
-//				
-//				@Override
-//				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
-//					return new AbstractClientPlayerVisitor(name, cw);
-//				}
-//			}).getBytes();
-//		}
+		if (transformedName.equals("net.minecraft.client.entity.AbstractClientPlayer")) {
+			return new ClassVisitorHelper(bytes, name, new ClassVisitorCreator(ClassWriterFlags.COMPUTE_FRAMES) {
+				
+				@Override
+				public ClassVisitor createClassVisitor(String name, ClassVisitor cw) {
+					return new AbstractClientPlayerVisitor(name, cw);
+				}
+			}).getBytes();
+		}
 		
 		return bytes;
 	}

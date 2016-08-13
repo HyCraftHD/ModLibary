@@ -1,6 +1,6 @@
 package net.hycrafthd.corelib;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 import com.google.common.eventbus.*;
@@ -63,6 +63,10 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 	 * Analytics
 	 */
 	private Analytics analytics;
+	/**
+	 * Configuration
+	 */
+	private File configuration;
 	
 	/**
 	 * Constructor
@@ -81,7 +85,7 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 			FMLCommonHandler.instance().exitJava(0, true);
 		}
 		
-		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/updater.json");
+		UpdateChecker.add(modid, "https://www.hycrafthd.net/mods/corelib/promo.json");
 		instance = this;
 	}
 	
@@ -92,6 +96,16 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 	public boolean registerBus(EventBus bus, LoadController controller) {
 		bus.register(this);
 		return true;
+	}
+	
+	/**
+	 * Preinit event
+	 * 
+	 * @param event
+	 */
+	@Subscribe
+	public void preinit(FMLPreInitializationEvent event) {
+		configuration = event.getSuggestedConfigurationFile();
 	}
 	
 	/**
@@ -183,7 +197,39 @@ public class CoreLib extends DummyModContainer implements IPlayerAnalytics {
 	
 	@Override
 	public boolean isAnalyticsEnabled() {
-		return true;
+		boolean b = true;
+		try {
+			if (!configuration.exists()) {
+				configuration.createNewFile();
+			}
+			FileReader fr = new FileReader(configuration);
+			BufferedReader reader = new BufferedReader(fr);
+			
+			String k = "";
+			
+			Iterator<String> it = reader.lines().iterator();
+			while (it.hasNext()) {
+				String s = it.next();
+				if (s.startsWith("enable-analytics:")) {
+					k = s.split(":")[1];
+				}
+			}
+			if (k == "") {
+				FileWriter wr = new FileWriter(configuration);
+				BufferedWriter writer = new BufferedWriter(wr);
+				writer.write("enable-analytics:true");
+				writer.flush();
+				writer.close();
+				k = "true";
+			}
+			
+			b = Boolean.parseBoolean(k);
+			reader.close();
+		} catch (Exception ex) {
+			configuration.delete();
+			ex.printStackTrace();
+		}
+		return b;
 	}
 	
 }

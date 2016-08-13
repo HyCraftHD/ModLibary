@@ -65,6 +65,7 @@ public class Analytics {
 							hashmap.put("token", Analytics.this.uniqueID);
 						}
 						HttpUtil.postMap(Analytics.this.serverUrl, hashmap, true);
+						System.out.println("test----------------------------...");
 					}
 				}
 			}, 0L, 600000L);
